@@ -1,0 +1,3 @@
+const routes = {
+  pathToArticles: '/articles'
+}
