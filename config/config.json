@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "root",
+    "database": "MyWorld",
+    "host": "127.0.0.1",
+    "port": 8000,
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "root",
+    "database": "MyWorld",
+    "host": "127.0.0.1",
+    "port": 8000,
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "root",
+    "database": "MyWorld",
+    "host": "127.0.0.1",
+    "port": 8000,
+    "dialect": "postgres"
+  }
+}

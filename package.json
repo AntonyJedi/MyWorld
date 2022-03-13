@@ -1,0 +1,35 @@
+{
+  "name": "myworld",
+  "version": "1.0.0",
+  "description": "My own portal",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "front": "npm run start --prefix front",
+    "model": "npx sequelize-cli model:generate --name",
+    "migrate": "npx sequelize-cli db:migrate",
+    "rollback": "npx sequelize-cli db:migrate:undo:all",
+    "seed": "npx sequelize-cli seed:generate",
+    "runseed": "npx sequelize-cli db:seed:all",
+    "dev": "concurrently \"npm start\" \"npm run front\" "
+  },
+  "keywords": [
+    "React",
+    "Express",
+    "PostgeSQL"
+  ],
+  "author": "Anton",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "pg": "^8.7.3",
+    "sequelize": "^6.15.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "config": "^3.3.7",
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.4.1"
+  }
+}
