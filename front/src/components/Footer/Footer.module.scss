@@ -1,0 +1,55 @@
+@import "src/static/main";
+.footer {
+  position: relative;
+  width: 100%;
+  background: $secColor;
+  min-height: 150px;
+  .wave {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-size: 1000px 100px !important;
+  }
+  .wave1 {
+    z-index: 100;
+    opacity: 1;
+    bottom: 0;
+    animation: animWave 4s linear infinite;
+  }
+  .wave2 {
+    z-index: 99;
+    opacity: .5;
+    bottom: 10px;
+    animation: animWave_2 4s linear infinite;
+  }
+  .wave3 {
+    z-index: 99;
+    opacity: .2;
+    bottom: 15px;
+    animation: animWave_2 3s linear infinite;
+  }
+  .wave4 {
+    z-index: 99;
+    opacity: .7;
+    bottom: 20px;
+    animation: animWave_2 2.5s linear infinite;
+  }
+  @keyframes animWave {
+    0% {
+      background-position-x: 1000px;
+    }
+    100% {
+      background-position-x: 0px;
+    }
+  }
+  @keyframes animWave_2 {
+    0% {
+      background-position-x: 0px;
+    }
+    100% {
+      background-position-x: 1000px;
+    }
+  }
+}

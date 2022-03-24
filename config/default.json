@@ -4,5 +4,6 @@
   "db_user": "postgres",
   "db_password": "root",
   "db_host": "localhost",
-  "db_port": 8000
+  "db_port": 8000,
+  "secret": "SOME_SECRET_WORDS"
 }

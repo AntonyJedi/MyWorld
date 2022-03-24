@@ -18,6 +18,7 @@ const Articles = ({allArticles, deleteOne}) => {
               <p>{ar.text}</p>
               <p><span>{ar.tag1}</span><span>{ar.tag2}</span><span>{ar.tag3}</span></p>
               <p>{ar.creationDate}</p>
+              <img src={'http://localhost:5000/' + ar.img} alt=""/>
               <Link to={`/update/${ar.id}`}>Update</Link>
               <button onClick={() => handleDelete(ar.id)}>x</button>
             </li>

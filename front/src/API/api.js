@@ -8,7 +8,7 @@ const AXIOS = axios.create({
 
 export const articlesAPI = {
   getAllArticles: () => {
-    return AXIOS.get(baseApiURL + 'articles');
+    return AXIOS.get(baseApiURL + 'articles')
   },
   getOneArticle: id => {
     return AXIOS.get(baseApiURL + `articles/${id}`)
@@ -21,5 +21,11 @@ export const articlesAPI = {
   },
   updateArticle: (form, id) => {
     return AXIOS.put(baseApiURL + `articles/${id}`, form)
+  }
+}
+
+export const quotesAPI = {
+  getAllQuotes: () => {
+    return AXIOS.get(baseApiURL)
   }
 }

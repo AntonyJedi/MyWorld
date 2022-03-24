@@ -1,3 +1,0 @@
-const routes = {
-  pathToArticles: '/articles'
-}

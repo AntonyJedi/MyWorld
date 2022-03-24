@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&display=swap');
+@import "zero";
+
+$mainColor: #228B22;
+$secColor: #0e1538;
+$fontColor: #000;
+$pink: #ff22bb;
+$blue: #00ccff;
+$green: #22e622;
+$yellow: yellow;
+$mainFont: 'Crete Round', serif;
+$maxWidth: 1500px;
+
+@mixin flexFull($var: center) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: $var;
+  align-items: center;
+}
+
+@mixin magicButton ($color: $green, $sec: $secColor) {
+  position: relative;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($color: #000000, $alpha: .5);
+  margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  transition: all .5s ease-in-out;
+  overflow: hidden;
+  -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, #000400);
+  &:hover {
+    background-color: $color;
+    box-shadow: 0 0 10px $color,
+    0 0 30px $color,
+    0 0 60px $color,
+    0 0 100px $color;
+    &::before {
+      width: 100%;
+    }
+    &::after {
+      background: $color;
+    }
+    span {
+      opacity: 1;
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 350%;
+    background: $color;
+    transition: all 1s ease;
+    animation: anim 5s linear infinite;
+    animation-delay: .33s;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    background-color: $sec;
+  }
+  span {
+    position: relative;
+    color: #fff;
+    opacity: .7;
+    text-transform: uppercase;
+    z-index: 1;
+    transition: .5s;
+  }
+  @keyframes anim {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

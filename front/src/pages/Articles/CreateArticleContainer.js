@@ -7,8 +7,8 @@ class CreateArticleContainer extends React.Component {
   constructor(props) {
     super(props);
   }
-  newOne = form => {
-    this.props.newOneArticleThunkCreator(form)
+   newOne = async (form) => {
+    await this.props.newOneArticleThunkCreator(form)
   }
   render() {
     return (
