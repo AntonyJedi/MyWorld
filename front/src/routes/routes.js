@@ -22,7 +22,7 @@ export const adminRoutes = [
     title: 'New Articles'
   },
   {
-    path:pathToUpdateArticles,
+    path: pathToUpdateArticles,
     component: <UpdateArticleContainer/>,
     title: 'Update Article'
   }

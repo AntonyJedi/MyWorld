@@ -5,6 +5,8 @@ const fileUpload = require('express-fileupload')
 const path = require('path')
 const config = require('config')
 const router = require('./routes/index')
+const sequelize = require('./db')
+require('./models/assosiation')
 
 const app = express()
 
@@ -20,9 +22,11 @@ const PORT = config.get('port')
 
 const server_run = async () => {
   try {
+    await sequelize.authenticate()
+    await sequelize.sync({force: false})
     app.listen(PORT, () => console.log(`Server is running on ${PORT}`))
   } catch (e) {
-    throw new Error(e)
+    console.log(e)
   }
 }
 

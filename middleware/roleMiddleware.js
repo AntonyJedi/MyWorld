@@ -21,7 +21,7 @@ module.exports = function (roles) {
       }
       next()
     } catch (e) {
-      res.status(401).json({message: "Isn't auth"})
+      res.status(401).json({message: "Isn't auth (from role middleware)"})
     }
   }
 }

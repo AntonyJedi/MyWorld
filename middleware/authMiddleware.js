@@ -13,6 +13,6 @@ module.exports = function (req, res, next) {
     req.user = jwt.verify(token, config.get("secret"))
     next()
   } catch (e) {
-    res.status(401).json({message: "Isn't auth"})
+    res.status(401).json({message: "Isn't auth (from auth middleware)"})
   }
 }
