@@ -1,13 +1,11 @@
-const sequelize = require('../db')
-const {DataTypes} = require('sequelize')
-const Art = require('../models/articles')(sequelize, DataTypes)
+const Art = require('../models/articleModel')
 const uuid = require('uuid')
 const path = require('path')
 const fs = require('fs')
 
 const articlesList = async (req, res) => {
   const articles = await Art.findAll()
-  res.status(200).json(articles)
+  return res.status(200).json(articles)
 }
 
 const createArticle = async (req, res, next) => {
@@ -45,7 +43,7 @@ const createArticle = async (req, res, next) => {
 
 const articlesOne = async (req, res) => {
   const one = await Art.findOne({where: {id: req.params.id}})
-  res.status(200).json(one);
+  return res.status(200).json(one);
 }
 
 const articlesOneUpdate = async (req, res) => {
@@ -57,8 +55,7 @@ const articlesOneUpdate = async (req, res) => {
     tag3: req.body.tag3,
     text: req.body.text
   }, {where: {id: req.params.id}})
-  res.status(200).json(update);
-  console.log(update)
+  return res.status(200).json(update);
 }
 
 const articlesOneDelete = async (req, res) => {

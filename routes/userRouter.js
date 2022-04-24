@@ -1,4 +1,4 @@
-const {Registration, Login, getUsers} = require("../controllers/userController");
+const {Registration, Login, Logout, Activate, Refresh, getUsers} = require("../controllers/userController");
 const {Router} = require('express')
 const {check} = require('express-validator')
 const authMiddleware = require('./../middleware/authMiddleware')
@@ -11,6 +11,11 @@ user.post('/registration',[
   check('password', 'Enter password with correct length').isLength({min: 4, max: 10})
 ], Registration)
 user.post('/login', Login)
-user.get('/users', authMiddleware, roleMiddleware("admin"), getUsers)
+user.post('/logout', Logout)
+user.get('/users', getUsers)
+user.get('/activate/:link', Activate)
+user.get('/refresh', Refresh)
 
 module.exports = user
+
+// authMiddleware, roleMiddleware("admin")
