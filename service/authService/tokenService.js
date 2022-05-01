@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken')
 const config = require('config')
-const sequelize = require('../../db')
-const {DataTypes} = require('sequelize')
-const Tokens = require('../../models/tokens')(sequelize, DataTypes)
+const Tokens = require('../../models/tokenModel')
 
 const generateToken = async (payload) => {
   const accessToken = jwt.sign(payload, config.get('secret'), {expiresIn: '1h'})
@@ -10,14 +8,19 @@ const generateToken = async (payload) => {
   return {accessToken, refreshToken}
 }
 
-const saveToken = async (userId, refreshToken) => {
-  const tokenData = await Tokens.findOne({where: {userId}})
+const saveToken = async (UserId, refreshToken) => {
+  const tokenData = await Tokens.findOne({where: {UserId}})
   if (!tokenData) {
-    const newToken = await Tokens.create(userId, refreshToken)
+    const newToken = await Tokens.create({UserId, refreshToken})
     return newToken
   } else {
-    tokenData.refreshToken = refreshToken
+    await tokenData.update({refreshToken})
   }
 }
 
-module.exports = {generateToken}
+const removeToken = async (refreshToken) => {
+  const tokenData = await Tokens.destroy({where: {refreshToken}})
+  return tokenData
+}
+
+module.exports = {generateToken, saveToken, removeToken}

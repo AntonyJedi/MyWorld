@@ -1,4 +1,4 @@
-const {Registration, Login, Logout, Activate, Refresh, getUsers} = require("../controllers/userController");
+const {Registration, Login, Logout, Activate, Refresh, getUsers, getCookie} = require("../controllers/userController");
 const {Router} = require('express')
 const {check} = require('express-validator')
 const authMiddleware = require('./../middleware/authMiddleware')
@@ -15,6 +15,7 @@ user.post('/logout', Logout)
 user.get('/users', getUsers)
 user.get('/activate/:link', Activate)
 user.get('/refresh', Refresh)
+user.get('/cookies', getCookie)
 
 module.exports = user
 

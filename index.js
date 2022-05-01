@@ -10,9 +10,9 @@ require('./models/assosiation')
 
 const app = express()
 
+app.use(cookieParser())
 app.use(cors())
 app.use(express.json())
-app.use(cookieParser())
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
 
