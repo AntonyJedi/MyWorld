@@ -18,10 +18,10 @@ const registrationServices = async (name, email, password, role) => {
     const hashPassword = await bcrypt.hash(password, 3)
     const activationLink = uuid.v4()
     const newUser = await Users.create({nickName: name, email, password: hashPassword, role, activationLink})
-    // await mailService.sendActivationLink(email, `${config.get('API_URL')}/api/activate/${activationLink}`)
+    const mailRes = await mailService.sendActivationLink(email, `${config.get('API_URL')}/api/auth/activate/${activationLink}`)
     const jwtUser = jwtAssist(newUser)
     const tokens = await tokensServices.generateToken(jwtUser)
-    await tokensServices.saveToken(jwtUser.id, tokens.refreshToken)
+    await tokensServices.saveToken(jwtUser.id, tokens.accessToken, tokens.refreshToken)
     return {
       status: 200,
       toClient: tokens
@@ -51,7 +51,7 @@ const loginServices = async (email, password) => {
   }
   const jwtUser = jwtAssist(user)
   const tokens = await tokensServices.generateToken(jwtUser)
-  await tokensServices.saveToken(jwtUser.id, tokens.refreshToken)
+  await tokensServices.saveToken(jwtUser.id, tokens.accessToken, tokens.refreshToken)
   return {
     status: 200,
     toClient: `User ${email} was logged in and token is - ${tokens.refreshToken}`,
@@ -64,6 +64,32 @@ const logoutServices = async (refreshToken) => {
   return token
 }
 
+const refreshServices = async (refreshToken) => {
+  if (!refreshToken) {
+    return {
+      status: 401,
+      toClient: 'User is unauthorized'
+    }
+  }
+  const validToken = tokensServices.validateRefreshToken(refreshToken)
+  const tokenFromDB = await tokensServices.findToken(refreshToken)
+  if (!validToken || !tokenFromDB) {
+    return {
+      status: 401,
+      toClient: 'User is unauthorized'
+    }
+  }
+  const user = await Users.findOne({where: validToken.UserId})
+  const jwtUser = jwtAssist(user)
+  const tokens = await tokensServices.generateToken(jwtUser)
+  await tokensServices.saveToken(jwtUser.id, tokens.accessToken, tokens.refreshToken)
+  return {
+    status: 200,
+    toClient: 'Token was refreshed',
+    tokens: tokens
+  }
+}
+
 const activationServices = async (activationLink) => {
   const user = await Users.findOne({where: {activationLink}})
   if (!user) {
@@ -72,4 +98,10 @@ const activationServices = async (activationLink) => {
   await user.update({isActivated: true})
 }
 
-module.exports = {registrationServices, loginServices, logoutServices, activationServices}
+module.exports = {
+  registrationServices,
+  loginServices,
+  logoutServices,
+  activationServices,
+  refreshServices
+}

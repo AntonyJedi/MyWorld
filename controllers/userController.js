@@ -3,6 +3,7 @@ const Tokens = require('../models/tokenModel')
 const {validationResult} = require('express-validator')
 const config = require('config')
 const usersServices = require("../service/authService/usersService");
+const tokensServices = require('../service/authService/tokenService')
 
 const Registration = async (req, res) => {
   try {
@@ -15,7 +16,7 @@ const Registration = async (req, res) => {
     if (resultOfReg.status !== 400) {
       res.cookie('refreshToken', resultOfReg.toClient.refreshToken, {httpOnly: true})
     }
-    res.status(resultOfReg.status).json(resultOfReg.toClient)
+    res.status(resultOfReg.status).json(resultOfReg.toClient);
   } catch (e) {
     console.log(e)
     return res.status(400).json({message: 'Something went wrong with registration'})
@@ -29,7 +30,7 @@ const Login = async (req, res) => {
     if (resultOfLogin.status !== 400) {
       res.cookie('refreshToken', resultOfLogin.token, {httpOnly: true})
     }
-    return res.status(resultOfLogin.status).json(resultOfLogin.toClient)
+    return res.status(resultOfLogin.status).json({toClient: resultOfLogin.toClient, token: resultOfLogin.token})
   } catch (e) {
     console.log(e)
     return res.status(400).json({message: 'Something went wrong with login'})
@@ -57,9 +58,14 @@ const Activate = async (req, res) => {
   }
 }
 
-const Refresh = (req, res) => {
+const Refresh = async (req, res) => {
   try {
-    return res.status(200).json({message: "Yes, it is refresh"})
+    const {refreshToken} = req.cookies
+    const resultOfRefresh = await usersServices.refreshServices(refreshToken)
+    if (resultOfRefresh.status !== 400) {
+      res.cookie('refreshToken', resultOfRefresh.token, {httpOnly: true})
+    }
+    return res.status(resultOfRefresh.status).json({message: resultOfRefresh.toClient, tokens: resultOfRefresh.tokens})
   } catch (e) {
     console.log(e)
   }
@@ -79,16 +85,11 @@ const getUsers = async (req, res) => {
   }
 }
 
-const getCookie = (req, res) => {
-  res.send({message: "Cookies were sent", cookies: req.cookies})
-}
-
 module.exports = {
   Registration,
   Login,
   Logout,
   Activate,
   Refresh,
-  getUsers,
-  getCookie
+  getUsers
 }

@@ -1,5 +1,10 @@
 const express = require('express')
 const cors = require('cors')
+const corsOptions ={
+  origin:'http://localhost:3000',
+  credentials:true,
+  optionSuccessStatus:200
+}
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 const path = require('path')
@@ -11,7 +16,7 @@ require('./models/assosiation')
 const app = express()
 
 app.use(cookieParser())
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))

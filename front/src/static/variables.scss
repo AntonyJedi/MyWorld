@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&display=swap');
-@import "zero";
-
 $mainColor: #228B22;
 $secColor: #0e1538;
 $fontColor: #000;
@@ -8,8 +5,8 @@ $pink: #ff22bb;
 $blue: #00ccff;
 $green: #22e622;
 $yellow: yellow;
-$mainFont: 'Crete Round', serif;
-$maxWidth: 1500px;
+$mainFont: 'OwnFont', serif;
+$maxWidth: 1200px;
 
 @mixin flexFull($var: center) {
   display: flex;
@@ -25,7 +22,7 @@ $maxWidth: 1500px;
   justify-content: center;
   align-items: center;
   background-color: rgba($color: #000000, $alpha: .5);
-  margin: 0 10px;
+  margin: 0 5px;
   color: #fff;
   text-decoration: none;
   transition: all .5s ease-in-out;
@@ -63,6 +60,22 @@ $maxWidth: 1500px;
     inset: 3px;
     background-color: $sec;
   }
+  &.active {
+    background-color: $color;
+    box-shadow: 0 0 10px $color,
+    0 0 30px $color,
+    0 0 60px $color,
+    0 0 100px $color;
+    &::before {
+      width: 100%;
+    }
+    &::after {
+      background: $color;
+    }
+    span {
+      opacity: 1;
+    }
+  }
   span {
     position: relative;
     color: #fff;
@@ -79,4 +92,10 @@ $maxWidth: 1500px;
       transform: rotate(360deg);
     }
   }
+}
+
+%main_container {
+  max-width: $maxWidth;
+  margin: 0 auto;
+  padding: 0 15px;
 }

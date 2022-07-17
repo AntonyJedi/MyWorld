@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "My own portal",
   "main": "index.js",
+  "proxy": "http://localhost:3000",
   "scripts": {
     "start": "nodemon index.js",
     "front": "npm run start --prefix front",

@@ -1,18 +1,10 @@
-@import "src/static/main";
+@import "src/static/variables";
 header {
   background: $secColor;
-  padding: 10px 0 !important;
   transition: all .5s ease-in-out;
   color: #fff;
   section {
-    width: $maxWidth;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-  .navbar {
     @include flexFull(space-between);
-    padding: 0 20px;
-    margin: 0 auto !important;
     .logo {
       width: 250px;
       img {
@@ -24,32 +16,15 @@ header {
       @include flexFull();
         a {
           @include magicButton($blue);
-          &.active {
-            background-color: $blue;
-            box-shadow: 0 0 10px $blue,
-            0 0 30px $blue,
-            0 0 60px $blue,
-            0 0 100px $blue;
-            &::before {
-              width: 100%;
-            }
-            &::after {
-              background: $blue;
-            }
-            span {
-              opacity: 1;
-            }
-          }
         }
     }
     .quote {
       font-style: italic;
     }
     .auth {
-      list-style: none;
-      text-align: center;
-      li:first-child {
-        margin-bottom: 10px;
+      @include flexFull();
+      a {
+        @include magicButton($blue);
       }
     }
   }
