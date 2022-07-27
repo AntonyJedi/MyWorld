@@ -1,4 +1,6 @@
 {
+  "API_URL": "http://localhost:5000",
+  "CLIENT_URL": "http://localhost:3000",
   "port": 5000,
   "db_name": "MyWorld",
   "db_user": "postgres",
@@ -6,5 +8,10 @@
   "db_host": "localhost",
   "db_port": 8000,
   "secret": "SOME_SECRET_WORDS",
-  "refresh": "REFRESH_SECRET_WORDS"
+  "refresh": "REFRESH_SECRET_WORDS",
+  "SMTP_HOST": "smtp.gmail.com",
+  "SMTP_PORT": 587,
+  "SMTP_USER": "magnificentworldjs@gmail.com",
+  "SMTP_PASS": "pain23killer0719",
+  "SMTP_PASSWORD": "jigyiwvudmuxdnrb"
 }

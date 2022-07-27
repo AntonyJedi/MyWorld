@@ -6,9 +6,9 @@ const Users = sequelize.define('Users', {
   nickName: {type: DataTypes.STRING, allowNull: false},
   email: {type: DataTypes.STRING, allowNull: false},
   password: {type: DataTypes.STRING, allowNull: false},
-  role: {type: DataTypes.STRING, allowNull: false},
-  isActivated: {type: DataTypes.BOOLEAN, allowNull: false},
-  activationLink: {type: DataTypes.STRING, allowNull: false}
+  role: {type: DataTypes.STRING, allowNull: false, defaultValue: 'user'},
+  isActivated: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
+  activationLink: {type: DataTypes.STRING, allowNull: true}
 })
 
 module.exports = Users

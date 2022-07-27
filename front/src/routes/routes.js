@@ -9,11 +9,11 @@ import {
 } from './routes_const'
 import Music from "../pages/Music/Music";
 import Science from "../pages/Science/Science";
-import Login from "../pages/Login/Login";
-import Registration from "../pages/Registration/Registration";
 import ArticlesContainer from "../pages/Articles/ArticlesContainer";
 import UpdateArticleContainer from "../pages/Articles/UpdateArticleContainer";
 import CreateArticleContainer from "../pages/Articles/CreateArticleContainer";
+import LoginContainer from "../pages/Login/LoginContainer";
+import RegistrationContainer from "../pages/Registration/RegistrationContainer";
 
 export const adminRoutes = [
   {
@@ -49,12 +49,12 @@ export const userRoutes = [
 export const authRoutes = [
   {
     path: pathToLogin,
-    component: <Login/>,
+    component: <LoginContainer/>,
     title: 'Login'
   },
   {
     path: pathToRegistration,
-    component: <Registration/>,
+    component: <RegistrationContainer/>,
     title: 'Registration'
   }
 ]

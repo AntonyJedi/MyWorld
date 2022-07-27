@@ -12,7 +12,7 @@ user.post('/registration',[
 ], Registration)
 user.post('/login', Login)
 user.post('/logout', Logout)
-user.get('/users', getUsers)
+user.get('/users', authMiddleware, getUsers)
 user.get('/activate/:link', Activate)
 user.get('/refresh', Refresh)
 

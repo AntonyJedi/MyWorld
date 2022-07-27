@@ -66,7 +66,7 @@ const CreateArticle = ({newOne}) => {
             <input
             type="file"
             accept="image/*"
-            multiple="falce"
+            multiple="false"
             onChange={handleImage}
           />
           </p>
