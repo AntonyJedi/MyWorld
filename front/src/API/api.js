@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseApiURL = 'http://localhost:5000/api/';
+export const baseApiURL = 'http://localhost:5000/api/';
 
 const AXIOS = axios.create({
   withCredentials: true,
@@ -45,5 +45,11 @@ export const authAPI = {
   },
   logout: async () => {
     return AXIOS.post(baseApiURL + `auth/logout`)
+  }
+}
+
+export const usersAPI = {
+  getUsers: () => {
+    return AXIOS.get(baseApiURL + `auth/users`)
   }
 }

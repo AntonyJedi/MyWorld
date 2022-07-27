@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import {authAPI} from "../../API/api";
 
-const Registration = () => {
+const Registration = ({doReg}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const sendReg = async e => {
     e.preventDefault();
-    const resFromReg = await authAPI.registration(name, email, password)
-    console.log(resFromReg);
+    await doReg(name, email, password)
   }
   return (
     <form onSubmit={sendReg}>

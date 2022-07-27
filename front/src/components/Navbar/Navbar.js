@@ -4,9 +4,9 @@ import styles from './Navbar.module.scss'
 import logo from '../../static/images/logo.png'
 import {adminRoutes, authRoutes, userRoutes} from "../../routes/routes";
 
-const Navbar = ({quotes}) => {
+const Navbar = ({quotes, isUserAuth, makeOut}) => {
   console.log(quotes)
-  const isAuth = false
+  // const isAuth = false
   let adminLink = adminRoutes.filter(link => link.title !== 'Update Article');
   return (
     <header>
@@ -14,16 +14,17 @@ const Navbar = ({quotes}) => {
         <NavLink className={styles.logo} to='/'><img src={logo} alt="logo"/></NavLink>
         <div className={styles.quote}>Some text</div>
         <nav>
-          {isAuth && adminLink.map(link => {
+          {isUserAuth && adminLink.map(link => {
             return <NavLink className={({isActive}) => isActive ? styles.active : ''} to={link.path}><span>{link.title}</span></NavLink>
           })}
           {userRoutes.map(link => {
             return <NavLink className={({isActive}) => isActive ? styles.active : ''} to={link.path}><span>{link.title}</span></NavLink>
           })}
+          {isUserAuth && <button onClick={makeOut}><span>Logout</span></button>}
         </nav>
-        {!isAuth && <ul className={styles.auth}>
+        {!isUserAuth && <ul className={styles.auth}>
           {authRoutes.map(link => {
-            return <li><NavLink to={link.path}><span>{link.title}</span></NavLink></li>
+            return <li><NavLink className={({isActive}) => isActive ? styles.active : ''} to={link.path}><span>{link.title}</span></NavLink></li>
           })}
         </ul>}
       </section>

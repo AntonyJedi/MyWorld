@@ -63,7 +63,7 @@ const Refresh = async (req, res) => {
     const {refreshToken} = req.cookies
     const resultOfRefresh = await usersServices.refreshServices(refreshToken)
     if (resultOfRefresh.status !== 400) {
-      res.cookie('refreshToken', resultOfRefresh.token, {httpOnly: true})
+      res.cookie('refreshToken', resultOfRefresh.tokens.refreshToken, {httpOnly: true})
     }
     return res.status(resultOfRefresh.status).json({message: resultOfRefresh.toClient, tokens: resultOfRefresh.tokens})
   } catch (e) {

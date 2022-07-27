@@ -14,7 +14,7 @@ header {
     nav {
       list-style: none;
       @include flexFull();
-        a {
+        a, button {
           @include magicButton($blue);
         }
     }

@@ -22,7 +22,7 @@ const sendActivationLink = async (to, link) => {
       `
           <div>
           <h1>To activate your account please use this link => </h1>
-          <a href="${link}">${link}</a>
+          <a href="${link}">Activate your account</a>
           </div>
       `
   }, (error, response) => {
