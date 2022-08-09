@@ -30,7 +30,7 @@ const Login = async (req, res) => {
     if (resultOfLogin.status !== 400) {
       res.cookie('refreshToken', resultOfLogin.token, {httpOnly: true})
     }
-    return res.status(resultOfLogin.status).json({toClient: resultOfLogin.toClient, token: resultOfLogin.token})
+    return res.status(resultOfLogin.status).json({toClient: resultOfLogin.toClient, token: resultOfLogin.token, user: resultOfLogin.user})
   } catch (e) {
     console.log(e)
     return res.status(400).json({message: 'Something went wrong with login'})
@@ -65,7 +65,7 @@ const Refresh = async (req, res) => {
     if (resultOfRefresh.status !== 400) {
       res.cookie('refreshToken', resultOfRefresh.tokens.refreshToken, {httpOnly: true})
     }
-    return res.status(resultOfRefresh.status).json({message: resultOfRefresh.toClient, tokens: resultOfRefresh.tokens})
+    return res.status(resultOfRefresh.status).json({message: resultOfRefresh.toClient, tokens: resultOfRefresh.tokens, user: resultOfRefresh.user})
   } catch (e) {
     console.log(e)
   }

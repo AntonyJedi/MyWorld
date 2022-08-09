@@ -13,12 +13,18 @@ class NavbarContainer extends React.Component {
   componentDidMount() {
     this.props.getQuotesThunkCreator();
   }
-  makeLogout() {
+  makeLogout(e) {
+    e.preventDefault();
     this.props.LogoutThunkCreator()
   }
   render() {
     return (
-      <Navbar quotes={this.props.quotes} isUserAuth={this.props.isAuth} makeOut={this.makeLogout}/>
+      <Navbar
+        quotes={this.props.quotes}
+        isUserAuth={this.props.isAuth}
+        makeOut={this.makeLogout}
+        isUserAdmin={this.props.isAdmin}
+      />
     )
   }
 }
@@ -26,7 +32,8 @@ class NavbarContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     quotes: state.QuotesStore.quotes_store,
-    isAuth: state.UserStore.isAuth
+    isAuth: state.UserStore.isAuth,
+    isAdmin: state.UserStore.isAdmin
   }
 }
 

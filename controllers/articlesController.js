@@ -22,7 +22,7 @@ const createArticle = async (req, res, next) => {
        tag2: form.tag2,
        tag3: form.tag3,
        img: filename,
-       creationDate: new Date().toISOString()
+       creationDate: new Date().toLocaleDateString("en-US")
      })
      return res.status(200).json(createdArt)
    } else {
@@ -32,7 +32,7 @@ const createArticle = async (req, res, next) => {
        tag1: form.tag1,
        tag2: form.tag2,
        tag3: form.tag3,
-       creationDate: new Date().toISOString()
+       creationDate: new Date().toLocaleDateString("en-US")
      })
      return res.status(200).json(createdArt)
    }
@@ -48,14 +48,34 @@ const articlesOne = async (req, res) => {
 
 const articlesOneUpdate = async (req, res) => {
   console.log(req.body)
-  const update = await Art.update({
-    title: req.body.title,
-    tag1: req.body.tag1,
-    tag2: req.body.tag2,
-    tag3: req.body.tag3,
-    text: req.body.text
-  }, {where: {id: req.params.id}})
-  return res.status(200).json(update);
+  const form = req.body
+  if (req.files) {
+    const delImage = await Art.findOne({where: {id: req.params.id}})
+    if (delImage.dataValues.img != null) {
+      fs.unlinkSync(path.resolve(__dirname, '..', 'static', delImage.dataValues.img))
+    }
+    const {image} = req.files
+    let updatedFileName = uuid.v4() + ".png"
+    await image.mv(path.resolve(__dirname, '..', 'static', updatedFileName))
+    const update = await Art.update({
+      title:form.title,
+      tag1: form.tag1,
+      tag2: form.tag2,
+      tag3: form.tag3,
+      text: form.text,
+      img: updatedFileName
+    }, {where: {id: req.params.id}})
+    return res.status(200).json(update);
+  } else {
+    const update = await Art.update({
+      title:form.title,
+      tag1: form.tag1,
+      tag2: form.tag2,
+      tag3: form.tag3,
+      text: form.text
+    }, {where: {id: req.params.id}})
+    return res.status(200).json(update);
+  }
 }
 
 const articlesOneDelete = async (req, res) => {

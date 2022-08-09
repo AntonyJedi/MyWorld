@@ -1,0 +1,16 @@
+$grid-breakpoints: (
+  modile: 576px,
+  tablet: 1080px
+);
+
+@mixin breakpoint($break, $break2: false) {
+  @if $break2 {
+    @media screen and (min-width: map-get($grid-breakpoints, $break)) and (max-width: map-get($grid-breakpoints, $break2)) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-width: map-get($grid-breakpoints, $break)) {
+      @content;
+    }
+  }
+}

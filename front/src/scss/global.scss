@@ -1,0 +1,39 @@
+@import "zero";
+@import "variables";
+
+@font-face {
+  font-family: "OwnFont";
+  src: url('../static/fonts/CreteRound-Regular.ttf') format("truetype");
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: $mainFont;
+}
+
+main {
+  margin-bottom: 100px;
+}
+
+.main_container {
+ @extend %main_container;
+}
+
+form {
+  @include form();
+  h2 {
+    margin: 0 0 20px 0;
+  }
+  input, textarea {
+    margin: 0 0 20px 0;
+    &:focus {
+      border-color: $secColor !important;
+      box-shadow: 0 0 0 2px $secColor !important;
+    }
+  }
+  .form_submit {
+    @include magicButton();
+  }
+}
