@@ -1,13 +1,14 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 
-const Articles = ({allArticles, deleteOne}) => {
+const Articles = ({allArticles, deleteOne, progress, isUserAdmin}) => {
   const handleDelete = id => {
     deleteOne(id)
   }
   return (
-    <div>
-      {allArticles.length > 0 ?
+    <>
+      {progress ? <Loader/> : allArticles.length > 0 ?
         <ul>
           {allArticles.map((ar, index) => {
             return <li
@@ -19,12 +20,12 @@ const Articles = ({allArticles, deleteOne}) => {
               <p><span>{ar.tag1}</span><span>{ar.tag2}</span><span>{ar.tag3}</span></p>
               <p>{ar.creationDate}</p>
               <img src={'http://localhost:5000/' + ar.img} alt=""/>
-              <Link to={`/update/${ar.id}`}>Update</Link>
-              <button onClick={() => handleDelete(ar.id)}>x</button>
+              {isUserAdmin && <Link to={`/update/${ar.id}`}>Update</Link>}
+              {isUserAdmin && <button onClick={() => handleDelete(ar.id)}>x</button>}
             </li>
           })}
         </ul> : <div>Nothing's here</div>}
-    </div>
+    </>
   );
 };
 

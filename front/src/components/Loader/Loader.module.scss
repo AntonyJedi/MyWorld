@@ -1,0 +1,12 @@
+@import "../../scss/variables";
+.loader_back {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background: #0e1538;
+  z-index: 5;
+  @include flexFull();
+}

@@ -22,6 +22,8 @@ class ArticlesContainer extends React.Component {
       <Articles
         allArticles={this.props.articles}
         deleteOne={this.deleteOne}
+        progress={this.props.isFetching}
+        isUserAdmin={this.props.isAdmin}
       />
     )
   }
@@ -29,7 +31,9 @@ class ArticlesContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    articles: state.ArticlesStore.articles_store
+    articles: state.ArticlesStore.articles_store,
+    isFetching: state.ArticlesStore.isFetching,
+    isAdmin: state.UserStore.isAdmin
   }
 }
 

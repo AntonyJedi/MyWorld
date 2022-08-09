@@ -1,10 +1,14 @@
-@import "src/static/variables";
+@import "../../scss/variables";
+@import "../../scss/breakpoints";
 header {
   background: $secColor;
   transition: all .5s ease-in-out;
   color: #fff;
   section {
     @include flexFull(space-between);
+    @include breakpoint(tablet) {
+      @include flexFull(space-evenly);
+    }
     .logo {
       width: 250px;
       img {
@@ -16,13 +20,20 @@ header {
       @include flexFull();
         a, button {
           @include magicButton($blue);
+          cursor: pointer;
         }
+      @include breakpoint(tablet) {
+        display: none;
+      }
     }
     .quote {
       font-style: italic;
     }
     .auth {
       @include flexFull();
+      @include breakpoint(tablet) {
+        display: none;
+      }
       a {
         @include magicButton($blue);
       }

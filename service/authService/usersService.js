@@ -55,7 +55,8 @@ const loginServices = async (email, password) => {
   return {
     status: 200,
     toClient: `User ${email} was logged in and token is - ${tokens.refreshToken}`,
-    token: tokens.refreshToken
+    token: tokens.refreshToken,
+    user: user
   }
 }
 
@@ -71,7 +72,7 @@ const refreshServices = async (refreshToken) => {
       toClient: 'User is unauthorized'
     }
   }
-  const validToken = tokensServices.validateRefreshToken(refreshToken)
+  const validToken = await tokensServices.validateRefreshToken(refreshToken)
   const tokenFromDB = await tokensServices.findToken(refreshToken)
   if (!validToken || !tokenFromDB) {
     return {
@@ -79,14 +80,15 @@ const refreshServices = async (refreshToken) => {
       toClient: 'User is unauthorized'
     }
   }
-  const user = await Users.findOne({where: validToken.UserId})
+  const user = await Users.findOne({where: {id: validToken.id}})
   const jwtUser = jwtAssist(user)
   const tokens = await tokensServices.generateToken(jwtUser)
   await tokensServices.saveToken(jwtUser.id, tokens.accessToken, tokens.refreshToken)
   return {
     status: 200,
     toClient: 'Token was refreshed',
-    tokens: tokens
+    tokens: tokens,
+    user: user
   }
 }
 

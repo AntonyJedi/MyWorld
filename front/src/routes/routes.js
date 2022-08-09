@@ -17,11 +17,6 @@ import RegistrationContainer from "../pages/Registration/RegistrationContainer";
 
 export const adminRoutes = [
   {
-    path: pathToNewArticles,
-    component: <CreateArticleContainer/>,
-    title: 'New Articles'
-  },
-  {
     path: pathToUpdateArticles,
     component: <UpdateArticleContainer/>,
     title: 'Update Article'
@@ -29,6 +24,14 @@ export const adminRoutes = [
 ]
 
 export const userRoutes = [
+  {
+    path: pathToNewArticles,
+    component: <CreateArticleContainer/>,
+    title: 'New Articles'
+  }
+]
+
+export const allRoutes = [
   {
     path: pathToArticles,
     component: <ArticlesContainer/>,
