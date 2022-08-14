@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
-import {newOneArticleThunkCreator} from "../../redux/ArticleReducer";
+import {newOneArticleThunkCreator} from "../../../redux/ArticleReducer";
 import CreateArticle from "./CreateArticle";
 
 class CreateArticleContainer extends React.Component {

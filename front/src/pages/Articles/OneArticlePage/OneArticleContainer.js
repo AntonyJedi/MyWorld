@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import OneArticle from "./OneArticle";
-import withRouter from "../UpdateArticleHock";
+import withRouter from "../ParamArticleHock";
 import {getChosenArticleThunkCreator} from "../../../redux/ArticleReducer"
 
 

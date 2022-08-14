@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux"
-import {getOneArticleThunkCreator, updateOneArticleThunkCreator} from "../../redux/ArticleReducer";
+import {getOneArticleThunkCreator, updateOneArticleThunkCreator} from "../../../redux/ArticleReducer";
 import UpdateArticle from "./UpdateArticle";
-import withRouter from "./UpdateArticleHock";
+import withRouter from "../ParamArticleHock";
 
 
 class UpdateArticleContainer extends React.Component {
