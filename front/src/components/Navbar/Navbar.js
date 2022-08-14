@@ -7,7 +7,7 @@ import {adminRoutes, allRoutes, authRoutes, userRoutes} from "../../routes/route
 const Navbar = ({quotes, isUserAuth, makeOut, isUserAdmin}) => {
   console.log(quotes)
   // const isAuth = false
-  // let adminLink = adminRoutes.filter(link => link.title !== 'Update Article');
+  let allLinks = allRoutes.filter(link => link.title !== 'Article');
   return (
     <header>
       <section className='main_container'>
@@ -17,10 +17,10 @@ const Navbar = ({quotes, isUserAuth, makeOut, isUserAdmin}) => {
           {isUserAuth && userRoutes.map(link => {
             return <NavLink className={({isActive}) => isActive ? styles.active : ''} to={link.path}><span>{link.title}</span></NavLink>
           })}
-          {allRoutes.map(link => {
+          {allLinks.map(link => {
             return <NavLink className={({isActive}) => isActive ? styles.active : ''} to={link.path}><span>{link.title}</span></NavLink>
           })}
-          {isUserAuth && <a onClick={makeOut}><span>Logout</span></a>}
+          {isUserAuth && <a className={styles.logout} onClick={makeOut}><span>Logout</span></a>}
         </nav>
         {!isUserAuth && <ul className={styles.auth}>
           {authRoutes.map(link => {

@@ -18,12 +18,15 @@ header {
     nav {
       list-style: none;
       @include flexFull();
-        a, button {
-          @include magicButton($blue);
-          cursor: pointer;
-        }
+      a, button {
+        @include magicButton($blue);
+        cursor: pointer;
+      }
       @include breakpoint(tablet) {
         display: none;
+      }
+      .logout {
+        @include magicButton(red);
       }
     }
     .quote {

@@ -37,3 +37,12 @@ form {
     @include magicButton();
   }
 }
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.basic_button {
+  @include magicButton();
+}

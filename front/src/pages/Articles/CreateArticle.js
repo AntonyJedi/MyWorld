@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom"
 import {Textarea, TextInput} from "evergreen-ui";
 import ImageUploader from "../../components/FileUploader/FileUploader";
+import {motion} from "framer-motion";
 
 const CreateArticleComponent = ({newOne}) => {
   const [article, setArticle] = useState({})
@@ -42,48 +43,53 @@ const CreateArticleComponent = ({newOne}) => {
   }
 
   return (
-    <form>
+    <motion.form
+      initial={{translateX: "-25%", opacity: 0}}
+      animate={{translateX: 0, opacity: 1}}
+      exit={{translateX: "50%", opacity: 0}}
+      transition={{duration: 0.5}}
+    >
       <h2>New article</h2>
-        <TextInput
-          id="articleTitle"
-          type="text"
-          placeholder="Title"
-          onChange={e => setArticle({...article, title: e.target.value})}
-        />
-        <TextInput
-          id="tag1"
-          type="text"
-          placeholder="Tag #1"
-          onChange={e => setArticle({...article, tag1: e.target.value})}
-        />
-        <TextInput
-          id="tag2"
-          type="text"
-          placeholder="Tag #2"
-          onChange={e => setArticle({...article, tag2: e.target.value})}
-        />
-        <TextInput
-          id="tag3"
-          type="text"
-          placeholder="Tag #3"
-          onChange={e => setArticle({...article, tag3: e.target.value})}
-        />
-        <Textarea
-          id="text"
-          placeholder="Article Text"
-          onChange={e => setArticle({...article, text: e.target.value})}
-        />
-        <ImageUploader
-          handleChange={handleChange}
-          handleRejected={handleRejected}
-          handleRemove={handleRemove}
-          fileRejections={fileRejections}
-          files={files}
-        />
+      <TextInput
+        id="articleTitle"
+        type="text"
+        placeholder="Title"
+        onChange={e => setArticle({...article, title: e.target.value})}
+      />
+      <TextInput
+        id="tag1"
+        type="text"
+        placeholder="Tag #1"
+        onChange={e => setArticle({...article, tag1: e.target.value})}
+      />
+      <TextInput
+        id="tag2"
+        type="text"
+        placeholder="Tag #2"
+        onChange={e => setArticle({...article, tag2: e.target.value})}
+      />
+      <TextInput
+        id="tag3"
+        type="text"
+        placeholder="Tag #3"
+        onChange={e => setArticle({...article, tag3: e.target.value})}
+      />
+      <Textarea
+        id="text"
+        placeholder="Article Text"
+        onChange={e => setArticle({...article, text: e.target.value})}
+      />
+      <ImageUploader
+        handleChange={handleChange}
+        handleRejected={handleRejected}
+        handleRemove={handleRemove}
+        fileRejections={fileRejections}
+        files={files}
+      />
       <div>
         <a className="form_submit" onClick={createArticle}><span>Create article</span></a>
       </div>
-    </form>
+    </motion.form>
   );
 };
 

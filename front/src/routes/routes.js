@@ -5,7 +5,7 @@ import {
   pathToScience,
   pathToMusic,
   pathToLogin,
-  pathToRegistration, pathToUpdateArticles
+  pathToRegistration, pathToUpdateArticles, pathToOneArticle
 } from './routes_const'
 import Music from "../pages/Music/Music";
 import Science from "../pages/Science/Science";
@@ -14,6 +14,7 @@ import UpdateArticleContainer from "../pages/Articles/UpdateArticleContainer";
 import CreateArticleContainer from "../pages/Articles/CreateArticleContainer";
 import LoginContainer from "../pages/Login/LoginContainer";
 import RegistrationContainer from "../pages/Registration/RegistrationContainer";
+import OneArticleContainer from "../pages/Articles/OneArticlePage/OneArticleContainer";
 
 export const adminRoutes = [
   {
@@ -36,6 +37,11 @@ export const allRoutes = [
     path: pathToArticles,
     component: <ArticlesContainer/>,
     title: 'Articles'
+  },
+  {
+    path: pathToOneArticle,
+    component: <OneArticleContainer/>,
+    title: 'Article'
   },
   {
     path: pathToMusic,
