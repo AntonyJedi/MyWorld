@@ -5,6 +5,7 @@
 /.pnp
 /migrations
 .pnp.js
+/static
 
 # testing
 /coverage
