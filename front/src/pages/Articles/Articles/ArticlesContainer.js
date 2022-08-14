@@ -5,7 +5,7 @@ import {
   delOneArticleThunkCreator,
   getArticlesThunkCreator,
   newOneArticleThunkCreator
-} from "../../redux/ArticleReducer";
+} from "../../../redux/ArticleReducer";
 
 class ArticlesContainer extends React.Component {
   constructor(props) {

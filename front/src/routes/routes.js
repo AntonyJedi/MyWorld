@@ -9,9 +9,9 @@ import {
 } from './routes_const'
 import Music from "../pages/Music/Music";
 import Science from "../pages/Science/Science";
-import ArticlesContainer from "../pages/Articles/ArticlesContainer";
-import UpdateArticleContainer from "../pages/Articles/UpdateArticleContainer";
-import CreateArticleContainer from "../pages/Articles/CreateArticleContainer";
+import ArticlesContainer from "../pages/Articles/Articles/ArticlesContainer";
+import UpdateArticleContainer from "../pages/Articles/UpdateArticle/UpdateArticleContainer";
+import CreateArticleContainer from "../pages/Articles/CreateArticle/CreateArticleContainer";
 import LoginContainer from "../pages/Login/LoginContainer";
 import RegistrationContainer from "../pages/Registration/RegistrationContainer";
 import OneArticleContainer from "../pages/Articles/OneArticlePage/OneArticleContainer";

@@ -1,7 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Textarea, TextInput} from "evergreen-ui";
-import ImageUploader from "../../components/FileUploader/FileUploader";
+import ImageUploader from "../../../components/FileUploader/FileUploader";
+import {motion} from "framer-motion";
 
 const UpdateArticle = ({article, updateArticle}) => {
   const navigate = useNavigate()
@@ -44,7 +45,12 @@ const UpdateArticle = ({article, updateArticle}) => {
   }
 
   return (
-    <form>
+    <motion.form
+      initial={{translateX: "-25%", opacity: 0}}
+      animate={{translateX: 0, opacity: 1}}
+      exit={{translateX: "50%", opacity: 0}}
+      transition={{duration: 0.5}}
+    >
       <h2>Update Article</h2>
       <TextInput
         id="articleTitle"
@@ -93,7 +99,7 @@ const UpdateArticle = ({article, updateArticle}) => {
       </div>
       {/*<input type="file" accept="image/*" multiple="false" onChange={e => console.log(e.target.files[0])}/>*/}
       {/*<button type="submit">Update</button>*/}
-    </form>
+    </motion.form>
   );
 };
 

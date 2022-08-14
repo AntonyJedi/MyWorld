@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {useNavigate} from "react-router-dom"
 import {Textarea, TextInput} from "evergreen-ui";
-import ImageUploader from "../../components/FileUploader/FileUploader";
+import ImageUploader from "../../../components/FileUploader/FileUploader";
 import {motion} from "framer-motion";
 
 const CreateArticleComponent = ({newOne}) => {
