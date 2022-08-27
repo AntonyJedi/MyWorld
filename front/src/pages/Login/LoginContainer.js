@@ -13,7 +13,7 @@ class LoginContainer extends React.Component {
   }
   render() {
     return (
-      <Login doLogin={this.makeLogin} />
+      <Login doLogin={this.makeLogin} isUserAuth={this.props.isAuth} />
     );
   }
 }

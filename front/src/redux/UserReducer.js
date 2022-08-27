@@ -49,7 +49,7 @@ export const RegistrationThunkCreator = (name, email, pass) => async (dispatch) 
 }
 export const LoginThunkCreator = (email, pass) => async (dispatch) => {
   try {
-    debugger
+    dispatch(setLoadingCreator(true))
     let responseFromLog = await authAPI.login(email, pass)
     if (responseFromLog) {
       localStorage.setItem('token', responseFromLog.data.token)
@@ -57,7 +57,9 @@ export const LoginThunkCreator = (email, pass) => async (dispatch) => {
       dispatch(setAuthActionCreator(true))
     }
   } catch (e) {
-    console.log('Логінізація провалена!')
+    console.log(e)
+  } finally {
+    dispatch(setLoadingCreator(false))
   }
 }
 

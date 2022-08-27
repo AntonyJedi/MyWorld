@@ -27,7 +27,7 @@ const App = ({isUserAuth, isLoading, isUserAdmin}) => {
               {allRoutes.map(route => {
                 return <Route key={route.path} path={route.path} element={route.component}/>
               })}
-              {!isUserAuth && authRoutes.map(route => {
+              {authRoutes.map(route => {
                 return <Route key={route.path} path={route.path} element={route.component}/>
               })}
               {isUserAdmin && adminRoutes.map(route => {

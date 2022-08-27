@@ -23,12 +23,7 @@ const UpdateArticle = ({article, updateArticle}) => {
   }
   useEffect(() => {
     setUp(article)
-    console.log(up)
   }, [article])
-
-  useEffect(() => {
-    console.log(up)
-  }, [up])
 
   async function updateHandler (e) {
     e.preventDefault()
