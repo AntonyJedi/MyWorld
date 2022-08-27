@@ -1,11 +1,13 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Textarea, TextInput} from "evergreen-ui";
 import ImageUploader from "../../../components/FileUploader/FileUploader";
 import {motion} from "framer-motion";
+import {AlertContext} from "../../../components/Alert/AlertContext";
 
 const UpdateArticle = ({article, updateArticle}) => {
   const navigate = useNavigate()
+  const alert = useContext(AlertContext)
   const [up, setUp] = useState({})
   const [files, setFiles] = useState([])
   const [fileRejections, setFileRejections] = useState([])
@@ -21,12 +23,7 @@ const UpdateArticle = ({article, updateArticle}) => {
   }
   useEffect(() => {
     setUp(article)
-    console.log(up)
   }, [article])
-
-  useEffect(() => {
-    console.log(up)
-  }, [up])
 
   async function updateHandler (e) {
     e.preventDefault()
@@ -39,6 +36,8 @@ const UpdateArticle = ({article, updateArticle}) => {
     formUpdate.append('image', up.image)
     try {
       await updateArticle(formUpdate, article.id)
+      alert.show("Article has been successfully updated", "success")
+      setTimeout(() => navigate("/articles"), 200)
     } catch (e) {
       console.log(e)
     }

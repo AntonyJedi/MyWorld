@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 import style from "./Articles.module.scss";
-import {motion} from "framer-motion"
+import {motion} from "framer-motion";
+import {AlertContext} from "../../../components/Alert/AlertContext";
 
 const Articles = ({allArticles, deleteOne, progress, isUserAdmin}) => {
+  const alert = useContext(AlertContext)
   const handleDelete = id => {
     deleteOne(id)
+    alert.show("Article was deleted")
   }
   return (
     <motion.div
@@ -25,7 +28,7 @@ const Articles = ({allArticles, deleteOne, progress, isUserAdmin}) => {
                 <div className={style.id}>{article.id}</div>
                 <h3 className={style.title}>{article.title}</h3>
                 <div>{article.text.substr(0, 150)}...</div>
-                <img src={'http://localhost:5000/' + article.img} alt={article.title}/>
+                {article.img && <img src={'http://localhost:5000/' + article.img} alt={article.title}/>}
               </Link>
               {isUserAdmin &&
               <div className={style.adminLinks}>

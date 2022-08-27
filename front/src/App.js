@@ -8,6 +8,7 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import Loader from "./components/Loader/Loader";
 import SideBarMobile from "./components/SideBarMobile/SideBarMobile";
 import {AnimatePresence} from "framer-motion"
+import AlertComponent from "./components/Alert/AlertComponent";
 
 const App = ({isUserAuth, isLoading, isUserAdmin}) => {
   const location = useLocation()
@@ -16,6 +17,7 @@ const App = ({isUserAuth, isLoading, isUserAdmin}) => {
       {isLoading ? <Loader/> : <>
         <NavbarContainer/>
         <main className='main_container'>
+          <AlertComponent/>
           <AnimatePresence exitBeforeEnter={true}>
             <Routes location={location} key={location.pathname}>
               <Route exact path='/' element={<HomePage/>}/>
@@ -25,7 +27,7 @@ const App = ({isUserAuth, isLoading, isUserAdmin}) => {
               {allRoutes.map(route => {
                 return <Route key={route.path} path={route.path} element={route.component}/>
               })}
-              {!isUserAuth && authRoutes.map(route => {
+              {authRoutes.map(route => {
                 return <Route key={route.path} path={route.path} element={route.component}/>
               })}
               {isUserAdmin && adminRoutes.map(route => {

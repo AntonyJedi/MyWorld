@@ -1,9 +1,13 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {Textarea, TextInput} from "evergreen-ui";
 import ImageUploader from "../../../components/FileUploader/FileUploader";
 import {motion} from "framer-motion";
+import {AlertContext} from "../../../components/Alert/AlertContext";
+import {useNavigate} from "react-router-dom";
 
 const CreateArticleComponent = ({newOne}) => {
+  const alert = useContext(AlertContext)
+  const navigate = useNavigate()
   const [article, setArticle] = useState({})
 
   const [files, setFiles] = useState([])
@@ -19,11 +23,7 @@ const CreateArticleComponent = ({newOne}) => {
     setArticle({...article, image: null})
   }
 
-  useEffect(() => {
-    console.log(article)
-  }, [article]);
-
-  function createArticle(e) {
+  async function createArticle(e) {
     e.preventDefault()
     const formData = new FormData()
     formData.append('title', article.title)
@@ -34,8 +34,9 @@ const CreateArticleComponent = ({newOne}) => {
     formData.append('image', article.image)
     console.log(formData)
     try {
-      newOne(formData)
-      // await navigate("/articles")
+      await newOne(formData)
+      alert.show("Article has been successfully created", "success")
+      setTimeout(() => navigate("/articles"), 200)
     } catch (e) {
       console.log(e)
     }

@@ -13,7 +13,7 @@ class RegistrationContainer extends React.Component {
   }
   render() {
     return (
-      <Registration doReg={this.makeReg} />
+      <Registration doReg={this.makeReg} isUserAuth={this.props.isAuth} />
     );
   }
 }
