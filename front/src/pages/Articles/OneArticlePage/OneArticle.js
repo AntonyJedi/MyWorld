@@ -12,7 +12,7 @@ const OneArticle = ({oneArticle}) => {
       transition={{duration: 0.5}}
     >
       <h2>{oneArticle.title}</h2>
-      <div className={style.image}><img src={`http://localhost:5000/${oneArticle.img}`} alt={oneArticle.title}/></div>
+      {oneArticle.img && <div className={style.image}><img src={`http://localhost:5000/${oneArticle.img}`} alt={oneArticle.title}/></div>}
       <div className={style.text}>{oneArticle.text}</div>
       <div className={style.bottom}>
         <div className={style.tags}>

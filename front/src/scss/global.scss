@@ -46,3 +46,14 @@ h2 {
 .basic_button {
   @include magicButton();
 }
+
+.delete_button {
+  @include magicButton(red);
+}
+
+.swiper-wrapper {
+  padding: 50px 0;
+  .swiper-slide-shadow-right, .swiper-slide-shadow-left {
+    background-image: none;
+  }
+}
