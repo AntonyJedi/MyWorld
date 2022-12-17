@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Routes, Route, useLocation} from 'react-router-dom'
+import {Routes, Route, useLocation} from 'react-router-dom'
 import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage/HomePage";
 import {adminRoutes, allRoutes, authRoutes, userRoutes} from "./routes/routes";

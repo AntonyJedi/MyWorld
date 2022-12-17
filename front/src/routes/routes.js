@@ -5,9 +5,8 @@ import {
   pathToScience,
   pathToMusic,
   pathToLogin,
-  pathToRegistration, pathToUpdateArticles, pathToOneArticle
+  pathToRegistration, pathToUpdateArticles, pathToOneArticle, pathToUpdateMusic
 } from './routes_const'
-import Music from "../pages/Music/Music";
 import Science from "../pages/Science/Science";
 import ArticlesContainer from "../pages/Articles/Articles/ArticlesContainer";
 import UpdateArticleContainer from "../pages/Articles/UpdateArticle/UpdateArticleContainer";
@@ -15,12 +14,19 @@ import CreateArticleContainer from "../pages/Articles/CreateArticle/CreateArticl
 import LoginContainer from "../pages/Login/LoginContainer";
 import RegistrationContainer from "../pages/Registration/RegistrationContainer";
 import OneArticleContainer from "../pages/Articles/OneArticlePage/OneArticleContainer";
+import MusicContainer from "../pages/Music/MusicPage/MusicContainer";
+import UpdateMusicContainer from "../pages/Music/UpdateMusic/UpdateMusicContainer";
 
 export const adminRoutes = [
   {
     path: pathToUpdateArticles,
     component: <UpdateArticleContainer/>,
     title: 'Update Article'
+  },
+  {
+    path: pathToUpdateMusic,
+    component: <UpdateMusicContainer/>,
+    title: 'Update Music'
   }
 ]
 
@@ -45,7 +51,7 @@ export const allRoutes = [
   },
   {
     path: pathToMusic,
-    component: <Music/>,
+    component: <MusicContainer/>,
     title: 'Music'
   },
   {

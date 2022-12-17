@@ -38,11 +38,13 @@ const setLoadingCreator = setLoading => ({type: 'SET-LOADING', isLoading: setLoa
 
 export const RegistrationThunkCreator = (name, email, pass) => async (dispatch) => {
   try {
+    debugger
     let responseFromReg = await authAPI.registration(name, email, pass)
-    console.log(responseFromReg)
-    localStorage.setItem('token', responseFromReg.data.accessToken)
-    dispatch(setUserActionCreator(responseFromReg.data.user))
-    dispatch(setAuthActionCreator(true))
+    if (responseFromReg) {
+      localStorage.setItem('token', responseFromReg.data.token)
+      dispatch(setUserActionCreator(responseFromReg.data.user))
+      dispatch(setAuthActionCreator(true))
+    }
   } catch (e) {
     console.log(e)
   }

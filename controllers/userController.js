@@ -16,7 +16,7 @@ const Registration = async (req, res) => {
     if (resultOfReg.status !== 400) {
       res.cookie('refreshToken', resultOfReg.toClient.refreshToken, {httpOnly: true})
     }
-    res.status(resultOfReg.status).json(resultOfReg.toClient);
+    res.status(resultOfReg.status).json({token: resultOfReg.toClient, user: resultOfReg.user});
   } catch (e) {
     console.log(e)
     return res.status(400).json({message: 'Something went wrong with registration'})

@@ -24,7 +24,8 @@ const registrationServices = async (name, email, password, role) => {
     await tokensServices.saveToken(jwtUser.id, tokens.accessToken, tokens.refreshToken)
     return {
       status: 200,
-      toClient: tokens
+      toClient: tokens.refreshToken,
+      user: newUser
     }
   } else {
     return {

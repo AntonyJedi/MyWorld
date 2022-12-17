@@ -1,4 +1,5 @@
 const Articles = require('../models/articleModel')
+const Music = require('../models/musicModel')
 const Category = require('../models/categoryModel')
 const Quotes = require('../models/quotesModel')
 const Users = require('../models/usersModel')
@@ -8,4 +9,4 @@ Users.hasOne(Tokens)
 Tokens.belongsTo(Users)
 
 
-module.exports = {Articles, Category, Quotes, Users, Tokens}
+module.exports = {Articles, Music, Category, Quotes, Users, Tokens}

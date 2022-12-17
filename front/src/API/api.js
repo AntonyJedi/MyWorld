@@ -30,6 +30,24 @@ export const articlesAPI = {
   }
 }
 
+export const musicAPI = {
+  getAllSongs: () => {
+    return AXIOS.get(baseApiURL + `music/all`)
+  },
+  getSongsByCategory: category => {
+    return AXIOS.get(baseApiURL + `music/${category}`)
+  },
+  createNewSong: song => {
+    return AXIOS.post(baseApiURL + `music/new`, song)
+  },
+  updateOneSong: (id, updatedSong) => {
+    return AXIOS.put(baseApiURL + `music/${id}`, updatedSong)
+  },
+  deleteOneSong: id => {
+    return AXIOS.delete(baseApiURL + `music/${id}`)
+  }
+}
+
 export const quotesAPI = {
   getAllQuotes: () => {
     return AXIOS.get(baseApiURL)
