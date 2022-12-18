@@ -1,9 +1,15 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import style from './Music.module.scss';
 import {Link} from "react-router-dom";
+import {AlertContext} from "../../../components/Alert/AlertContext";
 
 const MusicCard = ({id, songTitle, album, lyrics, category, image, release, deleteSong, canDelete}) => {
+  const alert = useContext(AlertContext)
   const [turn, setTurn] = useState(false)
+  const handlerDelete = idSong => {
+    deleteSong(idSong)
+    alert.show('Song was deleted', 'danger')
+  }
   return (
     <>
       <li className={[style.card, turn && style.turn].join(' ')} onClick={() => setTurn(turn => !turn)}>
@@ -21,10 +27,10 @@ const MusicCard = ({id, songTitle, album, lyrics, category, image, release, dele
           </div>
         </div>
       </li>
-        {canDelete && <div>
-        <button onClick={() => deleteSong(id)} className='delete_button' style={{margin: '10px auto'}}>
-          <span>Delete song</span></button>
-        <Link style={{margin: '10px auto'}} className='basic_button' to={`/updateSong/${id}`}><span>Update</span></Link>
+      {canDelete && <div className={style.adminButtons}>
+        <Link className='basic_button' to={`/updateSong/${id}`}><span>Update</span></Link>
+        <div onClick={() => handlerDelete(id)} className='delete_button'>
+          <span>Delete song</span></div>
       </div>}
     </>
   );

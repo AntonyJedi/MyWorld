@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import {motion} from "framer-motion";
 
-const Music = ({songs, isLoading, deleteOne, isAdminAuth}) => {
+const Music = ({songs, deleteOne, isAdminAuth}) => {
   const [isAddNew, setIsAddNew] = useState(false)
   return (
     <>
@@ -62,7 +62,7 @@ const Music = ({songs, isLoading, deleteOne, isAdminAuth}) => {
               )}
             </Swiper>
           </motion.ul>
-          <button onClick={() => setIsAddNew(isAddNew => !isAddNew)}style={{margin: '0 auto'}} className='basic_button'><span>Add new song</span></button>
+          <div onClick={() => setIsAddNew(isAddNew => !isAddNew)}style={{margin: '0 auto'}} className='basic_button'><span>Add new song</span></div>
         </>
       ) : <CreateMusicContainer setIsAddNew={setIsAddNew} />
       }

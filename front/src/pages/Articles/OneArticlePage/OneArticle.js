@@ -20,7 +20,7 @@ const OneArticle = ({oneArticle}) => {
           <span>#{oneArticle.tag2}</span>
           <span>#{oneArticle.tag3}</span>
         </div>
-        <div>{oneArticle.creationDate}</div>
+        <div>{new Date(oneArticle.creationDate).toLocaleDateString()}</div>
       </div>
     </motion.article>
   );
