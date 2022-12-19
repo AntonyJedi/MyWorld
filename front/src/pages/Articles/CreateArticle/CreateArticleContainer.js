@@ -20,6 +20,7 @@ class CreateArticleContainer extends React.Component {
       <CreateArticle
         newOne={this.newOne}
         categories={this.props.allCategories}
+        user={this.props.currentUser}
       />
     )
   }
@@ -28,7 +29,8 @@ class CreateArticleContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     articles: state.ArticlesStore.articles_store,
-    allCategories: state.ArticlesStore.categories_store
+    allCategories: state.ArticlesStore.categories_store,
+    currentUser: state.UserStore.user
   }
 }
 

@@ -19,11 +19,6 @@ import UpdateMusicContainer from "../pages/Music/UpdateMusic/UpdateMusicContaine
 
 export const adminRoutes = [
   {
-    path: pathToUpdateArticles,
-    component: <UpdateArticleContainer/>,
-    title: 'Update Article'
-  },
-  {
     path: pathToUpdateMusic,
     component: <UpdateMusicContainer/>,
     title: 'Update Music'
@@ -35,6 +30,11 @@ export const userRoutes = [
     path: pathToNewArticles,
     component: <CreateArticleContainer/>,
     title: 'New Articles'
+  },
+  {
+    path: pathToUpdateArticles,
+    component: <UpdateArticleContainer/>,
+    title: 'Update Article'
   }
 ]
 

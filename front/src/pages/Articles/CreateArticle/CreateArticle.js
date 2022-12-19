@@ -5,10 +5,10 @@ import {motion} from "framer-motion";
 import {AlertContext} from "../../../components/Alert/AlertContext";
 import {useNavigate} from "react-router-dom";
 
-const CreateArticle = ({newOne, categories}) => {
+const CreateArticle = ({newOne, categories, user}) => {
   const alert = useContext(AlertContext)
   const navigate = useNavigate()
-  const [article, setArticle] = useState({})
+  const [article, setArticle] = useState({userId: user.id, userName: user.nickName, categoryId: 1})
 
   const [files, setFiles] = useState([])
   const [fileRejections, setFileRejections] = useState([])
@@ -33,6 +33,8 @@ const CreateArticle = ({newOne, categories}) => {
     formData.append('text', article.text)
     formData.append('image', article.image)
     formData.append('categoryId', article.categoryId)
+    formData.append('userId', article.userId)
+    formData.append('userName', article.userName)
     try {
       await newOne(formData)
       alert.show("Article has been successfully created", "success")
