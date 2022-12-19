@@ -61,7 +61,7 @@ const songOneUpdate = async (req, res) => {
       lyrics: form.lyrics,
       category: form.category,
       img: updatedFileName,
-      releaseDate: new Date().toLocaleDateString("en-US")
+      releaseDate: form.releaseDate
     }, {where: {id: req.params.id}})
     return res.status(200).json(update);
   } else {
@@ -71,7 +71,7 @@ const songOneUpdate = async (req, res) => {
       artist: form.artist,
       lyrics: form.lyrics,
       category: form.category,
-      releaseDate: new Date().toLocaleDateString("en-US")
+      releaseDate: form.releaseDate
     }, {where: {id: req.params.id}})
     return res.status(200).json(update);
   }

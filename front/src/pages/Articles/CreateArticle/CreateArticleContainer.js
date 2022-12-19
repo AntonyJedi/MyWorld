@@ -1,28 +1,35 @@
 import React from "react";
 import {connect} from "react-redux"
-import {newOneArticleThunkCreator} from "../../../redux/ArticleReducer";
+import {getAllCategoriesThunkCreator, newOneArticleThunkCreator} from "../../../redux/ArticleReducer";
 import CreateArticle from "./CreateArticle";
 
 class CreateArticleContainer extends React.Component {
   constructor(props) {
     super(props);
   }
-   newOne = async (form) => {
+
+  componentDidMount() {
+    this.props.getAllCategoriesThunkCreator()
+  }
+
+  newOne = async (form) => {
     await this.props.newOneArticleThunkCreator(form)
   }
   render() {
     return (
-      <CreateArticle newOne={this.newOne}/>
+      <CreateArticle
+        newOne={this.newOne}
+        categories={this.props.allCategories}
+      />
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    articles: state.ArticlesStore.articles_store
+    articles: state.ArticlesStore.articles_store,
+    allCategories: state.ArticlesStore.categories_store
   }
 }
 
-export default connect(mapStateToProps, {
-  newOneArticleThunkCreator
-})(CreateArticleContainer)
+export default connect(mapStateToProps, {newOneArticleThunkCreator, getAllCategoriesThunkCreator})(CreateArticleContainer)

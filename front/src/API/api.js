@@ -13,8 +13,12 @@ AXIOS.interceptors.request.use((config) => {
 })
 
 export const articlesAPI = {
-  getAllArticles: () => {
-    return AXIOS.get(baseApiURL + 'articles')
+  getAllArticles: category => {
+    if (category) {
+      return AXIOS.get(baseApiURL + `articles/?category=${category}`)
+    } else {
+      return AXIOS.get(baseApiURL + 'articles')
+    }
   },
   getOneArticle: id => {
     return AXIOS.get(baseApiURL + `articles/${id}`)
@@ -27,6 +31,9 @@ export const articlesAPI = {
   },
   updateArticle: (form, id) => {
     return AXIOS.put(baseApiURL + `articles/${id}`, form)
+  },
+  getAllCategory: () => {
+    return AXIOS.get(baseApiURL + 'categories')
   }
 }
 

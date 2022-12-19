@@ -1,4 +1,5 @@
 export const pathToArticles = '/articles'
+export const pathToSpecificArticles = '/articles/:category'
 export const pathToOneArticle = '/article/:id'
 export const pathToNewArticles = '/newpost'
 export const pathToUpdateArticles = '/update/:id'

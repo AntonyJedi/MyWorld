@@ -1,9 +1,20 @@
 const Art = require('../models/articleModel')
+const Category = require('../models/categoryModel')
 const uuid = require('uuid')
 const path = require('path')
 const fs = require('fs')
 
 const articlesList = async (req, res) => {
+  let {category} = req.query
+  if (category) {
+    function capitalize(word) {
+      return word[0].toUpperCase() + word.slice(1).toLowerCase();
+    }
+    category = capitalize(category)
+    const cat = await Category.findOne({where: {title: category}})
+    const articles = await Art.findAll({where: {categoryId: cat.id}})
+    return res.status(200).json(articles)
+  }
   const articles = await Art.findAll()
   return res.status(200).json(articles)
 }
@@ -22,6 +33,7 @@ const createArticle = async (req, res, next) => {
        tag2: form.tag2,
        tag3: form.tag3,
        img: filename,
+       categoryId: form.categoryId,
        creationDate: new Date().toLocaleDateString("en-US")
      })
      return res.status(200).json(createdArt)
@@ -32,12 +44,13 @@ const createArticle = async (req, res, next) => {
        tag1: form.tag1,
        tag2: form.tag2,
        tag3: form.tag3,
+       categoryId: form.categoryId,
        creationDate: new Date().toLocaleDateString("en-US")
      })
      return res.status(200).json(createdArt)
    }
  } catch (e) {
-   next(res.status(500).json(e.message))
+   next(res.status(500).json(e.data))
  }
 }
 

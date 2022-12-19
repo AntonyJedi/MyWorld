@@ -6,13 +6,18 @@ import {
   getArticlesThunkCreator,
   newOneArticleThunkCreator
 } from "../../../redux/ArticleReducer";
+import withRouter from "../../../helpers/ParamHock";
 
 class ArticlesContainer extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    this.props.getArticlesThunkCreator();
+    if(this.props.param.category) {
+      this.props.getArticlesThunkCreator(this.props.param.category);
+    } else {
+      this.props.getArticlesThunkCreator()
+    }
   }
   deleteOne = id => {
     this.props.delOneArticleThunkCreator(id)
@@ -37,8 +42,10 @@ const mapStateToProps = state => {
   }
 }
 
+let withRouterContainer = withRouter(ArticlesContainer)
+
 export default connect(mapStateToProps, {
   getArticlesThunkCreator,
   delOneArticleThunkCreator,
   newOneArticleThunkCreator
-})(ArticlesContainer)
+})(withRouterContainer)

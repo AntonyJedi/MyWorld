@@ -22,6 +22,7 @@
       backface-visibility: hidden;
     }
     .front {
+      text-align: center;
       & > div {
         margin-bottom: 5px;
       }
@@ -38,6 +39,7 @@
       .inner {
         height: 100%;
         overflow-y: scroll;
+        line-height: 25px;
         &::-webkit-scrollbar {
           width: 5px;
           border-radius: 10px;
@@ -59,4 +61,11 @@
     width: 50%;
     margin: 0 auto 20px auto;
   }
+}
+
+.adminButtons {
+  padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
 }

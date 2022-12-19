@@ -1,11 +1,11 @@
-import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
-import {Textarea, TextInput} from "evergreen-ui";
+import React, {useCallback, useContext, useEffect, useState} from 'react';
+import {Select, Textarea, TextInput} from "evergreen-ui";
 import ImageUploader from "../../../components/FileUploader/FileUploader";
 import {motion} from "framer-motion";
 import {AlertContext} from "../../../components/Alert/AlertContext";
 import {useNavigate} from "react-router-dom";
 
-const CreateArticleComponent = ({newOne}) => {
+const CreateArticle = ({newOne, categories}) => {
   const alert = useContext(AlertContext)
   const navigate = useNavigate()
   const [article, setArticle] = useState({})
@@ -32,7 +32,7 @@ const CreateArticleComponent = ({newOne}) => {
     formData.append('tag3', article.tag3)
     formData.append('text', article.text)
     formData.append('image', article.image)
-    console.log(formData)
+    formData.append('categoryId', article.categoryId)
     try {
       await newOne(formData)
       alert.show("Article has been successfully created", "success")
@@ -79,6 +79,9 @@ const CreateArticleComponent = ({newOne}) => {
         placeholder="Article Text"
         onChange={e => setArticle({...article, text: e.target.value})}
       />
+      <Select onChange={e => setArticle({...article, categoryId: e.target.value})} width="70%">
+        {categories.map(cat => <option value={cat.id}>{cat.title}</option>)}
+      </Select>
       <ImageUploader
         handleChange={handleChange}
         handleRejected={handleRejected}
@@ -93,4 +96,4 @@ const CreateArticleComponent = ({newOne}) => {
   );
 };
 
-export default CreateArticleComponent;
+export default CreateArticle;

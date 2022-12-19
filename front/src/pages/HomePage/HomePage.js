@@ -1,10 +1,18 @@
 import React from 'react';
+import {motion} from "framer-motion";
+import {NavLink} from "react-router-dom";
 
-const HomePage = () => {
+const HomePage = ({categories}) => {
   return (
-    <div>
+    <motion.div
+      initial={{translateX: "-25%", opacity: 0}}
+      animate={{translateX: 0, opacity: 1}}
+      exit={{translateX: "50%", opacity: 0}}
+      transition={{duration: 0.5}}
+      >
       <h1>HomePage</h1>
-    </div>
+      {categories.map(one => <div><NavLink to={`/articles/${one.title.toLowerCase()}`}>{one.title}</NavLink></div>)}
+    </motion.div>
   );
 };
 

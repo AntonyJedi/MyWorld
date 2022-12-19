@@ -5,7 +5,7 @@ import {
   pathToScience,
   pathToMusic,
   pathToLogin,
-  pathToRegistration, pathToUpdateArticles, pathToOneArticle, pathToUpdateMusic
+  pathToRegistration, pathToUpdateArticles, pathToOneArticle, pathToUpdateMusic, pathToSpecificArticles
 } from './routes_const'
 import Science from "../pages/Science/Science";
 import ArticlesContainer from "../pages/Articles/Articles/ArticlesContainer";
@@ -43,6 +43,11 @@ export const allRoutes = [
     path: pathToArticles,
     component: <ArticlesContainer/>,
     title: 'Articles'
+  },
+  {
+    path: pathToSpecificArticles,
+    component: <ArticlesContainer/>,
+    title: 'Specific Articles'
   },
   {
     path: pathToOneArticle,
