@@ -7,7 +7,7 @@ import {adminRoutes, allRoutes, authRoutes, userRoutes} from "../../routes/route
 const Navbar = ({quotes, isUserAuth, makeOut, isUserAdmin}) => {
   console.log(quotes)
   // const isAuth = false
-  let allLinks = allRoutes.filter(link => link.title !== 'Article');
+  let allLinks = allRoutes.filter(link => link.title !== 'Article' && link.title !== 'Specific Articles');
   return (
     <header>
       <section className='main_container'>

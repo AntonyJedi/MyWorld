@@ -11,7 +11,7 @@ class UpdateArticleContainer extends React.Component {
     this.updateOneArticle = this.updateOneArticle.bind(this)
   }
   componentDidMount() {
-    const id = Number.parseInt(this.props.param);
+    const id = Number.parseInt(this.props.param.id);
     this.props.getOneArticleThunkCreator(id)
   }
 

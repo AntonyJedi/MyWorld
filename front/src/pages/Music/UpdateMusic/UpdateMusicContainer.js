@@ -12,7 +12,7 @@ class UpdateMusicContainer extends React.Component {
   }
 
   componentDidMount() {
-    const id = Number.parseInt(this.props.param);
+    const id = Number.parseInt(this.props.param.id);
     this.props.getOneSongThunkCreator(id)
   }
 
@@ -23,7 +23,7 @@ class UpdateMusicContainer extends React.Component {
   render() {
     return (
       <UpdateMusic
-        id={this.props.param}
+        id={this.props.param.id}
         song={this.props.updatedSong}
         updateSong={this.updateOneSong}
       />

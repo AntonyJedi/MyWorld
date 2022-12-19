@@ -11,7 +11,7 @@ class OneArticleContainer extends React.Component {
   }
 
   componentDidMount() {
-    const id = Number.parseInt(this.props.param)
+    const id = Number.parseInt(this.props.param.id)
     this.props.getChosenArticleThunkCreator(id)
   }
 
