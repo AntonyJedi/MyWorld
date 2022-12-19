@@ -24,6 +24,7 @@ class NavbarContainer extends React.Component {
         isUserAuth={this.props.isAuth}
         makeOut={this.makeLogout}
         isUserAdmin={this.props.isAdmin}
+        user={this.props.currentUser}
       />
     )
   }
@@ -33,7 +34,8 @@ const mapStateToProps = state => {
   return {
     quotes: state.QuotesStore.quotes_store,
     isAuth: state.UserStore.isAuth,
-    isAdmin: state.UserStore.isAdmin
+    isAdmin: state.UserStore.isAdmin,
+    currentUser: state.UserStore.user
   }
 }
 

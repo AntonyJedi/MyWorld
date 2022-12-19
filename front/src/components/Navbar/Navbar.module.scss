@@ -31,6 +31,7 @@ header {
     }
     .quote {
       font-style: italic;
+      @include magicButton(green);
     }
     .auth {
       @include flexFull();

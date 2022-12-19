@@ -10,7 +10,8 @@ const Article = sequelize.define('Articles', {
   tag2: {type: DataTypes.STRING, allowNull: true},
   tag3: {type: DataTypes.STRING, allowNull: true},
   img: {type: DataTypes.STRING, allowNull: true},
-  categoryId: {type: DataTypes.INTEGER, allowNull: false}
+  categoryId: {type: DataTypes.INTEGER, allowNull: false},
+  userId: {type: DataTypes.INTEGER, allowNull: false}
 })
 
 module.exports = Article
