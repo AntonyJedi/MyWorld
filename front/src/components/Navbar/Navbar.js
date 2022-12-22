@@ -6,12 +6,12 @@ import {allRoutes, authRoutes, userRoutes} from "../../routes/routes";
 
 const Navbar = ({isUserAuth, makeOut, user}) => {
   let allLinks = allRoutes.filter(link => link.title !== 'Article' && link.title !== 'Specific Articles');
-  let allUserLinks = userRoutes.filter(link => link.title !== 'Update Article' && link.title !== 'Update Music')
+  let allUserLinks = userRoutes.filter(link => link.title !== 'Update Article' && link.title !== 'Update Music' && link.title !== 'To Do List')
   return (
     <header>
       <section className='main_container'>
         <NavLink className={styles.logo} to='/'><img src={logo} alt="logo"/></NavLink>
-        {user.nickName && <div className={styles.quote}><span>{"Hello, " + user.nickName}</span></div>}
+        {user.nickName && <NavLink to={'/todolist'} className={({isActive}) => isActive ? [styles.active, styles.quote].join(' ') : styles.quote}><span>{"Hello, " + user.nickName}</span></NavLink>}
         <nav>
           {isUserAuth && allUserLinks.map(link => {
             return <NavLink className={({isActive}) => isActive ? styles.active : ''} to={link.path}><span>{link.title}</span></NavLink>

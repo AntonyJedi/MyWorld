@@ -51,6 +51,8 @@ export const RegistrationThunkCreator = (name, email, pass) => async (dispatch) 
       dispatch(setUserActionCreator(responseFromReg.data.user))
       dispatch(setAuthActionCreator(true))
     }
+    let allUsers = await usersAPI.getUsers()
+    dispatch(getAllUsers(allUsers.data))
   } catch (e) {
     console.log(e.data)
   }
@@ -64,6 +66,8 @@ export const LoginThunkCreator = (email, pass) => async (dispatch) => {
       dispatch(setUserActionCreator(responseFromLog.data.user))
       dispatch(setAuthActionCreator(true))
     }
+    let allUsers = await usersAPI.getUsers()
+    dispatch(getAllUsers(allUsers.data))
   } catch (e) {
     console.log(e)
   } finally {
@@ -88,6 +92,8 @@ export const checkAuth = () => async (dispatch) => {
     const response = await axios.get(`${baseApiURL}auth/refresh`, {withCredentials: true})
     dispatch(setUserActionCreator(response.data.user))
     dispatch(setAuthActionCreator(true))
+    let allUsers = await usersAPI.getUsers()
+    dispatch(getAllUsers(allUsers.data))
   } catch (e) {
     console.log(e)
   } finally {

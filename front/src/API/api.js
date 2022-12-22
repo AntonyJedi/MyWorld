@@ -55,6 +55,21 @@ export const musicAPI = {
   }
 }
 
+export const notesAPI = {
+  getAllNotes: () => {
+    return AXIOS.get(baseApiURL + `notes`)
+  },
+  createNewNote: note => {
+    return AXIOS.post(baseApiURL + `notes`, note)
+  },
+  updateOneNote: (id, updatedNote) => {
+    return AXIOS.put(baseApiURL + `notes/${id}`, updatedNote)
+  },
+  deleteOneNote: id => {
+    return AXIOS.delete(baseApiURL + `notes/${id}`)
+  }
+}
+
 export const quotesAPI = {
   getAllQuotes: () => {
     return AXIOS.get(baseApiURL)

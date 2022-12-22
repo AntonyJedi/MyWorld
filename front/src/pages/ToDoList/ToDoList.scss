@@ -1,0 +1,25 @@
+.note {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.note-enter-active {
+  animation: note 1s ease-in alternate-reverse;
+}
+.note-exit-active {
+  animation: note 1s ease-out forwards;
+}
+
+@keyframes note {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    opacity: .7;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
