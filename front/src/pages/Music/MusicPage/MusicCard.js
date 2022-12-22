@@ -3,7 +3,7 @@ import style from './Music.module.scss';
 import {Link} from "react-router-dom";
 import {AlertContext} from "../../../components/Alert/AlertContext";
 
-const MusicCard = ({id, songTitle, album, lyrics, category, image, release, deleteSong, canDelete}) => {
+const MusicCard = ({id, songTitle, album, lyrics, category, image, release, deleteSong, canDelete, user, userName}) => {
   const alert = useContext(AlertContext)
   const [turn, setTurn] = useState(false)
   const handlerDelete = idSong => {
@@ -27,7 +27,7 @@ const MusicCard = ({id, songTitle, album, lyrics, category, image, release, dele
           </div>
         </div>
       </li>
-      {canDelete && <div className={style.adminButtons}>
+      {(user === userName || canDelete) && <div className={style.adminButtons}>
         <Link className='basic_button' to={`/updateSong/${id}`}><span>Update</span></Link>
         <div onClick={() => handlerDelete(id)} className='delete_button'>
           <span>Delete song</span></div>

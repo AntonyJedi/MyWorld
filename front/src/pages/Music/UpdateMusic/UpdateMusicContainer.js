@@ -26,6 +26,7 @@ class UpdateMusicContainer extends React.Component {
         id={this.props.param.id}
         song={this.props.updatedSong}
         updateSong={this.updateOneSong}
+        user={this.props.currentUser}
       />
     )
   }
@@ -33,7 +34,8 @@ class UpdateMusicContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    updatedSong: state.MusicStore.updatedSong
+    updatedSong: state.MusicStore.updatedSong,
+    currentUser: state.UserStore.user
   }
 }
 

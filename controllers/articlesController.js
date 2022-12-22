@@ -34,6 +34,8 @@ const createArticle = async (req, res, next) => {
        tag3: form.tag3,
        img: filename,
        categoryId: form.categoryId,
+       userId: form.userId,
+       userName: form.userName,
        creationDate: new Date().toLocaleDateString("en-US")
      })
      return res.status(200).json(createdArt)
@@ -45,6 +47,8 @@ const createArticle = async (req, res, next) => {
        tag2: form.tag2,
        tag3: form.tag3,
        categoryId: form.categoryId,
+       userId: form.userId,
+       userName: form.userName,
        creationDate: new Date().toLocaleDateString("en-US")
      })
      return res.status(200).json(createdArt)

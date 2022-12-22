@@ -6,13 +6,14 @@ import {NavLink} from "react-router-dom";
 
 const SideBarMobile = ({isAuth}) => {
   const [isShown, setIsShown] = useState(false)
-  let allLinks = allRoutes.filter(link => link.title !== 'Article');
+  let allLinks = allRoutes.filter(link => link.title !== 'Article' && link.title !== 'Specific Articles')
+  let allUserLinks = userRoutes.filter(link => link.title !== 'Update Article' && link.title !== 'Update Music')
   return (
     <>
       <SideSheet position={Position.BOTTOM} isShown={isShown} onCloseComplete={() => setIsShown(false)}>
         <Paragraph margin={15}>
           <nav className={style.navigation}>
-            {isAuth && userRoutes.map(link => {
+            {isAuth && allUserLinks.map(link => {
               return <NavLink onClick={() => setIsShown(false)} className={({isActive}) => isActive ? style.buttons : ''} to={link.path}><span>{link.title}</span></NavLink>
             })}
             {allLinks.map(link => {

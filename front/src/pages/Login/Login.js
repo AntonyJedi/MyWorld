@@ -33,7 +33,7 @@ const Login = ({doLogin, isUserAuth}) => {
 
   return (
     <>
-      {isUserAuth ? setTimeout(() => navigate("/articles"), 100) :
+      {isUserAuth ? setTimeout(() => navigate("/"), 100) :
         <motion.form
           initial={{translateX: "-25%", opacity: 0}}
           animate={{translateX: 0, opacity: 1}}
