@@ -73,12 +73,7 @@ const Refresh = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const users = await Users.findAll({
-      include: [{
-        model: Tokens,
-        attributes: ['refreshToken']
-      }]
-    })
+    const users = await Users.findAll()
     res.json(users)
   } catch (e) {
     console.log(e)

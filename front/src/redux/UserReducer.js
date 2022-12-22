@@ -1,11 +1,12 @@
-import {authAPI, baseApiURL} from "../API/api";
+import {authAPI, baseApiURL, usersAPI} from "../API/api";
 import axios from "axios";
 
 const initStore = {
   user: {},
   isAdmin: false,
   isAuth: false,
-  isLoading: false
+  isLoading: false,
+  allUsers: []
 }
 
 const UserReducer = (state = initStore, action) => {
@@ -26,6 +27,11 @@ const UserReducer = (state = initStore, action) => {
         ...state,
         isLoading: action.isLoading
       }
+    case 'ALL-USERS':
+      return {
+        ...state,
+        allUsers: action.allUsers.map(name => name.nickName)
+      }
     default:
       return state
   }
@@ -35,6 +41,7 @@ const UserReducer = (state = initStore, action) => {
 const setUserActionCreator = userInfo => ({type: 'SET-USER', user: userInfo})
 const setAuthActionCreator = setAuth => ({type: 'SET-AUTH', isAuth: setAuth})
 const setLoadingCreator = setLoading => ({type: 'SET-LOADING', isLoading: setLoading})
+const getAllUsers = allUsers => ({type: 'ALL-USERS', allUsers})
 
 export const RegistrationThunkCreator = (name, email, pass) => async (dispatch) => {
   try {
@@ -52,7 +59,6 @@ export const LoginThunkCreator = (email, pass) => async (dispatch) => {
   try {
     dispatch(setLoadingCreator(true))
     let responseFromLog = await authAPI.login(email, pass)
-    console.log(responseFromLog.data.user.nickName)
     if (responseFromLog) {
       localStorage.setItem('token', responseFromLog.data.token)
       dispatch(setUserActionCreator(responseFromLog.data.user))
@@ -82,6 +88,18 @@ export const checkAuth = () => async (dispatch) => {
     const response = await axios.get(`${baseApiURL}auth/refresh`, {withCredentials: true})
     dispatch(setUserActionCreator(response.data.user))
     dispatch(setAuthActionCreator(true))
+  } catch (e) {
+    console.log(e)
+  } finally {
+    dispatch(setLoadingCreator(false))
+  }
+}
+
+export const getUsersThunkCreator = () => async (dispatch) => {
+  try {
+    dispatch(setLoadingCreator(true))
+    let allUsers = await usersAPI.getUsers()
+    dispatch(getAllUsers(allUsers.data))
   } catch (e) {
     console.log(e)
   } finally {

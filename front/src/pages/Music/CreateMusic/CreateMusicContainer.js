@@ -16,14 +16,14 @@ class CreateMusicContainer extends React.Component {
 
   render() {
     return (
-      <CreateMusic newSong={this.newSong} addNew={this.props.setIsAddNew} />
+      <CreateMusic newSong={this.newSong} addNew={this.props.setIsAddNew} user={this.props.currentUser} />
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-
+    currentUser: state.UserStore.user
   }
 }
 

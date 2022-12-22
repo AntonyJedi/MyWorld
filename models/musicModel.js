@@ -8,7 +8,8 @@ const Music = sequelize.define('Music', {
   lyrics: {type: DataTypes.TEXT, allowNull: false},
   category: {type: DataTypes.STRING, allowNull: false},
   img: {type: DataTypes.STRING, allowNull: true},
-  releaseDate: {type: DataTypes.DATE, allowNull: false}
+  releaseDate: {type: DataTypes.DATE, allowNull: false},
+  userName: {type: DataTypes.STRING, allowNull: false}
 })
 
 module.exports = Music

@@ -5,10 +5,10 @@ import ImageUploader from "../../../components/FileUploader/FileUploader";
 import {motion} from "framer-motion";
 import {AlertContext} from "../../../components/Alert/AlertContext";
 
-const UpdateMusic = ({id, song, updateSong}) => {
+const UpdateMusic = ({id, song, updateSong, user}) => {
   const navigate = useNavigate()
   const alert = useContext(AlertContext)
-  const [up, setUp] = useState({})
+  const [up, setUp] = useState({userName: user.nickName})
   const [files, setFiles] = useState([])
   const [fileRejections, setFileRejections] = useState([])
   const handleChange = (file) => {
@@ -34,6 +34,7 @@ const UpdateMusic = ({id, song, updateSong}) => {
     formUpdate.append('category', up.category)
     formUpdate.append('image', up.image)
     formUpdate.append('releaseDate', up.releaseDate)
+    formUpdate.append('userName', up.userName)
     try {
       console.log(up)
       await updateSong(id, formUpdate)

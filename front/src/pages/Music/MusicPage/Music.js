@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import MusicCard from "./MusicCard";
-import Loader from "../../../components/Loader/Loader";
 import CreateMusicContainer from "../CreateMusic/CreateMusicContainer";
 import {Autoplay, EffectCoverflow} from 'swiper';
 import {Swiper, SwiperSlide} from "swiper/react"
@@ -9,62 +8,73 @@ import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import {motion} from "framer-motion";
 
-const Music = ({songs, deleteOne, isAdminAuth}) => {
+const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
+  console.log(currentUser, users)
   const [isAddNew, setIsAddNew] = useState(false)
   return (
     <>
       {(!isAddNew && songs.length > 0) ? (
         <>
-          <motion.ul
-            initial={{translateX: "-25%", opacity: 0}}
-            animate={{translateX: 0, opacity: 1}}
-            exit={{translateX: "50%", opacity: 0}}
-            transition={{duration: 0.5}}
-          >
-            <Swiper
-              className='mySwiper'
-              modules={[EffectCoverflow, Autoplay]}
-              spaceBetween={50}
-              autoplay={{delay: 3000}}
-              effect={"coverflow"}
-              grabCursor={true}
-              centeredSlides={true}
-              slidesPerView={1}
-              coverflowEffect={{
-                rotate: 50,
-                stretch: 0,
-                depth: 100,
-                modifier: 1
-              }}
-              breakpoints={{
-                650: {
-                  slidesPerView: 2
-                },
-                1100: {
-                  slidesPerView: 3
-                }
-              }}
-            >
-              {songs.map(one =>
-                <SwiperSlide>
-                  <MusicCard
-                    id={one.id}
-                    songTitle={one.song}
-                    album={one.album}
-                    lyrics={one.lyrics}
-                    category={one.category}
-                    image={one.img}
-                    release={one.releaseDate}
-                    deleteSong={deleteOne}
-                    canDelete={isAdminAuth}
-                  />
-                </SwiperSlide>
-              )}
-            </Swiper>
-          </motion.ul>
-          <div onClick={() => setIsAddNew(isAddNew => !isAddNew)}style={{margin: '0 auto'}} className='basic_button'><span>Add new song</span></div>
+          {users.map(user => {
+            return (
+              <>
+                {currentUser.nickName === user ? <h3>My playlist</h3> : <h3>{user}'s playlist</h3>}
+                <motion.ul
+                  initial={{translateX: "-25%", opacity: 0}}
+                  animate={{translateX: 0, opacity: 1}}
+                  exit={{translateX: "50%", opacity: 0}}
+                  transition={{duration: 0.5}}
+                >
+                  <Swiper
+                    className='mySwiper'
+                    modules={[EffectCoverflow, Autoplay]}
+                    spaceBetween={50}
+                    autoplay={{delay: 3000}}
+                    effect={"coverflow"}
+                    grabCursor={true}
+                    centeredSlides={true}
+                    slidesPerView={1}
+                    coverflowEffect={{
+                      rotate: 50,
+                      stretch: 0,
+                      depth: 100,
+                      modifier: 1
+                    }}
+                    breakpoints={{
+                      650: {
+                        slidesPerView: 2
+                      },
+                      1100: {
+                        slidesPerView: 3
+                      }
+                    }}
+                  >
+                    {songs.map(one => {
+                      if (one.userName === user)
+                        return <SwiperSlide>
+                          <MusicCard
+                            id={one.id}
+                            songTitle={one.song}
+                            album={one.album}
+                            lyrics={one.lyrics}
+                            category={one.category}
+                            image={one.img}
+                            release={one.releaseDate}
+                            userName={one.userName}
+                            deleteSong={deleteOne}
+                            canDelete={isAdminAuth}
+                            user={currentUser.nickName}
+                          />
+                        </SwiperSlide>
+                    })}
+                  </Swiper>
+                </motion.ul>
+              </>
+            )
+          })}
+          {isAuth && <div onClick={() => setIsAddNew(isAddNew => !isAddNew)} style={{margin: '0 auto'}} className='basic_button'><span>Add new song</span></div>}
         </>
-      ) : <CreateMusicContainer setIsAddNew={setIsAddNew} />
+      ) : <CreateMusicContainer setIsAddNew={setIsAddNew}/>
       }
     </>
   );

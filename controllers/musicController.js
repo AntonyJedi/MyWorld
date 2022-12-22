@@ -21,7 +21,8 @@ const createSong = async (req, res, next) => {
         lyrics: form.lyrics,
         category: form.category,
         img: filename,
-        releaseDate: form.releaseDate
+        releaseDate: form.releaseDate,
+        userName: form.userName
       })
       return res.status(200).json(createdSong)
     } else {
@@ -30,7 +31,8 @@ const createSong = async (req, res, next) => {
         album: form.album,
         lyrics: form.lyrics,
         category: form.category,
-        releaseDate: form.releaseDate
+        releaseDate: form.releaseDate,
+        userName: form.userName
       })
       console.log(createdSong)
       return res.status(200).json(createdSong)
@@ -61,7 +63,8 @@ const songOneUpdate = async (req, res) => {
       lyrics: form.lyrics,
       category: form.category,
       img: updatedFileName,
-      releaseDate: form.releaseDate
+      releaseDate: form.releaseDate,
+      userName: form.userName
     }, {where: {id: req.params.id}})
     return res.status(200).json(update);
   } else {
@@ -71,7 +74,8 @@ const songOneUpdate = async (req, res) => {
       artist: form.artist,
       lyrics: form.lyrics,
       category: form.category,
-      releaseDate: form.releaseDate
+      releaseDate: form.releaseDate,
+      userName: form.userName
     }, {where: {id: req.params.id}})
     return res.status(200).json(update);
   }

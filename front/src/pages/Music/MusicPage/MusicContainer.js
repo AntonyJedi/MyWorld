@@ -21,6 +21,9 @@ class MusicContainer extends React.Component {
         isLoading={this.props.isLoading}
         deleteOne={this.props.deleteOneSongThunkCreator}
         isAdminAuth={this.props.isAdmin}
+        users={this.props.allUsers}
+        isAuth={this.props.isAuth}
+        currentUser={this.props.currentUser}
       />
     )
   }
@@ -30,7 +33,10 @@ const mapStateToProps = state => {
   return {
     allSongs: state.MusicStore.songs_store,
     isLoading: state.MusicStore.isFetching,
-    isAdmin: state.UserStore.isAdmin
+    isAdmin: state.UserStore.isAdmin,
+    allUsers: state.UserStore.allUsers,
+    isAuth: state.UserStore.isAuth,
+    currentUser: state.UserStore.user
   }
 }
 

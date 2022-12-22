@@ -1,12 +1,12 @@
-import React, {useCallback, useContext, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {AlertContext} from "../../../components/Alert/AlertContext";
 import {motion} from "framer-motion";
 import {Textarea, TextInput} from "evergreen-ui";
 import ImageUploader from "../../../components/FileUploader/FileUploader";
 
-const CreateMusic = ({newSong, addNew}) => {
+const CreateMusic = ({newSong, addNew, user}) => {
   const alert = useContext(AlertContext)
-  const [music, setMusic] = useState({})
+  const [music, setMusic] = useState({userName: user.nickName})
 
   const [files, setFiles] = useState([])
   const [fileRejections, setFileRejections] = useState([])
@@ -21,6 +21,10 @@ const CreateMusic = ({newSong, addNew}) => {
     setMusic({...music, image: null})
   }
 
+  useEffect(() => {
+    console.log(music)
+  }, [music])
+
   async function createSong(e) {
     e.preventDefault()
     const formData = new FormData()
@@ -30,6 +34,7 @@ const CreateMusic = ({newSong, addNew}) => {
     formData.append('category', music.category)
     formData.append('image', music.image)
     formData.append('releaseDate', music.releaseDate)
+    formData.append('userName', music.userName)
     try {
       await newSong(formData)
       addNew(false)
@@ -62,7 +67,7 @@ const CreateMusic = ({newSong, addNew}) => {
       <TextInput
         id="tag3"
         type="text"
-        placeholder="Category"
+        placeholder="Genre"
         onChange={e => setMusic({...music, category: e.target.value})}
       />
       <TextInput

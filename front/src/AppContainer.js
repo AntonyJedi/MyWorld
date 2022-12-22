@@ -1,7 +1,7 @@
 import React from 'react';
 import App from "./App";
 import {connect} from "react-redux";
-import {checkAuth} from "./redux/UserReducer";
+import {checkAuth, getUsersThunkCreator} from "./redux/UserReducer";
 
 class AppContainer extends React.Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class AppContainer extends React.Component {
     if (localStorage.getItem('token')) {
       this.props.checkAuth()
     }
+    this.props.getUsersThunkCreator()
   }
 
   render() {
@@ -33,4 +34,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {checkAuth})(AppContainer);
+export default connect(mapStateToProps, {checkAuth, getUsersThunkCreator})(AppContainer);

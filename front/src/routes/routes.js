@@ -17,13 +17,7 @@ import OneArticleContainer from "../pages/Articles/OneArticlePage/OneArticleCont
 import MusicContainer from "../pages/Music/MusicPage/MusicContainer";
 import UpdateMusicContainer from "../pages/Music/UpdateMusic/UpdateMusicContainer";
 
-export const adminRoutes = [
-  {
-    path: pathToUpdateMusic,
-    component: <UpdateMusicContainer/>,
-    title: 'Update Music'
-  }
-]
+export const adminRoutes = []
 
 export const userRoutes = [
   {
@@ -35,6 +29,11 @@ export const userRoutes = [
     path: pathToUpdateArticles,
     component: <UpdateArticleContainer/>,
     title: 'Update Article'
+  },
+  {
+    path: pathToUpdateMusic,
+    component: <UpdateMusicContainer/>,
+    title: 'Update Music'
   }
 ]
 

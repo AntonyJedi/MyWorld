@@ -6,7 +6,7 @@ import {allRoutes, authRoutes, userRoutes} from "../../routes/routes";
 
 const Navbar = ({isUserAuth, makeOut, user}) => {
   let allLinks = allRoutes.filter(link => link.title !== 'Article' && link.title !== 'Specific Articles');
-  let allUserLinks = userRoutes.filter(link => link.title !== 'Update Article')
+  let allUserLinks = userRoutes.filter(link => link.title !== 'Update Article' && link.title !== 'Update Music')
   return (
     <header>
       <section className='main_container'>
