@@ -43,6 +43,10 @@ h2 {
   margin-bottom: 15px;
 }
 
+h3 {
+  margin: 15px 0;
+}
+
 .basic_button {
   @include magicButton();
 }
@@ -51,9 +55,14 @@ h2 {
   @include magicButton(red);
 }
 
-.swiper-wrapper {
-  padding: 40px 0;
-  .swiper-slide-shadow-right, .swiper-slide-shadow-left {
-    background-image: none;
-  }
+//.swiper-wrapper {
+//  padding: 40px 0;
+//  .swiper-slide-shadow-right, .swiper-slide-shadow-left {
+//    background-image: none;
+//  }
+//}
+
+.slick-track {
+ display: flex;
+  gap: 20px;
 }

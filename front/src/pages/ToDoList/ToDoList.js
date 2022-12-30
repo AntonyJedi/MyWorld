@@ -1,38 +1,48 @@
 import React, {useEffect, useState} from 'react';
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 import './ToDoList.scss'
+import {Button, Checkbox, IconButton, TextInput, TrashIcon} from "evergreen-ui";
 
-const ToDoList = ({allNotes, newNote, removeOne}) => {
+const ToDoList = ({allNotes, newNote, removeOne, change}) => {
   const [value, setValue] = useState({userName: 'Anton'})
   function setNewNote (e) {
     e.preventDefault()
     newNote(value)
     setValue({...value, text: ''})
   }
+
   return (
     <>
       <form onSubmit={setNewNote}>
-        <div className="input-group mb-3">
-          <input
+        <div className="input-group">
+          <TextInput
             value={value.text}
             type="text"
             className="form-control"
-            placeholder="Enter note title"
+            placeholder="Enter note..."
             onChange={e => setValue({...value, text: e.target.value})}
           />
-          <button className="btn btn-outline-secondary" type="submit">Add Note</button>
+          <Button intent="success" type="submit">Add Note</Button>
         </div>
       </form>
+
       <hr/>
-      <TransitionGroup component="ul" className="list-group mt-3">
+
+      <TransitionGroup component="ul" className="list-group">
         {allNotes.map(note => (
           <CSSTransition key={note.id} classNames="note" timeout={1000}>
-            <li
-              className="list-group-item note">
-              <strong>{note.text}</strong>
+            <li className={["list-group-item note", note.checked ? 'checked' : 'open'].join(' ')}>
+              <div className='text-item'>
+                <Checkbox
+                  checked={note.checked}
+                  onChange={() => change(note.id)}
+                />
+                <strong>{note.text}</strong>
+              </div>
               <div>
                 <small>{new Date().toLocaleDateString()}</small>
-                <button onClick={() => removeOne(note.id)} type="button" className="btn btn-dark">&times;</button>
+                <div className='userName'>{note.userName}</div>
+                <IconButton icon={TrashIcon} intent={!note.checked ? 'danger' : 'grey'} marginLeft={16} onClick={() => removeOne(note.id)} type="button" />
               </div>
             </li>
           </CSSTransition>

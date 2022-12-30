@@ -1,7 +1,12 @@
 import React from "react";
 import {connect} from "react-redux"
 import ToDoList from "./ToDoList";
-import {deleteOneNoteThunkCreator, getNotesThunkCreator, newNoteThunkCreator} from "../../redux/NotesReducer";
+import {
+  deleteOneNoteThunkCreator,
+  getNotesThunkCreator,
+  newNoteThunkCreator,
+  updateOneNoteThunkCreator
+} from "../../redux/NotesReducer";
 
 class ToDoListContainer extends React.Component {
   constructor(props) {
@@ -19,7 +24,9 @@ class ToDoListContainer extends React.Component {
     await this.props.newNoteThunkCreator(note)
   }
 
-
+  changeStatus = async id => [
+    await this.props.updateOneNoteThunkCreator(id)
+  ]
 
   render() {
     return (
@@ -27,6 +34,7 @@ class ToDoListContainer extends React.Component {
         allNotes={this.props.notes}
         newNote={this.addNote}
         removeOne={this.removeNote}
+        change={this.changeStatus}
       />
     )
   }
@@ -38,4 +46,9 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getNotesThunkCreator, newNoteThunkCreator, deleteOneNoteThunkCreator})(ToDoListContainer)
+export default connect(mapStateToProps, {
+  getNotesThunkCreator,
+  newNoteThunkCreator,
+  deleteOneNoteThunkCreator,
+  updateOneNoteThunkCreator
+})(ToDoListContainer)

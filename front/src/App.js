@@ -10,7 +10,7 @@ import {AnimatePresence} from "framer-motion"
 import AlertComponent from "./components/Alert/AlertComponent";
 import HomePageContainer from "./pages/HomePage/HomePageContainer";
 
-const App = ({isUserAuth, isLoading, isUserAdmin}) => {
+const App = ({isUserAuth, isLoading, isUserAdmin, makeOut}) => {
   const location = useLocation()
   return (
     <>
@@ -38,7 +38,7 @@ const App = ({isUserAuth, isLoading, isUserAdmin}) => {
           </AnimatePresence>
         </main>
         <Footer/>
-        <SideBarMobile isAuth={isUserAuth}/>
+        <SideBarMobile isAuth={isUserAuth} makeOut={makeOut} />
       </>}
     </>
   );

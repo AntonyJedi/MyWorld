@@ -13,7 +13,11 @@ class RegistrationContainer extends React.Component {
   }
   render() {
     return (
-      <Registration doReg={this.makeReg} isUserAuth={this.props.isAuth} />
+      <Registration
+        doReg={this.makeReg}
+        isUserAuth={this.props.isAuth}
+        error={this.props.error}
+      />
     );
   }
 }
@@ -21,7 +25,8 @@ class RegistrationContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.UserStore.user,
-    isAuth: state.UserStore.isAuth
+    isAuth: state.UserStore.isAuth,
+    error: state.UserStore.error
   }
 }
 

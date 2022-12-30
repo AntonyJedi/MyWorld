@@ -16,10 +16,12 @@ const Registration = async (req, res) => {
     if (resultOfReg.status !== 400) {
       res.cookie('refreshToken', resultOfReg.toClient.refreshToken, {httpOnly: true})
     }
-    res.status(resultOfReg.status).json({token: resultOfReg.toClient, user: resultOfReg.user});
+    resultOfReg.status === 200 ?
+      res.status(resultOfReg.status).json({token: resultOfReg.toClient, user: resultOfReg.user}) :
+      res.status(resultOfReg.status).json(resultOfReg.toClient);
   } catch (e) {
-    console.log(e)
-    return res.status(400).json({message: 'Something went wrong with registration'})
+    console.log(e.message)
+    res.status(400).json({message: 'Something went wrong with registration'})
   }
 }
 

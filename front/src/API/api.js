@@ -62,8 +62,8 @@ export const notesAPI = {
   createNewNote: note => {
     return AXIOS.post(baseApiURL + `notes`, note)
   },
-  updateOneNote: (id, updatedNote) => {
-    return AXIOS.put(baseApiURL + `notes/${id}`, updatedNote)
+  updateOneNote: id => {
+    return AXIOS.put(baseApiURL + `notes/${id}`)
   },
   deleteOneNote: id => {
     return AXIOS.delete(baseApiURL + `notes/${id}`)

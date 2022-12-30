@@ -8,7 +8,7 @@ const notesList = async (req, res) => {
 const createNote = async (req, res, next) => {
   const note = req.body
   try {
-    let newNote = List.create({
+    let newNote = await List.create({
       text: note.text,
       creationDate: new Date(),
       userName: note.userName,
@@ -21,12 +21,9 @@ const createNote = async (req, res, next) => {
 }
 
 const noteOneUpdate = async (req, res) => {
-  const note = req.body
   try {
-    let newNote = List.update({
-      text: note.text,
-      creationDate: new Date().toLocaleDateString(),
-      userName: note.userName
+    let newNote = await List.update({
+      checked: true,
     }, {where: {id: req.params.id}})
     return res.status(200).json(newNote)
   } catch (e) {

@@ -46,6 +46,9 @@
     }
   }
 }
+.logout {
+  @include magicButton(red);
+}
 
 .navigation {
   a {

@@ -24,6 +24,11 @@ const NotesReducer = (state = initStore, action) => {
         ...state,
         notes_store: state.notes_store.filter(one => one.id !== action.id)
       }
+    case 'CHANGE-ONE-NOTE':
+      return {
+        ...state,
+        notes_store: state.notes_store.map(one => one.id === action.id ? {...one, checked: !one.checked} : one)
+      }
     default:
       return state
   }
@@ -32,6 +37,7 @@ const NotesReducer = (state = initStore, action) => {
 const getNotesActionCreator = allNotes => ({type: 'GET-ALL-NOTES', allNotes})
 const setNewNoteActionCreator = newNote => ({type: 'SET-NEW-NOTE', newNote})
 const deleteOneNoteActionCreator = id => ({type: 'DELETE-ONE-NOTE', id})
+const changedOneNoteActionCreator = id => ({type: 'CHANGE-ONE-NOTE', id})
 
 export const getNotesThunkCreator = () => async (dispatch) => {
   try {
@@ -44,16 +50,17 @@ export const getNotesThunkCreator = () => async (dispatch) => {
 
 export const newNoteThunkCreator = note => async (dispatch) => {
   try {
-    await notesAPI.createNewNote(note)
-    dispatch(setNewNoteActionCreator(note))
+    const res = await notesAPI.createNewNote(note)
+    await dispatch(setNewNoteActionCreator(res.data))
   } catch (e) {
     console.log(e.response.data)
   }
 }
 
-export const updateOneSongThunkCreator = (id, note) => async () => {
+export const updateOneNoteThunkCreator = id => async (dispatch) => {
   try {
-    await notesAPI.updateOneNote(id, note)
+    await notesAPI.updateOneNote(id)
+    dispatch(changedOneNoteActionCreator(id))
   } catch (e) {
     console.log(e)
   }
@@ -61,7 +68,7 @@ export const updateOneSongThunkCreator = (id, note) => async () => {
 
 export const deleteOneNoteThunkCreator = id => async (dispatch) => {
   try {
-    await notesAPI.deleteOneNote(id)
+    const res = await notesAPI.deleteOneNote(id)
     dispatch(deleteOneNoteActionCreator(id))
   } catch (e) {
     console.log(e.response.data)

@@ -1,8 +1,45 @@
+.input-group {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  max-width: 100%;
+}
+
+.form-control {
+  margin: 0;
+}
+
+.text-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .note {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all .5s ease;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 0 10px;
+  &.checked {
+    border: 1px solid grey;
+    text-decoration: line-through;
+    color: grey;
+  }
+  .userName {
+    position: absolute;
+    top: -11px;
+    background: white;
+    padding: 0 5px;
+  }
 }
+
 .note-enter-active {
   animation: note 1s ease-in alternate-reverse;
 }
