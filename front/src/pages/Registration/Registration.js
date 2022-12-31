@@ -5,7 +5,7 @@ import {AlertContext} from "../../components/Alert/AlertContext";
 import {useNavigate} from "react-router-dom";
 import validation from "../../helpers/validation";
 
-const Registration = ({doReg, isUserAuth}) => {
+const Registration = ({doReg, isUserAuth, error}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,11 +19,16 @@ const Registration = ({doReg, isUserAuth}) => {
     if (Object.keys(formErrors).length >= 1) {
       alert.show(formErrors[Object.keys(formErrors)[0]], 'danger')
     } else if (Object.keys(formErrors).length === 0 && isSubmit) {
-      (async function UserRegistration() {
+      (async () => {
         await doReg(name, email, password);
+        alert.show('User has been created', 'success')
       })()
     }
   }, [formErrors])
+
+  useEffect(() => {
+    Object.keys(error).length !== 0 && alert.show(error.message, 'danger')
+  }, [error])
 
 
   const sendReg = () => {
@@ -35,7 +40,7 @@ const Registration = ({doReg, isUserAuth}) => {
 
   return (
     <>
-      {isUserAuth ? setTimeout(() => navigate("/articles"), 100) :
+      {isUserAuth ? setTimeout(() => navigate("/"), 100) :
         <motion.form
           initial={{translateX: "-25%", opacity: 0}}
           animate={{translateX: 0, opacity: 1}}

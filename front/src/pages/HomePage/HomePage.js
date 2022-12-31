@@ -1,6 +1,7 @@
 import React from 'react';
 import {motion} from "framer-motion";
 import {NavLink} from "react-router-dom";
+import style from './HomePage.module.scss'
 
 const HomePage = ({categories}) => {
   return (
@@ -10,8 +11,8 @@ const HomePage = ({categories}) => {
       exit={{translateX: "50%", opacity: 0}}
       transition={{duration: 0.5}}
       >
-      <h1>HomePage</h1>
-      {categories.map(one => <div><NavLink to={`/articles/${one.title.toLowerCase()}`}>{one.title}</NavLink></div>)}
+      <h1 style={{textAlign: 'center'}}>HomePage</h1>
+      {categories.map(one => <div className={style.category}><NavLink to={`/articles/${one.title.toLowerCase()}`}><span>{one.title}</span></NavLink></div>)}
     </motion.div>
   );
 };

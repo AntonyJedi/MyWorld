@@ -1,11 +1,12 @@
 import React from 'react';
 import App from "./App";
 import {connect} from "react-redux";
-import {checkAuth, getUsersThunkCreator} from "./redux/UserReducer";
+import {checkAuth, getUsersThunkCreator, LogoutThunkCreator} from "./redux/UserReducer";
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.makeLogout = this.makeLogout.bind(this)
   }
   componentDidMount() {
     if (localStorage.getItem('token')) {
@@ -14,12 +15,18 @@ class AppContainer extends React.Component {
     this.props.getUsersThunkCreator()
   }
 
+  makeLogout(e) {
+    e.preventDefault();
+    this.props.LogoutThunkCreator()
+  }
+
   render() {
     return (
       <App
         isUserAuth={this.props.isAuth}
         isLoading={this.props.isLoading}
         isUserAdmin={this.props.isAdmin}
+        makeOut={this.makeLogout}
       />
     );
   }
@@ -34,4 +41,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {checkAuth, getUsersThunkCreator})(AppContainer);
+export default connect(mapStateToProps, {checkAuth, getUsersThunkCreator, LogoutThunkCreator})(AppContainer);

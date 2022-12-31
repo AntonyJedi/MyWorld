@@ -16,7 +16,11 @@ class CreateMusicContainer extends React.Component {
 
   render() {
     return (
-      <CreateMusic newSong={this.newSong} addNew={this.props.setIsAddNew} user={this.props.currentUser} />
+      <CreateMusic
+        newSong={this.newSong}
+        addNew={this.props.setIsAddNew}
+        user={this.props.currentUser}
+      />
     )
   }
 }
