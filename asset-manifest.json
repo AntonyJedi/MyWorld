@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/MyWorld/static/css/main.8e1e9ce7.css",
+    "main.js": "/MyWorld/static/js/main.ffb2ae43.js",
+    "static/media/CreteRound-Regular.ttf": "/MyWorld/static/media/CreteRound-Regular.aad171ba4c2b1917591e.ttf",
+    "static/media/logo.png": "/MyWorld/static/media/logo.37ef4251da193e060554.png",
+    "static/media/slick.svg": "/MyWorld/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/MyWorld/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/MyWorld/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/MyWorld/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/MyWorld/index.html",
+    "main.8e1e9ce7.css.map": "/MyWorld/static/css/main.8e1e9ce7.css.map",
+    "main.ffb2ae43.js.map": "/MyWorld/static/js/main.ffb2ae43.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8e1e9ce7.css",
+    "static/js/main.ffb2ae43.js"
+  ]
+}
