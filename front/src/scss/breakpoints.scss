@@ -1,6 +1,7 @@
 $grid-breakpoints: (
   mobile: 576px,
-  tablet: 1080px
+  tablet: 1080px,
+  full: 1500px
 );
 
 @mixin breakpoint($break, $break2: false) {

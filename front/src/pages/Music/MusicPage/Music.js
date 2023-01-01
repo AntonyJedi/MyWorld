@@ -5,20 +5,25 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {motion} from "framer-motion";
+import NextArrow from "./SliderArrows/NextArrow";
+import PrevArrow from "./SliderArrows/PrevArrow";
+import './SliderArrows/SlickArrows.scss'
 
 const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
   const [isAddNew, setIsAddNew] = useState(false)
 
   const settings = {
     className: "center",
-    infinite: false,
+    infinite: true,
     centerPadding: "60px",
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     speed: 1000,
-    autoplaySpeed: 5000,
-    cssEase: "linear",
+    autoplaySpeed: 3000,
+    cssEase: 'cubic-bezier(0.600, -0.580, 0.535, 0.15)',
+    nextArrow: <NextArrow/>,
+    prevArrow: <PrevArrow/>,
     responsive: [
       {
         breakpoint: 700,

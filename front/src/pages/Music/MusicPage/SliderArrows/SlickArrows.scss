@@ -1,0 +1,15 @@
+@import "src/scss/breakpoints";
+
+.slick-prev, .slick-next {
+  color: #000000;
+  display: block;
+  &.slick-disabled {
+    display: none !important;
+  }
+  @include breakpoint(full) {
+    display: none !important;
+  }
+  &:hover {
+    color: red;
+  }
+}
