@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 import './ToDoList.scss'
 import {Button, Checkbox, IconButton, TextInput, TrashIcon} from "evergreen-ui";
+import {motion} from "framer-motion";
 
-const ToDoList = ({allNotes, newNote, removeOne, change}) => {
-  const [value, setValue] = useState({userName: 'Anton'})
+const ToDoList = ({allNotes, newNote, removeOne, change, currentUser}) => {
+  const [value, setValue] = useState({userName: currentUser.nickName})
   function setNewNote (e) {
     e.preventDefault()
     newNote(value)
@@ -13,7 +14,13 @@ const ToDoList = ({allNotes, newNote, removeOne, change}) => {
 
   return (
     <>
-      <form onSubmit={setNewNote}>
+      <motion.form
+        initial={{translateX: "-25%", opacity: 0}}
+        animate={{translateX: 0, opacity: 1}}
+        exit={{translateX: "50%", opacity: 0}}
+        transition={{duration: 0.5}}
+        onSubmit={setNewNote}
+      >
         <div className="input-group">
           <TextInput
             value={value.text}
@@ -24,7 +31,7 @@ const ToDoList = ({allNotes, newNote, removeOne, change}) => {
           />
           <Button intent="success" type="submit">Add Note</Button>
         </div>
-      </form>
+      </motion.form>
 
       <hr/>
 

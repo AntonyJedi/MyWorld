@@ -15,7 +15,7 @@ const articlesList = async (req, res) => {
     const articles = await Art.findAll({where: {categoryId: cat.id}})
     return res.status(200).json(articles)
   }
-  const articles = await Art.findAll()
+  const articles = await Art.findAll({order: [['id', 'DESC']]})
   return res.status(200).json(articles)
 }
 

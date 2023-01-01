@@ -14,7 +14,7 @@ const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
 
   const settings = {
     className: "center",
-    infinite: true,
+    infinite: false,
     centerPadding: "60px",
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -26,9 +26,17 @@ const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
     prevArrow: <PrevArrow/>,
     responsive: [
       {
-        breakpoint: 700,
+        breakpoint: 600,
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true
+        }
+      },
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true
         }
@@ -73,7 +81,7 @@ const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
             )
           })}
           {isAuth &&
-          <div onClick={() => setIsAddNew(isAddNew => !isAddNew)} style={{margin: '0 auto'}} className='basic_button'>
+          <div onClick={() => setIsAddNew(isAddNew => !isAddNew)} style={{margin: '20px auto'}} className='basic_button'>
             <span>Add new song</span></div>}
         </>
       ) : <CreateMusicContainer setIsAddNew={setIsAddNew}/>
