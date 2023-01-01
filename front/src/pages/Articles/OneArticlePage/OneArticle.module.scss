@@ -38,13 +38,24 @@
     }
   }
   .image {
-    display: flex;
-    float: right;
-    padding: 10px 20px;
+    position: absolute;
+    z-index: -1;
+    opacity: .2;
+    right: 20px;
+    top: -10px;
+    margin: 0;
+    @include breakpoint(mobile) {
+      position: static;
+      opacity: 1;
+      margin-bottom: 20px;
+      img {
+        margin: 0 auto;
+      }
+    }
     img {
-      width: 500px;
+      width: 200px;
       border-radius: 5px;
-      box-shadow: 15px 15px 16px 0px rgb(0 0 0 / 75%);
+      //box-shadow: 15px 15px 16px 0px rgb(0 0 0 / 75%);
     }
   }
 }

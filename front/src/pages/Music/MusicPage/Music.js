@@ -5,6 +5,9 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {motion} from "framer-motion";
+import NextArrow from "./SliderArrows/NextArrow";
+import PrevArrow from "./SliderArrows/PrevArrow";
+import './SliderArrows/SlickArrows.scss'
 
 const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
   const [isAddNew, setIsAddNew] = useState(false)
@@ -13,17 +16,27 @@ const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
     className: "center",
     infinite: false,
     centerPadding: "60px",
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     speed: 1000,
-    autoplaySpeed: 5000,
-    cssEase: "linear",
+    autoplaySpeed: 3000,
+    cssEase: 'cubic-bezier(0.600, -0.580, 0.535, 0.15)',
+    nextArrow: <NextArrow/>,
+    prevArrow: <PrevArrow/>,
     responsive: [
       {
-        breakpoint: 700,
+        breakpoint: 600,
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true
+        }
+      },
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true
         }
@@ -68,7 +81,7 @@ const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
             )
           })}
           {isAuth &&
-          <div onClick={() => setIsAddNew(isAddNew => !isAddNew)} style={{margin: '0 auto'}} className='basic_button'>
+          <div onClick={() => setIsAddNew(isAddNew => !isAddNew)} style={{margin: '20px auto'}} className='basic_button'>
             <span>Add new song</span></div>}
         </>
       ) : <CreateMusicContainer setIsAddNew={setIsAddNew}/>
