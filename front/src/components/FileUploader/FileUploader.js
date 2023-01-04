@@ -1,12 +1,12 @@
-import React, {useCallback, useState} from "react";
+import React from "react";
 import {FileCard, FileUploader, Pane} from "evergreen-ui";
 
 const ImageUploader = ({handleChange, handleRejected, handleRemove, fileRejections, files}) => {
   return (
     <Pane maxWidth={654}>
       <FileUploader
-        label="Upload File"
-        description="You can upload 1 file. File can be up to 50 MB."
+        label='Upload File'
+        description='You can upload 1 file. File can be up to 50 MB.'
         maxSizeInBytes={50 * 1024 ** 2}
         maxFiles={1}
         onChange={handleChange}
@@ -18,7 +18,7 @@ const ImageUploader = ({handleChange, handleRejected, handleRemove, fileRejectio
           return (
             <FileCard
               key={name}
-              isInvalid={fileRejection != null}
+              isInvalid={fileRejection !== null}
               name={name}
               onRemove={handleRemove}
               sizeInBytes={size}

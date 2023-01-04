@@ -1,13 +1,16 @@
-import React from "react";
+import React from 'react';
 import {
   pathToArticles,
   pathToNewArticles,
-  pathToScience,
   pathToMusic,
   pathToLogin,
-  pathToRegistration, pathToUpdateArticles, pathToOneArticle, pathToUpdateMusic, pathToSpecificArticles, pathToDoList
-} from './routes_const'
-import Science from "../pages/Science/Science";
+  pathToRegistration,
+  pathToUpdateArticles,
+  pathToOneArticle,
+  pathToUpdateMusic,
+  pathToSpecificArticles,
+  pathToDoList,
+} from './routes_const';
 import ArticlesContainer from "../pages/Articles/Articles/ArticlesContainer";
 import UpdateArticleContainer from "../pages/Articles/UpdateArticle/UpdateArticleContainer";
 import CreateArticleContainer from "../pages/Articles/CreateArticle/CreateArticleContainer";
@@ -18,13 +21,13 @@ import MusicContainer from "../pages/Music/MusicPage/MusicContainer";
 import UpdateMusicContainer from "../pages/Music/UpdateMusic/UpdateMusicContainer";
 import ToDoListContainer from "../pages/ToDoList/ToDoListContainer";
 
-export const adminRoutes = []
+export const adminRoutes = [];
 
 export const userRoutes = [
   {
     path: pathToNewArticles,
-    component: <CreateArticleContainer/>,
-    title: 'New Articles'
+    component: <CreateArticleContainer />,
+    title: 'New Articles',
   },
   {
     path: pathToUpdateArticles,
@@ -41,7 +44,7 @@ export const userRoutes = [
     component: <ToDoListContainer/>,
     title: 'To Do List'
   }
-]
+];
 
 export const allRoutes = [
   {
@@ -82,4 +85,4 @@ export const authRoutes = [
     component: <RegistrationContainer/>,
     title: 'Registration'
   }
-]
+];

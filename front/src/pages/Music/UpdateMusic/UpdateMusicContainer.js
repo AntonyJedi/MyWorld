@@ -39,6 +39,6 @@ const mapStateToProps = state => {
   }
 }
 
-let withRouterUpdateContainer = withRouter(UpdateMusicContainer)
+const withRouterUpdateContainer = withRouter(UpdateMusicContainer)
 
 export default connect(mapStateToProps, {getOneSongThunkCreator, updateOneSongThunkCreator})(withRouterUpdateContainer)

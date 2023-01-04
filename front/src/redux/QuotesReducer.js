@@ -1,7 +1,7 @@
 import {quotesAPI} from "../API/api";
 
 const initStore = {
-  quotes_store: []
+  quotesStore: []
 }
 
 const QuotesReducer = (state = initStore, action) => {
@@ -9,7 +9,7 @@ const QuotesReducer = (state = initStore, action) => {
     case 'GET-ALL-QUOTES':
       return {
         ...state,
-        quotes_store: action.quotes
+        quotesStore: action.quotes
       }
     default:
       return state
@@ -19,7 +19,7 @@ const QuotesReducer = (state = initStore, action) => {
 const getQuotesActionCreator = allQuotes => ({type: 'GET-ALL-QUOTES', quotes: allQuotes})
 
 export const getQuotesThunkCreator = () => async (dispatch) => {
-  let response = await quotesAPI.getAllQuotes()
+  const response = await quotesAPI.getAllQuotes()
   dispatch(getQuotesActionCreator(response.data))
 }
 

@@ -25,7 +25,7 @@ const UpdateArticle = ({article, updateArticle}) => {
     setUp(article)
   }, [article])
 
-  async function updateHandler (e) {
+  const updateHandler = async (e) => {
     e.preventDefault()
     const formUpdate = new FormData()
     formUpdate.append('title', up.title)
@@ -52,37 +52,37 @@ const UpdateArticle = ({article, updateArticle}) => {
     >
       <h2>Update Article</h2>
       <TextInput
-        id="articleTitle"
-        type="text"
+        id='articleTitle'
+        type='text'
         value={up.title}
-        placeholder="New title value..."
+        placeholder='New title value...'
         onChange={e => setUp({...up, title: e.target.value})}
       />
       <TextInput
-        id="tag1"
-        type="text"
+        id='tag1'
+        type='text'
         value={up.tag1}
-        placeholder="New tag #1 value..."
+        placeholder='New tag #1 value...'
         onChange={e => setUp({...up, tag1: e.target.value})}
       />
       <TextInput
-        id="tag2"
-        type="text"
+        id='tag2'
+        type='text'
         value={up.tag2}
-        placeholder="New tag #2 value..."
+        placeholder='New tag #2 value...'
         onChange={e => setUp({...up, tag2: e.target.value})}
       />
       <TextInput
-        id="tag3"
-        type="text"
+        id='tag3'
+        type='text'
         value={up.tag3}
-        placeholder="New tag #3 value..."
+        placeholder='New tag #3 value...'
         onChange={e => setUp({...up, tag3: e.target.value})}
       />
       <Textarea
-        id="text"
+        id='text'
         value={up.text}
-        placeholder="New text value..."
+        placeholder='New text value...'
         onChange={e => setUp({...up, text: e.target.value})}
       />
       <ImageUploader
@@ -94,10 +94,8 @@ const UpdateArticle = ({article, updateArticle}) => {
         value={up.image}
       />
       <div>
-        <a className="form_submit" onClick={updateHandler}><span>Update article</span></a>
+        <a className='form_submit' onClick={updateHandler}><span>Update article</span></a>
       </div>
-      {/*<input type="file" accept="image/*" multiple="false" onChange={e => console.log(e.target.files[0])}/>*/}
-      {/*<button type="submit">Update</button>*/}
     </motion.form>
   );
 };

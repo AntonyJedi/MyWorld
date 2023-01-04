@@ -25,7 +25,7 @@ const CreateMusic = ({newSong, addNew, user}) => {
     console.log(music)
   }, [music])
 
-  async function createSong(e) {
+  const createSong = async (e) => {
     e.preventDefault()
     const formData = new FormData()
     formData.append('song', music.song)
@@ -53,32 +53,32 @@ const CreateMusic = ({newSong, addNew, user}) => {
     >
       <h2>New Music</h2>
       <TextInput
-        id="articleTitle"
-        type="text"
-        placeholder="Song"
+        id='articleTitle'
+        type='text'
+        placeholder='Song'
         onChange={e => setMusic({...music, song: e.target.value})}
       />
       <TextInput
-        id="tag1"
-        type="text"
-        placeholder="Album"
+        id='tag1'
+        type='text'
+        placeholder='Album'
         onChange={e => setMusic({...music, album: e.target.value})}
       />
       <TextInput
-        id="tag3"
-        type="text"
-        placeholder="Genre"
+        id='tag3'
+        type='text'
+        placeholder='Genre'
         onChange={e => setMusic({...music, category: e.target.value})}
       />
       <TextInput
-        id="tag2"
-        type="date"
-        placeholder="ReleaseDate"
+        id='tag2'
+        type='date'
+        placeholder='ReleaseDate'
         onChange={e => setMusic({...music, releaseDate: e.target.value})}
       />
       <Textarea
-        id="text"
-        placeholder="Lyrics"
+        id='text'
+        placeholder='Lyrics'
         onChange={e => setMusic({...music, lyrics: e.target.value})}
       />
       <ImageUploader
@@ -89,7 +89,7 @@ const CreateMusic = ({newSong, addNew, user}) => {
         files={files}
       />
       <div>
-        <a className="form_submit" onClick={createSong}><span>Create song</span></a>
+        <a className='form_submit' onClick={createSong}><span>Create song</span></a>
       </div>
     </motion.form>
   );

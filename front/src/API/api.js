@@ -77,13 +77,13 @@ export const quotesAPI = {
 }
 
 export const authAPI = {
-  registration: async (name, email, password) => {
+  registration: (name, email, password) => {
     return AXIOS.post(baseApiURL + `auth/registration`, {name, email, password})
   },
-  login: async (email, password) => {
+  login: (email, password) => {
     return AXIOS.post(baseApiURL + `auth/login`, {email, password})
   },
-  logout: async () => {
+  logout: () => {
     return AXIOS.post(baseApiURL + `auth/logout`)
   }
 }

@@ -12,7 +12,7 @@ const HomePage = ({categories}) => {
       transition={{duration: 0.5}}
       >
       <h1 style={{textAlign: 'center'}}>HomePage</h1>
-      {categories.map(one => <div className={style.category}><NavLink to={`/articles/${one.title.toLowerCase()}`}><span>{one.title}</span></NavLink></div>)}
+      {categories.map(one => <div key={one.title} className={style.category}><NavLink to={`/articles/${one.title.toLowerCase()}`}><span>{one.title}</span></NavLink></div>)}
     </motion.div>
   );
 };

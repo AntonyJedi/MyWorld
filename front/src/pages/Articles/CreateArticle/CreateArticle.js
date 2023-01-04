@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import {Select, Textarea, TextInput} from "evergreen-ui";
 import ImageUploader from "../../../components/FileUploader/FileUploader";
 import {motion} from "framer-motion";
@@ -23,7 +23,7 @@ const CreateArticle = ({newOne, categories, user}) => {
     setArticle({...article, image: null})
   }
 
-  async function createArticle(e) {
+  const createArticle = async (e) => {
     e.preventDefault()
     const formData = new FormData()
     formData.append('title', article.title)
@@ -53,36 +53,36 @@ const CreateArticle = ({newOne, categories, user}) => {
     >
       <h2>New article</h2>
       <TextInput
-        id="articleTitle"
-        type="text"
-        placeholder="Title"
+        id='articleTitle'
+        type='text'
+        placeholder='Title'
         onChange={e => setArticle({...article, title: e.target.value})}
       />
       <TextInput
-        id="tag1"
-        type="text"
-        placeholder="Tag #1"
+        id='tag1'
+        type='text'
+        placeholder='Tag #1'
         onChange={e => setArticle({...article, tag1: e.target.value})}
       />
       <TextInput
-        id="tag2"
-        type="text"
-        placeholder="Tag #2"
+        id='tag2'
+        type='text'
+        placeholder='Tag #2'
         onChange={e => setArticle({...article, tag2: e.target.value})}
       />
       <TextInput
-        id="tag3"
-        type="text"
-        placeholder="Tag #3"
+        id='tag3'
+        type='text'
+        placeholder='Tag #3'
         onChange={e => setArticle({...article, tag3: e.target.value})}
       />
       <Textarea
-        id="text"
-        placeholder="Article Text"
+        id='text'
+        placeholder='Article Text'
         onChange={e => setArticle({...article, text: e.target.value})}
       />
-      <Select onChange={e => setArticle({...article, categoryId: e.target.value})} width="70%">
-        {categories.map(cat => <option value={cat.id}>{cat.title}</option>)}
+      <Select onChange={e => setArticle({...article, categoryId: e.target.value})} width='70%'>
+        {categories.map(cat => <option key={cat.id} value={cat.id}>{cat.title}</option>)}
       </Select>
       <ImageUploader
         handleChange={handleChange}
@@ -92,7 +92,7 @@ const CreateArticle = ({newOne, categories, user}) => {
         files={files}
       />
       <div>
-        <a className="form_submit" onClick={createArticle}><span>Create article</span></a>
+        <a className='form_submit' onClick={createArticle}><span>Create article</span></a>
       </div>
     </motion.form>
   );

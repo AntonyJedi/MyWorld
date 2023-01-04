@@ -1,7 +1,7 @@
 import {notesAPI} from "../API/api";
 
 const initStore = {
-  notes_store: [],
+  notesStore: [],
   updatedNote: {},
   isFetching: true
 }
@@ -11,23 +11,23 @@ const NotesReducer = (state = initStore, action) => {
     case 'GET-ALL-NOTES':
       return {
         ...state,
-        notes_store: action.allNotes,
+        notesStore: action.allNotes,
         isFetching: false
       }
     case 'SET-NEW-NOTE':
       return {
         ...state,
-        notes_store: [...state.notes_store, action.newNote]
+        notesStore: [...state.notesStore, action.newNote]
       }
     case 'DELETE-ONE-NOTE':
       return {
         ...state,
-        notes_store: state.notes_store.filter(one => one.id !== action.id)
+        notesStore: state.notesStore.filter(one => one.id !== action.id)
       }
     case 'CHANGE-ONE-NOTE':
       return {
         ...state,
-        notes_store: state.notes_store.map(one => one.id === action.id ? {...one, checked: !one.checked} : one)
+        notesStore: state.notesStore.map(one => one.id === action.id ? {...one, checked: !one.checked} : one)
       }
     default:
       return state
@@ -41,7 +41,7 @@ const changedOneNoteActionCreator = id => ({type: 'CHANGE-ONE-NOTE', id})
 
 export const getNotesThunkCreator = () => async (dispatch) => {
   try {
-    let response = await notesAPI.getAllNotes()
+    const response = await notesAPI.getAllNotes()
     dispatch(getNotesActionCreator(response.data))
   } catch (e) {
     console.log(e)
@@ -68,7 +68,7 @@ export const updateOneNoteThunkCreator = id => async (dispatch) => {
 
 export const deleteOneNoteThunkCreator = id => async (dispatch) => {
   try {
-    const res = await notesAPI.deleteOneNote(id)
+    await notesAPI.deleteOneNote(id)
     dispatch(deleteOneNoteActionCreator(id))
   } catch (e) {
     console.log(e.response.data)

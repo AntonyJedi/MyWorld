@@ -43,7 +43,7 @@ class ToDoListContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    notes: state.NotesStore.notes_store,
+    notes: state.NotesStore.notesStore,
     currentUser: state.UserStore.user
   }
 }
