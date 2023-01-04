@@ -1,7 +1,7 @@
 import React from "react";
 import {ArrowLeftIcon} from 'evergreen-ui';
 
-function PrevArrow(props) {
+  const PrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <ArrowLeftIcon

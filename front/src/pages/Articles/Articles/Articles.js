@@ -13,8 +13,7 @@ const Articles = ({allArticles, deleteOne, progress, isUserAdmin, user, category
   }
   return (
     <>
-      {progress ? <Loader/> : allArticles.length > 0 ?
-        <motion.div
+      {progress ? <Loader/> : allArticles.length > 0 ? <motion.div
           initial={{translateX: "-25%", opacity: 0}}
           animate={{translateX: 0, opacity: 1}}
           exit={{translateX: "50%", opacity: 0}}
@@ -45,7 +44,7 @@ const Articles = ({allArticles, deleteOne, progress, isUserAdmin, user, category
           animate={{translateX: 0, opacity: 1}}
           exit={{translateX: "50%", opacity: 0}}
           transition={{duration: 0.5}}
-        >Nothing's here</motion.div>}
+        >Nothing&apos;s here</motion.div>}
     </>
   );
 };

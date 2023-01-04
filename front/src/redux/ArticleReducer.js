@@ -1,11 +1,11 @@
 import {articlesAPI} from "../API/api";
 
 const initStore = {
-  articles_store: [],
+  articlesStore: [],
   updatedArticle: {},
   chosenArticle: {},
   isFetching: true,
-  categories_store: []
+  categoriesStore: []
 }
 
 const ArticleReducer = (state = initStore, action) => {
@@ -13,13 +13,13 @@ const ArticleReducer = (state = initStore, action) => {
     case 'GET-ARTICLES':
       return {
         ...state,
-        articles_store: action.articles,
+        articlesStore: action.articles,
         isFetching: false
       }
     case 'DELETE-ONE-ARTICLE':
       return {
         ...state,
-        articles_store: state.articles_store.filter(d => d.id !== action.del)
+        articlesStore: state.articlesStore.filter(d => d.id !== action.del)
       }
     case 'GET-ONE-ARTICLE':
       return {
@@ -29,7 +29,7 @@ const ArticleReducer = (state = initStore, action) => {
     case 'GET-CHOSEN-ARTICLE':
       return {
         ...state,
-        chosenArticle: state.articles_store.length > 0 ? state.articles_store.find(ar => ar.id === action.chosenArticleID) : action.data
+        chosenArticle: state.articlesStore.length > 0 ? state.articlesStore.find(ar => ar.id === action.chosenArticleID) : action.data
       }
     case 'IS-FETCHING':
       return {
@@ -39,7 +39,7 @@ const ArticleReducer = (state = initStore, action) => {
     case 'GET-ALL-CATEGORIES':
       return {
         ...state,
-        categories_store: action.categories
+        categoriesStore: action.categories
       }
     default:
       return state
@@ -54,7 +54,7 @@ const getAllCategoriesActionCreator = categories => ({type: 'GET-ALL-CATEGORIES'
 
 export const getArticlesThunkCreator = (category) => async (dispatch) => {
   try {
-    let response = category ? await articlesAPI.getAllArticles(category) : await articlesAPI.getAllArticles()
+    const response = category ? await articlesAPI.getAllArticles(category) : await articlesAPI.getAllArticles()
     dispatch(getArticlesActionCreator(response.data))
   } catch (e) {
     console.log(e)

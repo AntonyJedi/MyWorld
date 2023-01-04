@@ -28,8 +28,8 @@ class CreateArticleContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    articles: state.ArticlesStore.articles_store,
-    allCategories: state.ArticlesStore.categories_store,
+    articles: state.ArticlesStore.articlesStore,
+    allCategories: state.ArticlesStore.categoriesStore,
     currentUser: state.UserStore.user
   }
 }

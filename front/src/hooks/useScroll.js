@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 
 export const useScroll = (initialState) => {
   const [scroll, setScroll] = useState(initialState);

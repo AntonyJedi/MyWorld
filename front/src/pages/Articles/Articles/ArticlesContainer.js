@@ -38,14 +38,14 @@ class ArticlesContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    articles: state.ArticlesStore.articles_store,
+    articles: state.ArticlesStore.articlesStore,
     isFetching: state.ArticlesStore.isFetching,
     isAdmin: state.UserStore.isAdmin,
     currentUser: state.UserStore.user
   }
 }
 
-let withRouterContainer = withRouter(ArticlesContainer)
+const withRouterContainer = withRouter(ArticlesContainer)
 
 export default connect(mapStateToProps, {
   getArticlesThunkCreator,

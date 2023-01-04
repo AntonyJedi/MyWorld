@@ -28,6 +28,6 @@ const mapStateToProps = state => {
   }
 }
 
-let withRouterContainer = withRouter(OneArticleContainer)
+const withRouterContainer = withRouter(OneArticleContainer)
 
 export default connect(mapStateToProps, {getChosenArticleThunkCreator})(withRouterContainer);

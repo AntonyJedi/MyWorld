@@ -35,6 +35,6 @@ const mapStateToProps = state => {
   }
 }
 
-let withRouterUpdateContainer = withRouter(UpdateArticleContainer)
+const withRouterUpdateContainer = withRouter(UpdateArticleContainer)
 
 export default connect(mapStateToProps, {getOneArticleThunkCreator, updateOneArticleThunkCreator})(withRouterUpdateContainer)

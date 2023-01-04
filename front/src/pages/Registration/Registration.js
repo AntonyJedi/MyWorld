@@ -33,7 +33,7 @@ const Registration = ({doReg, isUserAuth, error}) => {
 
   const sendReg = () => {
     const validateResult = validation(email, password);
-    let errors = !name ? {...validateResult, name: 'Name is required'} : validateResult;
+    const errors = !name ? {...validateResult, name: 'Name is required'} : validateResult;
     setFormErrors(errors)
     setIsSubmit(true)
   }
@@ -50,24 +50,24 @@ const Registration = ({doReg, isUserAuth, error}) => {
           <h2>Registration form</h2>
           <TextInput
             value={name}
-            name="text-input-name"
-            placeholder="Please, enter your name"
+            name='text-input-name'
+            placeholder='Please, enter your name'
             onChange={e => setName(e.target.value)}
           />
           <TextInput
             value={email}
-            name="text-input-name"
-            placeholder="Please, enter your email"
+            name='text-input-name'
+            placeholder='Please, enter your email'
             onChange={e => setEmail(e.target.value)}
           />
           <TextInput
             type='password'
             value={password}
-            name="text-input-name"
-            placeholder="Please, enter your password"
+            name='text-input-name'
+            placeholder='Please, enter your password'
             onChange={e => setPassword(e.target.value)}
           />
-          <a className="form_submit" onClick={sendReg}><span>Sign up</span></a>
+          <a className='form_submit' onClick={sendReg}><span>Sign up</span></a>
         </motion.form>
       }
     </>

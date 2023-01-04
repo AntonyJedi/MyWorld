@@ -31,7 +31,7 @@ class MusicContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    allSongs: state.MusicStore.songs_store,
+    allSongs: state.MusicStore.songsStore,
     isLoading: state.MusicStore.isFetching,
     isAdmin: state.UserStore.isAdmin,
     allUsers: state.UserStore.allUsers,

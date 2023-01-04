@@ -52,13 +52,13 @@ const setError = resError => ({type: 'SET-ERROR', resError})
 
 export const RegistrationThunkCreator = (name, email, pass) => async (dispatch) => {
   try {
-    let responseFromReg = await authAPI.registration(name, email, pass)
+    const responseFromReg = await authAPI.registration(name, email, pass)
     if (responseFromReg) {
       localStorage.setItem('token', responseFromReg.data.token)
       dispatch(setUserActionCreator(responseFromReg.data.user))
       dispatch(setAuthActionCreator(true))
     }
-    let allUsers = await usersAPI.getUsers()
+    const allUsers = await usersAPI.getUsers()
     dispatch(getAllUsers(allUsers.data))
   } catch (e) {
     dispatch(setError(e.response.data))
@@ -68,13 +68,13 @@ export const RegistrationThunkCreator = (name, email, pass) => async (dispatch) 
 export const LoginThunkCreator = (email, pass) => async (dispatch) => {
   try {
     dispatch(setLoadingCreator(true))
-    let responseFromLog = await authAPI.login(email, pass)
+    const responseFromLog = await authAPI.login(email, pass)
     if (responseFromLog) {
       localStorage.setItem('token', responseFromLog.data.token)
       dispatch(setUserActionCreator(responseFromLog.data.user))
       dispatch(setAuthActionCreator(true))
     }
-    let allUsers = await usersAPI.getUsers()
+    const allUsers = await usersAPI.getUsers()
     dispatch(getAllUsers(allUsers.data))
   } catch (e) {
     console.log(e)
@@ -85,7 +85,7 @@ export const LoginThunkCreator = (email, pass) => async (dispatch) => {
 
 export const LogoutThunkCreator = () => async (dispatch) => {
   try {
-    let responseFromLog = await authAPI.logout()
+    await authAPI.logout()
     localStorage.removeItem('token')
     dispatch(setUserActionCreator({}))
     dispatch(setAuthActionCreator(false))
@@ -100,7 +100,7 @@ export const checkAuth = () => async (dispatch) => {
     const response = await axios.get(`${baseApiURL}auth/refresh`, {withCredentials: true})
     dispatch(setUserActionCreator(response.data.user))
     dispatch(setAuthActionCreator(true))
-    let allUsers = await usersAPI.getUsers()
+    const allUsers = await usersAPI.getUsers()
     dispatch(getAllUsers(allUsers.data))
   } catch (e) {
     console.log(e)
@@ -112,7 +112,7 @@ export const checkAuth = () => async (dispatch) => {
 export const getUsersThunkCreator = () => async (dispatch) => {
   try {
     dispatch(setLoadingCreator(true))
-    let allUsers = await usersAPI.getUsers()
+    const allUsers = await usersAPI.getUsers()
     dispatch(getAllUsers(allUsers.data))
   } catch (e) {
     console.log(e)

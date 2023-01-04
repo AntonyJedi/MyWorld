@@ -1,7 +1,7 @@
-import {articlesAPI, musicAPI} from "../API/api";
+import {musicAPI} from "../API/api";
 
 const initStore = {
-  songs_store: [],
+  songsStore: [],
   updatedSong: {},
   chosenSong: {},
   isFetching: true
@@ -12,23 +12,23 @@ const MusicReducer = (state = initStore, action) => {
     case 'GET-ALL-SONGS':
       return {
         ...state,
-        songs_store: action.allSongs,
+        songsStore: action.allSongs,
         isFetching: false
       }
     case 'SET-NEW-SONG':
       return {
         ...state,
-        songs_store: [...state.songs_store, action.newSong]
+        songsStore: [...state.songsStore, action.newSong]
       }
     case 'DELETE-ONE-SONG':
       return {
         ...state,
-        songs_store: state.songs_store.filter(one => one.id !== action.id)
+        songsStore: state.songsStore.filter(one => one.id !== action.id)
       }
     case 'GET-ONE-SONG':
       return {
         ...state,
-        updatedSong: state.songs_store.find(song => song.id === action.id)
+        updatedSong: state.songsStore.find(song => song.id === action.id)
       }
     default:
       return state
@@ -42,7 +42,7 @@ const deleteOneSongActionCreator = id => ({type: 'DELETE-ONE-SONG', id})
 
 export const getSongsThunkCreator = () => async (dispatch) => {
   try {
-    let response = await musicAPI.getAllSongs()
+    const response = await musicAPI.getAllSongs()
     dispatch(getSongsActionCreator(response.data))
   } catch (e) {
     console.log(e)

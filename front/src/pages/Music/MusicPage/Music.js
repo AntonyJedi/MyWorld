@@ -56,7 +56,7 @@ const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
           {users.map(user => {
             return (
               <>
-                {currentUser.nickName === user ? <h3>My playlist</h3> : <h3>{user}'s playlist</h3>}
+                {currentUser.nickName === user ? <h3>My playlist</h3> : <h3>{user}&apos;s playlist</h3>}
                 <Slider {...settings}>
                   {songs.map(one => {
                     if (one.userName === user)

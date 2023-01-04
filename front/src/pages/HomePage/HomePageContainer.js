@@ -23,7 +23,7 @@ class HomePageContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    allCategories: state.ArticlesStore.categories_store
+    allCategories: state.ArticlesStore.categoriesStore
   }
 }
 

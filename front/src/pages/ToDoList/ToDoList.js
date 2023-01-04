@@ -6,7 +6,7 @@ import {motion} from "framer-motion";
 
 const ToDoList = ({allNotes, newNote, removeOne, change, currentUser}) => {
   const [value, setValue] = useState({userName: currentUser.nickName})
-  function setNewNote (e) {
+  const setNewNote = (e) => {
     e.preventDefault()
     newNote(value)
     setValue({...value, text: ''})
@@ -21,23 +21,23 @@ const ToDoList = ({allNotes, newNote, removeOne, change, currentUser}) => {
         transition={{duration: 0.5}}
         onSubmit={setNewNote}
       >
-        <div className="input-group">
+        <div className='input-group'>
           <TextInput
             value={value.text}
-            type="text"
-            className="form-control"
-            placeholder="Enter note..."
+            type='text'
+            className='form-control'
+            placeholder='Enter note...'
             onChange={e => setValue({...value, text: e.target.value})}
           />
-          <Button intent="success" type="submit">Add Note</Button>
+          <Button intent='success' type='submit'>Add Note</Button>
         </div>
       </motion.form>
 
       <hr/>
 
-      <TransitionGroup component="ul" className="list-group">
+      <TransitionGroup component='ul' className='list-group'>
         {allNotes.map(note => (
-          <CSSTransition key={note.id} classNames="note" timeout={1000}>
+          <CSSTransition key={note.id} classNames='note' timeout={1000}>
             <li className={["list-group-item note", note.checked ? 'checked' : 'open'].join(' ')}>
               <div className='text-item'>
                 <Checkbox
@@ -49,7 +49,7 @@ const ToDoList = ({allNotes, newNote, removeOne, change, currentUser}) => {
               <div>
                 <small>{new Date().toLocaleDateString()}</small>
                 <div className='userName'>{note.userName}</div>
-                <IconButton icon={TrashIcon} intent={!note.checked ? 'danger' : 'grey'} marginLeft={16} onClick={() => removeOne(note.id)} type="button" />
+                <IconButton icon={TrashIcon} intent={!note.checked ? 'danger' : 'grey'} marginLeft={16} onClick={() => removeOne(note.id)} type='button' />
               </div>
             </li>
           </CSSTransition>

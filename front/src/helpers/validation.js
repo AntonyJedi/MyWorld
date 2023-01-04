@@ -1,6 +1,6 @@
 const validation = (em, pass) => {
   const errors = {}
-  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+  const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g
   if (!em) {
     errors.email = "Email is required"
   } else if (!regex.test(em)) {
