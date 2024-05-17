@@ -9,7 +9,7 @@ const AlertComponent = () => {
     <Pane position={'relative'}>
       <Alert
         display={alert.visible ? 'flex' : 'none'}
-        intent={alert.type}
+        intent={alert.messageType}
         title={alert.text}
         marginBottom={32}
       />

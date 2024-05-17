@@ -4,7 +4,7 @@ export const AlertReducer = (state, action) => {
       return {
         ...state,
         text: action.text,
-        type: action.messageType,
+        messageType: action.messageType,
         visible: true
       }
     case "HIDE_ALERT":
