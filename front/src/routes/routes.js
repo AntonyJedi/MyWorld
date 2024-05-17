@@ -10,6 +10,7 @@ import {
   pathToUpdateMusic,
   pathToSpecificArticles,
   pathToDoList,
+  pathToGame
 } from './routes_const';
 import ArticlesContainer from "../pages/Articles/Articles/ArticlesContainer";
 import UpdateArticleContainer from "../pages/Articles/UpdateArticle/UpdateArticleContainer";
@@ -20,6 +21,7 @@ import OneArticleContainer from "../pages/Articles/OneArticlePage/OneArticleCont
 import MusicContainer from "../pages/Music/MusicPage/MusicContainer";
 import UpdateMusicContainer from "../pages/Music/UpdateMusic/UpdateMusicContainer";
 import ToDoListContainer from "../pages/ToDoList/ToDoListContainer";
+import GamePage from "../pages/Game/Game";
 
 export const adminRoutes = [];
 
@@ -67,6 +69,11 @@ export const allRoutes = [
     component: <MusicContainer/>,
     title: 'Music'
   },
+  {
+    path: pathToGame,
+    component: <GamePage/>,
+    title: 'Game'
+  }
   // {
   //   path: pathToScience,
   //   component: <Science/>,

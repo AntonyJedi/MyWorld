@@ -6,10 +6,10 @@ import {motion} from "framer-motion";
 import {AlertContext} from "../../../components/Alert/AlertContext";
 
 const Articles = ({allArticles, deleteOne, progress, isUserAdmin, user, categoryName}) => {
-  const alert = useContext(AlertContext)
+  const {show} = useContext(AlertContext)
   const handleDelete = id => {
     deleteOne(id)
-    alert.show("Article was deleted")
+    show("Article was deleted", "danger")
   }
   return (
     <>
