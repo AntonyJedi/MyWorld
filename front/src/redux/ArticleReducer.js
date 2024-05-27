@@ -19,7 +19,7 @@ const ArticleReducer = (state = initStore, action) => {
     case 'DELETE-ONE-ARTICLE':
       return {
         ...state,
-        articlesStore: state.articlesStore.filter(d => d.id !== action.del)
+        articlesStore: state.articlesStore.filter(d => d.id !== action.idDelOne)
       }
     case 'GET-ONE-ARTICLE':
       return {
@@ -47,7 +47,7 @@ const ArticleReducer = (state = initStore, action) => {
 }
 
 const getArticlesActionCreator = allArticles => ({type: 'GET-ARTICLES', articles: allArticles})
-const delOneArticleCreator = delOne => ({type: 'DELETE-ONE-ARTICLE', del: delOne})
+const delOneArticleCreator = id => ({type: 'DELETE-ONE-ARTICLE', idDelOne: id})
 const getOneArticleCreator = getOne => ({type: 'GET-ONE-ARTICLE', getOne: getOne})
 const getChosenArticleActionCreator = (id, data) => ({type: 'GET-CHOSEN-ARTICLE', chosenArticleID: id, data: data})
 const getAllCategoriesActionCreator = categories => ({type: 'GET-ALL-CATEGORIES', categories})
