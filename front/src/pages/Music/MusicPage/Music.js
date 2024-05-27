@@ -11,6 +11,7 @@ import './SliderArrows/SlickArrows.scss'
 
 const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
   const [isAddNew, setIsAddNew] = useState(false)
+  // const [isUserDisplay, setIsUserDisplay] = useState([])
 
   const settings = {
     className: "center",
@@ -45,7 +46,7 @@ const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
   };
 
   return (
-    <motion.ul
+    <motion.div
       initial={{translateX: "-25%", opacity: 0}}
       animate={{translateX: 0, opacity: 1}}
       exit={{translateX: "50%", opacity: 0}}
@@ -54,31 +55,33 @@ const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
       {(!isAddNew && songs.length > 0) ? (
         <>
           {users.map(user => {
-            return (
-              <>
-                {currentUser.nickName === user ? <h3>My playlist</h3> : <h3>{user}&apos;s playlist</h3>}
-                <Slider {...settings}>
-                  {songs.map(one => {
-                    if (one.userName === user)
-                      return (
-                        <MusicCard
-                          id={one.id}
-                          songTitle={one.song}
-                          album={one.album}
-                          lyrics={one.lyrics}
-                          category={one.category}
-                          image={one.img}
-                          release={one.releaseDate}
-                          userName={one.userName}
-                          deleteSong={deleteOne}
-                          canDelete={isAdminAuth}
-                          user={currentUser.nickName}
-                        />
-                      )
-                  })}
-                </Slider>
-              </>
-            )
+            if (songs.filter(s => s.userName === user).length > 0) {
+              return (
+                <>
+                  {currentUser.nickName === user ? <h3>My</h3> : <h3>{user}&apos;s playlist</h3>}
+                  <Slider {...settings}>
+                    {songs.map(one => {
+                      if (one.userName === user)
+                        return (
+                          <MusicCard
+                            id={one.id}
+                            songTitle={one.song}
+                            album={one.album}
+                            lyrics={one.lyrics}
+                            category={one.category}
+                            image={one.img}
+                            release={one.releaseDate}
+                            userName={one.userName}
+                            deleteSong={deleteOne}
+                            canDelete={isAdminAuth}
+                            user={currentUser.nickName}
+                          />
+                        )
+                    })}
+                  </Slider>
+                </>
+              )
+            }
           })}
           {isAuth &&
           <div onClick={() => setIsAddNew(isAddNew => !isAddNew)} style={{margin: '20px auto'}} className='basic_button'>
@@ -86,7 +89,7 @@ const Music = ({songs, deleteOne, isAuth, isAdminAuth, users, currentUser}) => {
         </>
       ) : <CreateMusicContainer setIsAddNew={setIsAddNew}/>
       }
-    </motion.ul>
+    </motion.div>
   );
 };
 

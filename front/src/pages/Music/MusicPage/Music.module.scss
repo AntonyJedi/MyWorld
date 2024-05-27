@@ -5,6 +5,7 @@
   background: transparent;
   perspective: 1000px;
   height: fit-content;
+  list-style: none;
   &.turn {
     .cardInner {
       transform: rotateY(180deg);
