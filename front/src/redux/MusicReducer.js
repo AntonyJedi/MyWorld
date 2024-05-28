@@ -30,6 +30,11 @@ const MusicReducer = (state = initStore, action) => {
         ...state,
         updatedSong: state.songsStore.find(song => song.id === action.id)
       }
+    case 'SET-IS-LOADING':
+      return {
+        ...state,
+        isFetching: action.value
+      }
     default:
       return state
   }
@@ -39,6 +44,7 @@ const getSongsActionCreator = allSongs => ({type: 'GET-ALL-SONGS', allSongs})
 const setNewSongActionCreator = newSong => ({type: 'SET-NEW-SONG', newSong})
 const getOneSongActionCreator = id => ({type: 'GET-ONE-SONG', id})
 const deleteOneSongActionCreator = id => ({type: 'DELETE-ONE-SONG', id})
+const setLoadingStatus = value => ({type: 'SET-IS-LOADING', value})
 
 export const getSongsThunkCreator = () => async (dispatch) => {
   try {
@@ -72,8 +78,10 @@ export const updateOneSongThunkCreator = (id, form) => async () => {
 
 export const deleteOneSongThunkCreator = id => async (dispatch) => {
   try {
+    dispatch(setLoadingStatus(true))
     await musicAPI.deleteOneSong(id)
     dispatch(deleteOneSongActionCreator(id))
+    dispatch(setLoadingStatus(false))
   } catch (e) {
     console.log(e.response.data)
   }

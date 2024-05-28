@@ -18,21 +18,25 @@ main {
 }
 
 .main_container {
- @extend %main_container;
+  @extend %main_container;
 }
 
 form {
   @include form();
+
   h2 {
     margin: 0 0 20px 0;
   }
+
   input, textarea, select {
     margin: 0 0 20px 0;
+
     &:focus {
       border-color: $secColor !important;
       box-shadow: 0 0 0 2px $secColor !important;
     }
   }
+
   .form_submit {
     @include magicButton();
   }
@@ -55,7 +59,19 @@ h3 {
   @include magicButton(red);
 }
 
+.action_button {
+  @include magicButton(green);
+  margin-top: 20px;
+}
+
 .slick-track {
- display: flex;
+  display: flex;
   gap: 20px;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }

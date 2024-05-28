@@ -24,7 +24,7 @@ class AppContainer extends React.Component {
     return (
       <App
         isUserAuth={this.props.isAuth}
-        isLoading={this.props.isLoading}
+        isUserLoading={this.props.isUserLoading}
         isUserAdmin={this.props.isAdmin}
         makeOut={this.makeLogout}
       />
@@ -36,7 +36,7 @@ const mapStateToProps = state => {
   return {
     user: state.UserStore.user,
     isAuth: state.UserStore.isAuth,
-    isLoading: state.UserStore.isLoading,
+    isUserLoading: state.UserStore.isLoading,
     isAdmin: state.UserStore.isAdmin
   }
 }
