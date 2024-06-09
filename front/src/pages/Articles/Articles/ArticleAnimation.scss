@@ -1,0 +1,52 @@
+//.article-enter-active {
+//  animation: article 1s ease-in alternate-reverse;
+//}
+//.article-exit-active {
+//  animation: article 1s ease-out forwards;
+//}
+//
+//@keyframes article {
+//  0% {
+//    transform: translateX(0);
+//  }
+//  30% {
+//    opacity: .7;
+//    transform: translateX(30px);
+//  }
+//  100% {
+//    opacity: 0;
+//    transform: translateX(-200px);
+//  }
+//}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    transform: rotate(360deg) scale(0);
+  }
+}
+
+.list-group-item {
+  transition: all 1s ease;
+}
+
+.article-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.article-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 1000ms, transform 1000ms;
+}
+.article-exit {
+  opacity: 1;
+  transform: translateX(0);
+  position: absolute; // Position absolute to remove from flow
+  width: 100%; // Ensure it maintains the width for animation
+}
+.article-exit-active {
+  animation: rotate 1s infinite linear;
+}
