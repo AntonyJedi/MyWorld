@@ -37,7 +37,7 @@ const ToDoList = ({allNotes, newNote, removeOne, change, currentUser}) => {
 
       <TransitionGroup component='ul' className='list-group'>
         {allNotes.map(note => (
-          <CSSTransition key={note.id} classNames='note' timeout={1000}>
+          <CSSTransition key={note.id} classNames='note' timeout={1000} onEnter={() => console.log('Enter:', note.id)} onExit={() => console.log('Exit:', note.id)}>
             <li className={["list-group-item note", note.checked ? 'checked' : 'open'].join(' ')}>
               <div className='text-item'>
                 <Checkbox

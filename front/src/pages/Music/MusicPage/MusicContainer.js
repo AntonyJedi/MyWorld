@@ -18,7 +18,7 @@ class MusicContainer extends React.Component {
     return (
       <Music
         songs={this.props.allSongs}
-        isLoading={this.props.isLoading}
+        isMusicLoading={this.props.isMusicLoading}
         deleteOne={this.props.deleteOneSongThunkCreator}
         isAdminAuth={this.props.isAdmin}
         users={this.props.allUsers}
@@ -32,7 +32,7 @@ class MusicContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     allSongs: state.MusicStore.songsStore,
-    isLoading: state.MusicStore.isFetching,
+    isMusicLoading: state.MusicStore.isFetching,
     isAdmin: state.UserStore.isAdmin,
     allUsers: state.UserStore.allUsers,
     isAuth: state.UserStore.isAuth,

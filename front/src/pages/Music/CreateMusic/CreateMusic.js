@@ -21,6 +21,10 @@ const CreateMusic = ({newSong, addNew, user}) => {
     setMusic({...music, image: null})
   }
 
+  const back = () => {
+    addNew(false)
+  }
+
   useEffect(() => {
     console.log(music)
   }, [music])
@@ -88,8 +92,9 @@ const CreateMusic = ({newSong, addNew, user}) => {
         fileRejections={fileRejections}
         files={files}
       />
-      <div>
+      <div className='flex-center'>
         <a className='form_submit' onClick={createSong}><span>Create song</span></a>
+        <buttom className='action_button' onClick={back}><span>Back to list -&gt;</span></buttom>
       </div>
     </motion.form>
   );

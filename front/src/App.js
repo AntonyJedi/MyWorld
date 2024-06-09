@@ -10,11 +10,11 @@ import {AnimatePresence} from "framer-motion"
 import AlertComponent from "./components/Alert/AlertComponent";
 import HomePageContainer from "./pages/HomePage/HomePageContainer";
 
-const App = ({isUserAuth, isLoading, isUserAdmin, makeOut}) => {
+const App = ({isUserAuth, isUserLoading, isUserAdmin, makeOut}) => {
   const location = useLocation()
   return (
     <>
-      {isLoading ? <Loader/> : <>
+      {isUserLoading ? <Loader/> : <>
         <NavbarContainer/>
         <main className='main_container'>
           <AlertComponent/>
