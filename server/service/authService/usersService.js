@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const mailService = require('./mailService');
-const tokensServices = require('./tokenService')
+const tokensServices = require('../authService/tokenService')
 const jwtAssist = require('../../assist/jwtPayload')
 const config = require('config')
 

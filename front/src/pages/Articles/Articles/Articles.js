@@ -6,6 +6,7 @@ import './ArticleAnimation.scss';
 import { motion } from "framer-motion";
 import { AlertContext } from "../../../components/Alert/AlertContext";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import {baseApi} from "../../../API/api";
 
 const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categoryName }) => {
   const { show } = useContext(AlertContext);
@@ -30,7 +31,7 @@ const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categor
                   <div className={style.userName}>{article.userName}</div>
                   <h3 className={style.title}>{article.title}</h3>
                   <div>{article.text.substr(0, 150)}...</div>
-                  {article.img && <img src={"http://localhost:5000/" + article.img} alt={article.title} />}
+                  {article.img && <img src={baseApi + article.img} alt={article.title} />}
                 </Link>
                 {(user.id === article.userId || isUserAdmin) &&
                 <div className={style.adminLinks}>

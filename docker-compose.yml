@@ -1,0 +1,46 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./front
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    ports:
+      - "3010:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./server
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    ports:
+      - "5010:5010"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_DB: myworld
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "8080:80"
+    depends_on:
+      - db

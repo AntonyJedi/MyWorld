@@ -3,6 +3,7 @@ import style from "./OneArticle.module.scss";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { AlertContext } from "../../../components/Alert/AlertContext";
+import {baseApi} from "../../../API/api";
 
 
 const OneArticle = ({ oneArticle, isAdmin, user, deleteOne }) => {
@@ -30,7 +31,7 @@ const OneArticle = ({ oneArticle, isAdmin, user, deleteOne }) => {
       </div>
       }
       {oneArticle.img &&
-      <div className={style.image}><img src={`http://localhost:5000/${oneArticle.img}`} alt={oneArticle.title} /></div>}
+      <div className={style.image}><img src={baseApi + oneArticle.img} alt={oneArticle.title} /></div>}
       <div className={style.text}>{oneArticle.text}</div>
       <div className={style.bottom}>
         <div className={style.tags}>
