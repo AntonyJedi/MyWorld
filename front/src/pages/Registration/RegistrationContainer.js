@@ -8,8 +8,8 @@ class RegistrationContainer extends React.Component {
     super(props);
     this.makeReg = this.makeReg.bind(this)
   }
-  makeReg(name, email, pass) {
-    this.props.RegistrationThunkCreator(name, email, pass)
+  makeReg(name, email, pass, about, job, mood, interests) {
+    this.props.RegistrationThunkCreator(name, email, pass, about, job, mood, interests)
   }
   render() {
     return (

@@ -1,0 +1,13 @@
+GET http://localhost:5010/api/articles
+
+###
+
+GET http://localhost:5010/api/music/all
+
+###
+
+GET http://localhost:5010/api/users
+
+###
+
+PUT http://localhost:5010/api/music/like/1

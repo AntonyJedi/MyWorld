@@ -122,7 +122,7 @@ $maxWidth: 1400px;
   padding: 15px;
 }
 
-%admin_links {
+@mixin admin_links($flex-items) {
   .adminLinks {
     margin: 10px 0 0 0;
     position: absolute;
@@ -130,7 +130,7 @@ $maxWidth: 1400px;
     transform: translateX(-50%);
     left: 50%;
     width: 100%;
-    @include flexFull(space-evenly);
+    @include flexFull($flex-items);
     .delete {
       @include magicButton(red);
     }

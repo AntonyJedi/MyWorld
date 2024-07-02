@@ -16,6 +16,9 @@ class HomePageContainer extends React.Component {
     return (
       <HomePage
         categories={this.props.allCategories}
+        user={this.props.user}
+        isAdmin={this.props.isAdmin}
+        isAuth={this.props.isAuth}
       />
     )
   }
@@ -23,7 +26,10 @@ class HomePageContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    allCategories: state.ArticlesStore.categoriesStore
+    allCategories: state.ArticlesStore.categoriesStore,
+    user: state.UserStore.user,
+    isAdmin: state.UserStore.isAdmin,
+    isAuth: state.UserStore.isAuth
   }
 }
 

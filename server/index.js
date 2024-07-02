@@ -28,7 +28,7 @@ const PORT = config.get('port')
 const server_run = async () => {
   try {
     await sequelize.authenticate()
-    // await sequelize.sync({force: false})
+    await sequelize.sync({force: false})
     app.listen(PORT, () => console.log(`Server is running on ${PORT}`))
   } catch (e) {
     console.log(e)

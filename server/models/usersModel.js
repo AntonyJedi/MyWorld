@@ -7,6 +7,10 @@ const Users = sequelize.define('Users', {
   email: {type: DataTypes.STRING, allowNull: false},
   password: {type: DataTypes.STRING, allowNull: false},
   role: {type: DataTypes.STRING, allowNull: false, defaultValue: 'user'},
+  about: {type: DataTypes.STRING, allowNull: true},
+  currectMood: {type: DataTypes.STRING, allowNull: true},
+  interests: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true},
+  job: {type: DataTypes.STRING, allowNull: true},
   isActivated: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
   activationLink: {type: DataTypes.STRING, allowNull: true}
 })

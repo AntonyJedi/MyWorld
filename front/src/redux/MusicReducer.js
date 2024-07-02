@@ -1,4 +1,4 @@
-import {musicAPI} from "../API/api";
+import { musicAPI } from "../API/api";
 
 const initStore = {
   songsStore: [],
@@ -30,6 +30,11 @@ const MusicReducer = (state = initStore, action) => {
         ...state,
         updatedSong: state.songsStore.find(song => song.id === action.id)
       }
+    case 'SET-SONG-LIKE':
+      return {
+        ...state,
+        songsStore: state.songsStore.map(song => song.id === action.likedSong.id ? action.likedSong : song)
+      }
     case 'SET-IS-LOADING':
       return {
         ...state,
@@ -40,11 +45,12 @@ const MusicReducer = (state = initStore, action) => {
   }
 }
 
-const getSongsActionCreator = allSongs => ({type: 'GET-ALL-SONGS', allSongs})
-const setNewSongActionCreator = newSong => ({type: 'SET-NEW-SONG', newSong})
-const getOneSongActionCreator = id => ({type: 'GET-ONE-SONG', id})
-const deleteOneSongActionCreator = id => ({type: 'DELETE-ONE-SONG', id})
-const setLoadingStatus = value => ({type: 'SET-IS-LOADING', value})
+const getSongsActionCreator = allSongs => ({ type: 'GET-ALL-SONGS', allSongs })
+const setNewSongActionCreator = newSong => ({ type: 'SET-NEW-SONG', newSong })
+const getOneSongActionCreator = id => ({ type: 'GET-ONE-SONG', id })
+const deleteOneSongActionCreator = id => ({ type: 'DELETE-ONE-SONG', id })
+const setLoadingStatus = value => ({ type: 'SET-IS-LOADING', value })
+const likeOneSongActionsCreator = likedSong => ({ type: 'SET-SONG-LIKE', likedSong })
 
 export const getSongsThunkCreator = () => async (dispatch) => {
   try {
@@ -71,6 +77,15 @@ export const newOneMusicThunkCreator = song => async (dispatch) => {
 export const updateOneSongThunkCreator = (id, form) => async () => {
   try {
     await musicAPI.updateOneSong(id, form)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const likeOneSongThungCreator = (id, user, add) => async (dispatch) => {
+  try {
+    const response = await musicAPI.likeOneSong(id, user, add)
+    dispatch(likeOneSongActionsCreator(response.data))
   } catch (e) {
     console.log(e)
   }

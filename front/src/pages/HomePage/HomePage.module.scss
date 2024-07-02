@@ -1,10 +1,23 @@
 @import "src/scss/variables";
 @import "src/scss/breakpoints";
 
+.main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  .heading {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+}
+
 .category {
-  margin-top: 15px;
-  a {
-    @include magicButton();
-    margin: 0 auto;
+  .category_item {
+    margin-top: 15px;
+    a {
+      @include magicButton();
+      margin: 0 auto;
+    }
   }
 }

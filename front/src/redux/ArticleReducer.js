@@ -1,4 +1,4 @@
-import {articlesAPI} from "../API/api";
+import { articlesAPI } from "../API/api";
 
 const initStore = {
   articlesStore: [],
@@ -26,6 +26,12 @@ const ArticleReducer = (state = initStore, action) => {
         ...state,
         updatedArticle: action.getOne
       }
+    case 'SET-ARTICLE-LIKE':
+      debugger
+      return {
+        ...state,
+        articlesStore: state.articlesStore.map(article => article.id === action.likedArticle.id ? action.likedArticle : article)
+      }
     case 'GET-CHOSEN-ARTICLE':
       return {
         ...state,
@@ -46,11 +52,12 @@ const ArticleReducer = (state = initStore, action) => {
   }
 }
 
-const getArticlesActionCreator = allArticles => ({type: 'GET-ARTICLES', articles: allArticles})
-const delOneArticleCreator = id => ({type: 'DELETE-ONE-ARTICLE', idDelOne: id})
-const getOneArticleCreator = getOne => ({type: 'GET-ONE-ARTICLE', getOne: getOne})
-const getChosenArticleActionCreator = (id, data) => ({type: 'GET-CHOSEN-ARTICLE', chosenArticleID: id, data: data})
-const getAllCategoriesActionCreator = categories => ({type: 'GET-ALL-CATEGORIES', categories})
+const getArticlesActionCreator = allArticles => ({ type: 'GET-ARTICLES', articles: allArticles })
+const delOneArticleCreator = id => ({ type: 'DELETE-ONE-ARTICLE', idDelOne: id })
+const getOneArticleCreator = getOne => ({ type: 'GET-ONE-ARTICLE', getOne: getOne })
+const getChosenArticleActionCreator = (id, data) => ({ type: 'GET-CHOSEN-ARTICLE', chosenArticleID: id, data: data })
+const getAllCategoriesActionCreator = categories => ({ type: 'GET-ALL-CATEGORIES', categories })
+const likeOneArticleActionsCreator = likedArticle => ({ type: 'SET-ARTICLE-LIKE', likedArticle })
 
 export const getArticlesThunkCreator = (category) => async (dispatch) => {
   try {
@@ -87,6 +94,16 @@ export const getChosenArticleThunkCreator = id => async (dispatch) => {
 export const updateOneArticleThunkCreator = (form, id) => async () => {
   try {
     await articlesAPI.updateArticle(form, id)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const likeOneArticleThunkCreator = (id, user, add) => async (dispatch) => {
+  debugger
+  try {
+    const response = await articlesAPI.likeOneArticle(id, user, add)
+    dispatch(likeOneArticleActionsCreator(response.data))
   } catch (e) {
     console.log(e)
   }

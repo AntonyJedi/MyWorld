@@ -12,7 +12,8 @@ const Article = sequelize.define('Articles', {
   img: {type: DataTypes.STRING, allowNull: true},
   categoryId: {type: DataTypes.INTEGER, allowNull: false},
   userId: {type: DataTypes.INTEGER, allowNull: false},
-  userName: {type: DataTypes.STRING, allowNull: false}
+  userName: {type: DataTypes.STRING, allowNull: false},
+  liked: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true}
 })
 
 module.exports = Article

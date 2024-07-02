@@ -12,12 +12,13 @@ const generateAccessToken = (id, role) => {
   return jwt.sign(payload, config.get("secret"), {expiresIn: "24h"})
 }
 
-const registrationServices = async (name, email, password, role) => {
+const registrationServices = async (name, email, password, about, job, mood, interests) => {
   const candidate = await Users.findOne({where: {email}})
   if (!candidate) {
     const hashPassword = await bcrypt.hash(password, 3)
     const activationLink = uuid.v4()
-    const newUser = await Users.create({nickName: name, email, password: hashPassword, role, activationLink})
+    const newUser = await Users.create({nickName: name, email, password: hashPassword, about, currectMood: mood, job, interests, activationLink})
+    console.log(newUser)
     const mailRes = await mailService.sendActivationLink(email, `${config.get('API_URL')}/api/auth/activate/${activationLink}`)
     const jwtUser = jwtAssist(newUser)
     const tokens = await tokensServices.generateToken(jwtUser)

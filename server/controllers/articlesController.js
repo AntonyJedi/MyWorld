@@ -36,6 +36,7 @@ const createArticle = async (req, res, next) => {
        categoryId: form.categoryId,
        userId: form.userId,
        userName: form.userName,
+       liked: [],
        creationDate: new Date().toLocaleDateString("en-US")
      })
      return res.status(200).json(createdArt)
@@ -49,6 +50,7 @@ const createArticle = async (req, res, next) => {
        categoryId: form.categoryId,
        userId: form.userId,
        userName: form.userName,
+       liked: [],
        creationDate: new Date().toLocaleDateString("en-US")
      })
      return res.status(200).json(createdArt)
@@ -95,6 +97,21 @@ const articlesOneUpdate = async (req, res) => {
   }
 }
 
+const likeOneArticle = async (req, res) => {
+  const article = await Art.findOne({where: {id: req.params.id}})
+  let updatedLikedArticle;
+  if (req.body.add) {
+    updatedLikedArticle = [...article.liked, req.body.user]
+  } else {
+    updatedLikedArticle = article.liked.filter(name => name !== req.body.user)
+  }
+  const updatedArticle = await Art.update({
+    liked: updatedLikedArticle
+  }, {where: {id: req.params.id}})
+  const ArticleLiked = await Art.findOne({where: {id: req.params.id}})
+  return res.status(200).json(ArticleLiked);
+}
+
 const articlesOneDelete = async (req, res) => {
   const delImage = await Art.findOne({where: {id: req.params.id}})
   if (delImage.dataValues.img != null) {
@@ -105,5 +122,5 @@ const articlesOneDelete = async (req, res) => {
 }
 
 module.exports = {
-  articlesList, createArticle, articlesOne, articlesOneUpdate, articlesOneDelete
+  articlesList, createArticle, articlesOne, articlesOneUpdate, likeOneArticle, articlesOneDelete
 }

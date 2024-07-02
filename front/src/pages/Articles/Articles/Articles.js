@@ -6,14 +6,21 @@ import './ArticleAnimation.scss';
 import { motion } from "framer-motion";
 import { AlertContext } from "../../../components/Alert/AlertContext";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import {baseApi} from "../../../API/api";
+import { baseApi } from "../../../API/api";
+import { Badge, Pill } from "evergreen-ui";
 
-const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categoryName }) => {
+const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categoryName, isAuth, likeArticle }) => {
   const { show } = useContext(AlertContext);
+
   const handleDelete = id => {
     deleteOne(id);
     show("Article was deleted", "danger");
   };
+
+  const handleLike = (id, add) => {
+    likeArticle(id, user.nickName, add)
+  }
+
   return (
     <>
       {progress ? <Loader /> : allArticles.length > 0 ? <motion.div
@@ -33,12 +40,19 @@ const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categor
                   <div>{article.text.substr(0, 150)}...</div>
                   {article.img && <img src={baseApi + article.img} alt={article.title} />}
                 </Link>
-                {(user.id === article.userId || isUserAdmin) &&
-                <div className={style.adminLinks}>
-                  <Link className='basic_button' to={`/update/${article.id}`}><span>Update</span></Link>
-                  <div className={style.delete} onClick={() => handleDelete(article.id)}><span>Delete</span></div>
+                <div className={style.article_bottom}>
+                  {(user.id === article.userId || isUserAdmin) &&
+                    <div className={style.adminLinks}>
+                      <Link className='basic_button' to={`/update/${article.id}`}><span>Update</span></Link>
+                      <div className={style.delete} onClick={() => handleDelete(article.id)}><span>Delete</span></div>
+                    </div>
+                  }
+                  <section className={style.like_container}>
+                    {article.liked.length > 0 && <Pill color="red">{article.liked.length}</Pill>}
+                    {isAuth && <Badge color="teal" className={[style.like, article.liked.includes(user.nickName) && style.clicked].join(' ')} onClick={() => handleLike(article.id, !article.liked.includes(user.nickName))}>Like</Badge>}
+                    <ul>{article.liked.map(like => <li>{like}</li>)}</ul>
+                  </section>
                 </div>
-                }
               </li>
             </CSSTransition>
           ))}

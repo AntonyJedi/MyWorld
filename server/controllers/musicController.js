@@ -22,7 +22,8 @@ const createSong = async (req, res, next) => {
         category: form.category,
         img: filename,
         releaseDate: form.releaseDate,
-        userName: form.userName
+        userName: form.userName,
+        liked: []
       })
       return res.status(200).json(createdSong)
     } else {
@@ -32,7 +33,8 @@ const createSong = async (req, res, next) => {
         lyrics: form.lyrics,
         category: form.category,
         releaseDate: form.releaseDate,
-        userName: form.userName
+        userName: form.userName,
+        liked: []
       })
       console.log(createdSong)
       return res.status(200).json(createdSong)
@@ -47,8 +49,22 @@ const songsByCategory = async (req, res) => {
   return res.status(200).json(some);
 }
 
+const likeOneSong = async (req, res) => {
+  const song = await Music.findOne({where: {id: req.params.id}})
+  let updatedLikedSong;
+  if (req.body.add) {
+    updatedLikedSong = [...song.liked, req.body.user]
+  } else {
+    updatedLikedSong = song.liked.filter(name => name !== req.body.user)
+  }
+  const updatedSong = await Music.update({
+    liked: updatedLikedSong
+  }, {where: {id: req.params.id}})
+  const songLiked = await Music.findOne({where: {id: req.params.id}})
+  return res.status(200).json(songLiked);
+}
+
 const songOneUpdate = async (req, res) => {
-  console.log(req.body)
   const form = req.body
   if (req.files) {
     const delArt = await Music.findOne({where: {id: req.params.id}})
@@ -91,5 +107,5 @@ const songOneDelete = async (req, res) => {
 }
 
 module.exports = {
-  musicList, createSong, songsByCategory, songOneUpdate, songOneDelete
+  musicList, createSong, songsByCategory, songOneUpdate, songOneDelete, likeOneSong
 }

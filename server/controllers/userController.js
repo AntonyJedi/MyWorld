@@ -11,8 +11,10 @@ const Registration = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({message: 'Errors during registration', errors})
     }
-    const {name, email, password, role} = req.body
-    const resultOfReg = await usersServices.registrationServices(name, email, password, role)
+    const {name, email, password, about, job, mood, interests} = req.body
+    let interestsArr = interests != "" ? interests.split(', ') : [];
+    const resultOfReg = await usersServices.registrationServices(name, email, password, about, job, mood, interestsArr)
+    
     if (resultOfReg.status !== 400) {
       res.cookie('refreshToken', resultOfReg.toClient.refreshToken, {httpOnly: true})
     }

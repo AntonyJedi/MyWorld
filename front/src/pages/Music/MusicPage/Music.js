@@ -10,7 +10,7 @@ import PrevArrow from "./SliderArrows/PrevArrow";
 import "./SliderArrows/SlickArrows.scss";
 import Loader from "../../../components/Loader/Loader";
 
-const Music = ({ songs, deleteOne, isAuth, isAdminAuth, users, currentUser, isMusicLoading }) => {
+const Music = ({ songs, deleteOne, isAuth, isAdminAuth, users, currentUser, isMusicLoading, likeOne }) => {
   const [isAddNew, setIsAddNew] = useState(false);
   // const [isUserDisplay, setIsUserDisplay] = useState([])
 
@@ -71,10 +71,13 @@ const Music = ({ songs, deleteOne, isAuth, isAdminAuth, users, currentUser, isMu
                           category={one.category}
                           image={one.img}
                           release={one.releaseDate}
-                          userName={one.userName}
+                          songOwner={one.userName}
                           deleteSong={deleteOne}
                           canDelete={isAdminAuth}
                           user={currentUser.nickName}
+                          like={likeOne}
+                          usersLiked={one.liked}
+                          isAuth={isAuth}
                         />
                       );
                   })}

@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux"
 import Music from "./Music";
-import {deleteOneSongThunkCreator, getSongsThunkCreator} from "../../../redux/MusicReducer";
+import {deleteOneSongThunkCreator, getSongsThunkCreator, likeOneSongThungCreator} from "../../../redux/MusicReducer";
 
 
 class MusicContainer extends React.Component {
@@ -11,6 +11,10 @@ class MusicContainer extends React.Component {
 
   componentDidMount() {
     this.props.getSongsThunkCreator()
+  }
+
+  likeOneSong = (id, user, add) => {
+    this.props.likeOneSongThungCreator(id, user, add)
   }
 
 
@@ -24,6 +28,7 @@ class MusicContainer extends React.Component {
         users={this.props.allUsers}
         isAuth={this.props.isAuth}
         currentUser={this.props.currentUser}
+        likeOne={this.likeOneSong}
       />
     )
   }
@@ -40,4 +45,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getSongsThunkCreator, deleteOneSongThunkCreator})(MusicContainer)
+export default connect(mapStateToProps, {getSongsThunkCreator, deleteOneSongThunkCreator, likeOneSongThungCreator})(MusicContainer)

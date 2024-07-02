@@ -50,9 +50,9 @@ const setLoadingCreator = setLoading => ({type: 'SET-LOADING', isLoading: setLoa
 const getAllUsers = allUsers => ({type: 'ALL-USERS', allUsers})
 const setError = resError => ({type: 'SET-ERROR', resError})
 
-export const RegistrationThunkCreator = (name, email, pass) => async (dispatch) => {
+export const RegistrationThunkCreator = (name, email, pass, about, job, mood, interests) => async (dispatch) => {
   try {
-    const responseFromReg = await authAPI.registration(name, email, pass)
+    const responseFromReg = await authAPI.registration(name, email, pass, about, job, mood, interests)
     if (responseFromReg) {
       localStorage.setItem('token', responseFromReg.data.token)
       dispatch(setUserActionCreator(responseFromReg.data.user))

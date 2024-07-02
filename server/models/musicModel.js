@@ -9,7 +9,8 @@ const Music = sequelize.define('Music', {
   category: {type: DataTypes.STRING, allowNull: false},
   img: {type: DataTypes.STRING, allowNull: true},
   releaseDate: {type: DataTypes.DATE, allowNull: false},
-  userName: {type: DataTypes.STRING, allowNull: false}
+  userName: {type: DataTypes.STRING, allowNull: false},
+  liked: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true}
 })
 
 module.exports = Music

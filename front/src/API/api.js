@@ -36,6 +36,9 @@ export const articlesAPI = {
   },
   getAllCategory: () => {
     return AXIOS.get(baseApiURL + 'categories')
+  },
+  likeOneArticle: (id, user, add) => {
+    return AXIOS.put(baseApiURL + `articles/like/${id}`, {user, add})
   }
 }
 
@@ -51,6 +54,9 @@ export const musicAPI = {
   },
   updateOneSong: (id, updatedSong) => {
     return AXIOS.put(baseApiURL + `music/${id}`, updatedSong)
+  },
+  likeOneSong: (id, user, add) => {
+    return AXIOS.put(baseApiURL + `music/like/${id}`, {user, add})
   },
   deleteOneSong: id => {
     return AXIOS.delete(baseApiURL + `music/${id}`)
@@ -79,8 +85,8 @@ export const quotesAPI = {
 }
 
 export const authAPI = {
-  registration: (name, email, password) => {
-    return AXIOS.post(baseApiURL + `auth/registration`, {name, email, password})
+  registration: (name, email, password, about, job, mood, interests) => {
+    return AXIOS.post(baseApiURL + `auth/registration`, {name, email, password, about, job, mood, interests})
   },
   login: (email, password) => {
     return AXIOS.post(baseApiURL + `auth/login`, {email, password})

@@ -53,5 +53,21 @@
       z-index: 5;
     }
   }
-  @extend %admin_links;
+  @include admin_links(flex-start);
+}
+
+.like_container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 5px;
+  .like {
+    cursor: pointer;
+    transition: all .5s ease;
+    &.clicked {
+      font-size: 15px;
+      padding: 0 10px;
+    } 
+  }
 }
