@@ -3,6 +3,7 @@ import style from './Music.module.scss';
 import { Link } from "react-router-dom";
 import { AlertContext } from "../../../components/Alert/AlertContext";
 import { Badge, Pill } from "evergreen-ui";
+import "./MusicOverride.scss";
 
 const MusicCard = ({ id, songTitle, album, lyrics, category, image, release, deleteSong, canDelete, user, songOwner, like, usersLiked, isAuth }) => {
   const alert = useContext(AlertContext)
@@ -26,8 +27,9 @@ const MusicCard = ({ id, songTitle, album, lyrics, category, image, release, del
             <div>Genre - {category}</div>
             <div>Came out at {new Date(release).toLocaleDateString()}</div>
             <section className={style.like_container}>
-              {usersLiked.length > 0 && <Pill color="red">{usersLiked.length}</Pill>}
+              {usersLiked.length > 0 && <Pill className={style.count} color="red">{usersLiked.length}</Pill>}
               {isAuth && <Badge color="teal" className={[style.like, usersLiked.includes(user) && style.clicked].join(' ')} onClick={() => likeSong(id)}>Like</Badge>}
+              <ul className={style.likedList}>{usersLiked.map(like => <li>{like}</li>)}</ul>
             </section>
           </div>
           <div className={style.back}>

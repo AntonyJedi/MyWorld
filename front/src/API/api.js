@@ -37,6 +37,9 @@ export const articlesAPI = {
   getAllCategory: () => {
     return AXIOS.get(baseApiURL + 'categories')
   },
+  newCategory: newCategory => {
+    return AXIOS.post(baseApiURL + 'categories/new', newCategory)
+  },
   likeOneArticle: (id, user, add) => {
     return AXIOS.put(baseApiURL + `articles/like/${id}`, {user, add})
   }

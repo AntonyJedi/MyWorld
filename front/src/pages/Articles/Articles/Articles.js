@@ -8,6 +8,7 @@ import { AlertContext } from "../../../components/Alert/AlertContext";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { baseApi } from "../../../API/api";
 import { Badge, Pill } from "evergreen-ui";
+import { articleAuthRoutes } from "../../../routes/routes";
 
 const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categoryName, isAuth, likeArticle }) => {
   const { show } = useContext(AlertContext);
@@ -30,6 +31,7 @@ const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categor
         transition={{ duration: 0.5 }}
       >
         {categoryName ? <h2>{categoryName.toUpperCase()}</h2> : <h2>All articles</h2>}
+        {isAuth && <div className={style.links_container}>{articleAuthRoutes.map(route => <Link className="action_button" to={route.path}><span>{route.title}</span></Link>)}</div>}
         <TransitionGroup component='ul' className={[style.articleContainer, 'list-group'].join(' ')}>
           {allArticles.map((article, index) => (
             <CSSTransition key={article.id} classNames='article' timeout={1000} onEnter={() => console.log('Enter:', article.id)} onExit={() => console.log('Exit:', article.id)}>
@@ -48,9 +50,9 @@ const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categor
                     </div>
                   }
                   <section className={style.like_container}>
-                    {article.liked.length > 0 && <Pill color="red">{article.liked.length}</Pill>}
+                    {article.liked.length > 0 && <Pill className={style.count} color="red">{article.liked.length}</Pill>}
                     {isAuth && <Badge color="teal" className={[style.like, article.liked.includes(user.nickName) && style.clicked].join(' ')} onClick={() => handleLike(article.id, !article.liked.includes(user.nickName))}>Like</Badge>}
-                    <ul>{article.liked.map(like => <li>{like}</li>)}</ul>
+                    <ul className={style.likedList}>{article.liked.map(like => <li>{like}</li>)}</ul>
                   </section>
                 </div>
               </li>

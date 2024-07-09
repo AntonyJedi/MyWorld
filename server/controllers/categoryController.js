@@ -9,4 +9,16 @@ const categoryList = async (req, res) => {
   }
 }
 
-module.exports = {categoryList}
+const newCategory = async (req, res) => {
+  const category = req.body;
+  try {
+    const newCategory = await Category.create({
+      title: category.name
+    })
+    return res.status(200).json(newCategory)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+module.exports = {categoryList, newCategory}

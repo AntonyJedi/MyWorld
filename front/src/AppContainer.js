@@ -27,6 +27,7 @@ class AppContainer extends React.Component {
         isUserLoading={this.props.isUserLoading}
         isUserAdmin={this.props.isAdmin}
         makeOut={this.makeLogout}
+        user={this.props.user}
       />
     );
   }

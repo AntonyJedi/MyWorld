@@ -27,7 +27,6 @@ const ArticleReducer = (state = initStore, action) => {
         updatedArticle: action.getOne
       }
     case 'SET-ARTICLE-LIKE':
-      debugger
       return {
         ...state,
         articlesStore: state.articlesStore.map(article => article.id === action.likedArticle.id ? action.likedArticle : article)
@@ -100,7 +99,6 @@ export const updateOneArticleThunkCreator = (form, id) => async () => {
 }
 
 export const likeOneArticleThunkCreator = (id, user, add) => async (dispatch) => {
-  debugger
   try {
     const response = await articlesAPI.likeOneArticle(id, user, add)
     dispatch(likeOneArticleActionsCreator(response.data))
@@ -113,6 +111,14 @@ export const getAllCategoriesThunkCreator = () => async (dispatch) => {
   try {
     const res = await articlesAPI.getAllCategory()
     dispatch(getAllCategoriesActionCreator(res.data))
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const newCategoryThunkCreator = newCategory => async () => {
+  try {
+    await articlesAPI.newCategory(newCategory)
   } catch (e) {
     console.log(e)
   }

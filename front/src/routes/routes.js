@@ -10,7 +10,8 @@ import {
   pathToUpdateMusic,
   pathToSpecificArticles,
   pathToDoList,
-  pathToGame
+  pathToGame,
+  pathToCategoryCreation
 } from './routes_const';
 import ArticlesContainer from "../pages/Articles/Articles/ArticlesContainer";
 import UpdateArticleContainer from "../pages/Articles/UpdateArticle/UpdateArticleContainer";
@@ -22,6 +23,7 @@ import MusicContainer from "../pages/Music/MusicPage/MusicContainer";
 import UpdateMusicContainer from "../pages/Music/UpdateMusic/UpdateMusicContainer";
 import ToDoListContainer from "../pages/ToDoList/ToDoListContainer";
 import GamePage from "../pages/Game/Game";
+import CreateCategoryContainer from '../pages/Articles/Category/CreateCategoryContainer';
 
 export const adminRoutes = [];
 
@@ -45,6 +47,11 @@ export const userRoutes = [
     path: pathToDoList,
     component: <ToDoListContainer/>,
     title: 'To Do List'
+  },
+  {
+    path: pathToCategoryCreation,
+    component: <CreateCategoryContainer />,
+    title: 'New Category',
   }
 ];
 
@@ -79,6 +86,19 @@ export const allRoutes = [
   //   component: <Science/>,
   //   title: 'Science'
   // }
+]
+
+export const articleAuthRoutes = [
+  {
+    path: pathToNewArticles,
+    component: <CreateArticleContainer />,
+    title: 'New Articles',
+  },
+  {
+    path: pathToCategoryCreation,
+    component: <CreateCategoryContainer />,
+    title: 'New Category',
+  }
 ]
 
 export const authRoutes = [

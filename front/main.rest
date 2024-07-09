@@ -11,3 +11,7 @@ GET http://localhost:5010/api/users
 ###
 
 PUT http://localhost:5010/api/music/like/1
+
+###
+
+POST http://localhost:5010/api/categories/new

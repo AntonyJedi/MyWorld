@@ -4,9 +4,9 @@ import {motion} from "framer-motion";
 import {Textarea, TextInput} from "evergreen-ui";
 import ImageUploader from "../../../components/FileUploader/FileUploader";
 
-const CreateMusic = ({newSong, addNew, user}) => {
+const CreateMusic = ({newSong, addNew, user, songs}) => {
   const alert = useContext(AlertContext)
-  const [music, setMusic] = useState({userName: user.nickName})
+  const [music, setMusic] = useState({})
 
   const [files, setFiles] = useState([])
   const [fileRejections, setFileRejections] = useState([])
@@ -30,6 +30,7 @@ const CreateMusic = ({newSong, addNew, user}) => {
   }, [music])
 
   const createSong = async (e) => {
+    debugger
     e.preventDefault()
     const formData = new FormData()
     formData.append('song', music.song)
@@ -38,7 +39,7 @@ const CreateMusic = ({newSong, addNew, user}) => {
     formData.append('category', music.category)
     formData.append('image', music.image)
     formData.append('releaseDate', music.releaseDate)
-    formData.append('userName', music.userName)
+    formData.append('userName', user.nickName)
     try {
       await newSong(formData)
       addNew(false)
@@ -94,7 +95,7 @@ const CreateMusic = ({newSong, addNew, user}) => {
       />
       <div className='flex-center'>
         <a className='form_submit' onClick={createSong}><span>Create song</span></a>
-        <buttom className='action_button' onClick={back}><span>Back to list -&gt;</span></buttom>
+        {songs.length > 0 && <buttom className='action_button' onClick={back}><span>Back to list -&gt;</span></buttom>}
       </div>
     </motion.form>
   );

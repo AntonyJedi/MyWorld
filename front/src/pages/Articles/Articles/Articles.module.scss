@@ -34,7 +34,7 @@
       position: absolute;
       left: 20px;
       top: -20px;
-      background: #0e1538;
+      background: $secColor;
       color: #fff;
       padding: 8px;
       border-radius: 5px;
@@ -69,5 +69,40 @@
       font-size: 15px;
       padding: 0 10px;
     } 
+  }
+  .count {
+    cursor: pointer;
+    &:hover {
+      ~ .likedList {
+        transform: translateY(60%);
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+  .likedList {
+    position: absolute;
+    padding: 8px;
+    border-radius: 5px;
+    background: $secColor;
+    color: #fff;
+    transform: translateY(50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s ease-in-out;
+  }
+}
+
+.links_container {
+  display: flex;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-bottom: 30px;
+  @include breakpoint(tablet) {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 }

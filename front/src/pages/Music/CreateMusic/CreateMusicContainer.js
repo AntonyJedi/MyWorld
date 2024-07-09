@@ -20,6 +20,7 @@ class CreateMusicContainer extends React.Component {
         newSong={this.newSong}
         addNew={this.props.setIsAddNew}
         user={this.props.currentUser}
+        songs={this.props.allSongs}
       />
     )
   }
@@ -27,7 +28,8 @@ class CreateMusicContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.UserStore.user
+    currentUser: state.UserStore.user,
+    allSongs: state.MusicStore.songsStore
   }
 }
 

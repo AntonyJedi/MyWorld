@@ -6,11 +6,13 @@
   perspective: 1000px;
   height: fit-content;
   list-style: none;
+
   &.turn {
     .cardInner {
       transform: rotateY(180deg);
     }
   }
+
   .cardInner {
     background: $musicCard;
     color: #fff;
@@ -19,16 +21,21 @@
     position: relative;
     transition: transform 0.6s;
     transform-style: preserve-3d;
+
     //box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    .front, .back {
+    .front,
+    .back {
       backface-visibility: hidden;
     }
+
     .front {
       text-align: center;
-      & > div {
+
+      &>div {
         margin-bottom: 5px;
       }
     }
+
     .back {
       position: absolute;
       top: 20px;
@@ -38,47 +45,81 @@
       width: calc(100% - 40px);
       height: calc(100% - 100px);
       transform: rotateY(180deg);
+
       .inner {
         height: 100%;
         overflow-y: scroll;
         line-height: 25px;
+
         &::-webkit-scrollbar {
           width: 5px;
           border-radius: 10px;
         }
+
         &::-webkit-scrollbar-track {
           background: #f1f1f1;
         }
+
         &::-webkit-scrollbar-thumb {
           background: #000;
         }
+
         &::-webkit-scrollbar-thumb:hover {
           background: $musicCard;
         }
       }
     }
+
     .lyrics {
       position: absolute;
       top: 10px;
       right: 10px;
       cursor: pointer;
     }
+
     .like_container {
       position: absolute;
       bottom: 10px;
       right: 10px;
       display: flex;
       gap: 5px;
+
       .like {
         cursor: pointer;
         transition: all .5s ease;
+
         &.clicked {
           font-size: 15px;
           padding: 0 10px;
-        } 
+        }
+      }
+
+      .count {
+        cursor: pointer;
+        &:hover {
+          ~ .likedList {
+            transform: translateY(80%);
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }
+
+      .likedList {
+        position: absolute;
+        padding: 8px;
+        border-radius: 5px;
+        background: $secColor;
+        color: #fff;
+        transform: translateY(50%);
+        top: -50%;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .3s ease-in-out;
       }
     }
   }
+
   img {
     border-radius: 10px;
     width: 50%;
@@ -91,6 +132,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
+
   @include breakpoint(tablet) {
     gap: 10px;
   }
