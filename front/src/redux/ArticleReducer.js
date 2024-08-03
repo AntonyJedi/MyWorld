@@ -19,7 +19,7 @@ const ArticleReducer = (state = initStore, action) => {
     case 'DELETE-ONE-ARTICLE':
       return {
         ...state,
-        articlesStore: state.articlesStore.filter(d => d.id !== action.idDelOne)
+        articlesStore: state.articlesStore.filter(d => d.id !== action.id)
       }
     case 'GET-ONE-ARTICLE':
       return {
@@ -46,17 +46,29 @@ const ArticleReducer = (state = initStore, action) => {
         ...state,
         categoriesStore: action.categories
       }
+    case 'ADD-ONE-CATEGORY':
+      return {
+        ...state,
+        categoriesStore: [...state.categoriesStore, action.category]
+      }
+    case 'DELETE-ONE-CATEGORY':
+      return {
+        ...state,
+        categoriesStore: state.categoriesStore.filter(d => d.id !== action.id)
+      }
     default:
       return state
   }
 }
 
 const getArticlesActionCreator = allArticles => ({ type: 'GET-ARTICLES', articles: allArticles })
-const delOneArticleCreator = id => ({ type: 'DELETE-ONE-ARTICLE', idDelOne: id })
+const delOneArticleCreator = id => ({ type: 'DELETE-ONE-ARTICLE', id })
 const getOneArticleCreator = getOne => ({ type: 'GET-ONE-ARTICLE', getOne: getOne })
 const getChosenArticleActionCreator = (id, data) => ({ type: 'GET-CHOSEN-ARTICLE', chosenArticleID: id, data: data })
 const getAllCategoriesActionCreator = categories => ({ type: 'GET-ALL-CATEGORIES', categories })
 const likeOneArticleActionsCreator = likedArticle => ({ type: 'SET-ARTICLE-LIKE', likedArticle })
+const addOneCategoryActionsCreator = category => ({ type: 'ADD-ONE-CATEGORY', category })
+const delOneCategoryCreator = id => ({ type: 'DELETE-ONE-CATEGORY', id })
 
 export const getArticlesThunkCreator = (category) => async (dispatch) => {
   try {
@@ -116,12 +128,18 @@ export const getAllCategoriesThunkCreator = () => async (dispatch) => {
   }
 }
 
-export const newCategoryThunkCreator = newCategory => async () => {
+export const newCategoryThunkCreator = newCategory => async (dispatch) => {
   try {
-    await articlesAPI.newCategory(newCategory)
+    const res = await articlesAPI.newCategory(newCategory)
+    dispatch(addOneCategoryActionsCreator(res.data))
   } catch (e) {
     console.log(e)
   }
+}
+
+export const delOneCategoryThunkCreator = id => async (dispatch) => {
+  await articlesAPI.deleteOneCaregory(id)
+  dispatch(delOneCategoryCreator(id))
 }
 
 export default ArticleReducer;

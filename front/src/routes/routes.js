@@ -29,11 +29,6 @@ export const adminRoutes = [];
 
 export const userRoutes = [
   {
-    path: pathToNewArticles,
-    component: <CreateArticleContainer />,
-    title: 'New Articles',
-  },
-  {
     path: pathToUpdateArticles,
     component: <UpdateArticleContainer/>,
     title: 'Update Article'
@@ -47,11 +42,6 @@ export const userRoutes = [
     path: pathToDoList,
     component: <ToDoListContainer/>,
     title: 'To Do List'
-  },
-  {
-    path: pathToCategoryCreation,
-    component: <CreateCategoryContainer />,
-    title: 'New Category',
   }
 ];
 

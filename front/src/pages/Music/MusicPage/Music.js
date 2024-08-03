@@ -54,6 +54,12 @@ const Music = ({ songs, deleteOne, isAuth, isAdminAuth, users, currentUser, isMu
         exit={{ translateX: "50%", opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
+        {isAuth &&
+          <div onClick={() => setIsAddNew(isAddNew => !isAddNew)} style={{ margin: "20px auto" }}
+            className='basic_button'>
+            <span>Add new song</span>
+          </div>
+        }
         {users.map(user => {
           if (songs.filter(s => s.userName === user).length > 0) {
             return (
@@ -86,12 +92,6 @@ const Music = ({ songs, deleteOne, isAuth, isAdminAuth, users, currentUser, isMu
             );
           }
         })}
-        {isAuth &&
-        <div onClick={() => setIsAddNew(isAddNew => !isAddNew)} style={{ margin: "20px auto" }}
-             className='basic_button'>
-          <span>Add new song</span>
-        </div>
-        }
       </motion.div> : <CreateMusicContainer setIsAddNew={setIsAddNew} />
       }
     </>

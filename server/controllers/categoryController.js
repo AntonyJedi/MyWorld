@@ -21,4 +21,9 @@ const newCategory = async (req, res) => {
   }
 }
 
-module.exports = {categoryList, newCategory}
+const categoryOneDelete = async (req, res) => {
+  const del = await Category.destroy({where: {id: req.params.id}})
+  res.status(200).json(del);
+}
+
+module.exports = {categoryList, newCategory, categoryOneDelete}

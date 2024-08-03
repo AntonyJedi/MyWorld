@@ -21,9 +21,9 @@ const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categor
   const handleLike = (id, add) => {
     likeArticle(id, user.nickName, add)
   }
-
   return (
     <>
+    {isAuth && <div className={style.links_container}>{articleAuthRoutes.map(route => <Link className="action_button" to={route.path}><span>{route.title}</span></Link>)}</div>}
       {progress ? <Loader /> : allArticles.length > 0 ? <motion.div
         initial={{ translateX: "-25%", opacity: 0 }}
         animate={{ translateX: 0, opacity: 1 }}
@@ -31,7 +31,6 @@ const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categor
         transition={{ duration: 0.5 }}
       >
         {categoryName ? <h2>{categoryName.toUpperCase()}</h2> : <h2>All articles</h2>}
-        {isAuth && <div className={style.links_container}>{articleAuthRoutes.map(route => <Link className="action_button" to={route.path}><span>{route.title}</span></Link>)}</div>}
         <TransitionGroup component='ul' className={[style.articleContainer, 'list-group'].join(' ')}>
           {allArticles.map((article, index) => (
             <CSSTransition key={article.id} classNames='article' timeout={1000} onEnter={() => console.log('Enter:', article.id)} onExit={() => console.log('Exit:', article.id)}>

@@ -1,45 +1,49 @@
 import React from "react";
-import {Routes, Route, useLocation} from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Footer from "./components/Footer/Footer";
-import {adminRoutes, allRoutes, authRoutes, userRoutes} from "./routes/routes";
-import NotFound from "./pages/Not found/NotFound";
+import { adminRoutes, allRoutes, authRoutes, userRoutes, articleAuthRoutes } from "./routes/routes";
+import NotFound from "./pages/NotFound/NotFound";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import Loader from "./components/Loader/Loader";
 import SideBarMobile from "./components/SideBarMobile/SideBarMobile";
-import {AnimatePresence} from "framer-motion"
+import { AnimatePresence } from "framer-motion"
 import AlertComponent from "./components/Alert/AlertComponent";
 import HomePageContainer from "./pages/HomePage/HomePageContainer";
 import CreateCategoryContainer from "./pages/Articles/Category/CreateCategoryContainer";
 
-const App = ({isUserAuth, isUserLoading, isUserAdmin, makeOut, user}) => {
+const App = ({ isUserAuth, isUserLoading, isUserAdmin, makeOut, user }) => {
   console.log(user)
   const location = useLocation()
   return (
     <>
-      {isUserLoading ? <Loader/> : <>
-        <NavbarContainer/>
+      {isUserLoading ? <Loader /> : <>
+        <NavbarContainer />
         <main className='main_container'>
-          <AlertComponent/>
+          <AlertComponent />
           <AnimatePresence exitBeforeEnter={true}>
             <Routes location={location} key={location.pathname}>
-              <Route exact path='/' element={<HomePageContainer/>}/>
-              {isUserAuth && userRoutes.map(route => {
-                return <Route key={route.path} path={route.path} element={route.component}/>
-              })}
+              <Route exact path='/' element={<HomePageContainer />} />
+              {isUserAuth && (
+                <>
+                  {userRoutes.map(route => <Route key={route.path} path={route.path} element={route.component} />)}
+                  {articleAuthRoutes.map(route => <Route key={route.path} path={route.path} element={route.component} />)}
+                </>
+              )
+              }
               {allRoutes.map(route => {
-                return <Route key={route.path} path={route.path} element={route.component}/>
+                return <Route key={route.path} path={route.path} element={route.component} />
               })}
               {authRoutes.map(route => {
-                return <Route key={route.path} path={route.path} element={route.component}/>
+                return <Route key={route.path} path={route.path} element={route.component} />
               })}
               {isUserAdmin && adminRoutes.map(route => {
-                return <Route key={route.path} path={route.path} element={route.component}/>
+                return <Route key={route.path} path={route.path} element={route.component} />
               })}
-              <Route path='/*' element={<NotFound/>}/>
+              <Route path='/*' element={<NotFound />} />
             </Routes>
           </AnimatePresence>
         </main>
-        <Footer/>
+        <Footer />
         <SideBarMobile isAuth={isUserAuth} makeOut={makeOut} />
       </>}
     </>
