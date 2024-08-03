@@ -1,15 +1,11 @@
 import React from "react";
 import {connect} from "react-redux"
-import {getAllCategoriesThunkCreator, newOneArticleThunkCreator} from "../../../redux/ArticleReducer";
+import {newOneArticleThunkCreator} from "../../../redux/ArticleReducer";
 import CreateArticle from "./CreateArticle";
 
 class CreateArticleContainer extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    this.props.getAllCategoriesThunkCreator()
   }
 
   newOne = async (form) => {
@@ -34,4 +30,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {newOneArticleThunkCreator, getAllCategoriesThunkCreator})(CreateArticleContainer)
+export default connect(mapStateToProps, {newOneArticleThunkCreator})(CreateArticleContainer)

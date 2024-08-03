@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 const CreateArticle = ({newOne, categories, user}) => {
   const alert = useContext(AlertContext)
   const navigate = useNavigate()
-  const [article, setArticle] = useState({userId: user.id, userName: user.nickName, categoryId: 1})
+  const [article, setArticle] = useState({userId: user.id, userName: user.nickName, categoryId: categories[0].id})
 
   const [files, setFiles] = useState([])
   const [fileRejections, setFileRejections] = useState([])

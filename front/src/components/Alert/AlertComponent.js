@@ -1,20 +1,20 @@
-import React, {useContext} from 'react';
-import {Alert, Pane, CrossIcon} from "evergreen-ui";
-import {AlertContext} from "./AlertContext";
+import React, { useContext } from 'react';
+import { Alert, Pane, CrossIcon } from "evergreen-ui";
+import { AlertContext } from "./AlertContext";
 import style from "./AlertComponent.module.scss"
 
 const AlertComponent = () => {
-  const {alert, hide} = useContext(AlertContext)
+  const { alert, hide } = useContext(AlertContext)
   return (
-    <Pane position={'relative'}>
-      <Alert
-        display={alert.visible ? 'flex' : 'none'}
-        intent={alert.messageType}
-        title={alert.text}
-        marginBottom={32}
-      />
-      <CrossIcon onClick={hide} className={`${style.close} ${alert.visible ? style.show : style.hidden}`}/>
-    </Pane>
+    <div className={`${style.alertContainer} ${alert.visible ? style.show : style.hidden}`}>
+      <Pane>
+        <Alert
+          intent={alert.messageType}
+          title={alert.text}
+        />
+        <CrossIcon onClick={hide} className={`${style.close} ${alert.visible ? style.show : style.hidden}`} />
+      </Pane>
+    </div>
   );
 };
 

@@ -1,0 +1,27 @@
+@import "src/scss/breakpoints";
+
+.categories {
+  margin-top: 30px;
+
+  ul {
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    li {
+      width: 15%;
+      text-align: center;
+
+      button {
+        margin-left: 10px;
+      }
+    }
+    @include breakpoint (mobile) {
+      flex-direction: column;
+      li {
+        width: 100%;
+      }
+    }
+  }
+}

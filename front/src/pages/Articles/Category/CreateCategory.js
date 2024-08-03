@@ -3,6 +3,7 @@ import { TextInput } from "evergreen-ui";
 import { motion } from "framer-motion";
 import { AlertContext } from "../../../components/Alert/AlertContext";
 import { IconButton, TrashIcon } from "evergreen-ui";
+import style from './CreateCatogory.module.scss';
 
 
 function CreateCategory({ createNewCategory, allCategories, deleteOne }) {
@@ -22,6 +23,7 @@ function CreateCategory({ createNewCategory, allCategories, deleteOne }) {
     }
     await createNewCategory(newCategory)
     alert.show('New category has been successfully created', 'success')
+    setNewCategory({name: ''})
   }
   return (
     <motion.div
@@ -37,13 +39,14 @@ function CreateCategory({ createNewCategory, allCategories, deleteOne }) {
             id='CategoryTitle'
             type='text'
             placeholder='Title'
+            value={newCategory.name}
             onChange={e => setNewCategory({ ...newCategory, name: e.target.value })}
           />
           <div>
             <a className='form_submit' onClick={createCategory}><span>Create catergory</span></a>
           </div>
         </form>
-        <section className='category'>
+        <section className={style.categories}>
           <ul>
             {allCategories.map(category => <li>{category.title}<IconButton icon={TrashIcon} intent="danger" onClick={() => handleDelete(category.id)} /></li>)}
           </ul>

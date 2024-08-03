@@ -2,10 +2,11 @@
 @import "src/scss/breakpoints";
 
 .card {
-  background: transparent;
+  background: rgba($color: #000000, $alpha: .05);
   perspective: 1000px;
   height: fit-content;
   list-style: none;
+  border-radius: 10px;
 
   &.turn {
     .cardInner {
@@ -69,55 +70,12 @@
         }
       }
     }
+  }
 
-    .lyrics {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-    }
-
-    .like_container {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      display: flex;
-      gap: 5px;
-
-      .like {
-        cursor: pointer;
-        transition: all .5s ease;
-
-        &.clicked {
-          font-size: 15px;
-          padding: 0 10px;
-        }
-      }
-
-      .count {
-        cursor: pointer;
-        &:hover {
-          ~ .likedList {
-            transform: translateY(80%);
-            visibility: visible;
-            opacity: 1;
-          }
-        }
-      }
-
-      .likedList {
-        position: absolute;
-        padding: 8px;
-        border-radius: 5px;
-        background: $secColor;
-        color: #fff;
-        transform: translateY(50%);
-        top: -50%;
-        opacity: 0;
-        visibility: hidden;
-        transition: all .3s ease-in-out;
-      }
-    }
+  .lyrics {
+    padding: 10px;
+    text-align: right;
+    cursor: pointer;
   }
 
   img {
@@ -127,13 +85,51 @@
   }
 }
 
-.adminButtons {
-  padding: 10px;
+.edit_links {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
 
-  @include breakpoint(tablet) {
-    gap: 10px;
+  .like_container {
+    position: relative;
+    display: flex;
+    gap: 5px;
+    margin-left: auto;
+
+    .like {
+      cursor: pointer;
+      transition: all .5s ease;
+
+      &.clicked {
+        font-size: 15px;
+        padding: 0 10px;
+      }
+    }
+
+    .count {
+      cursor: pointer;
+
+      &:hover {
+        ~.likedList {
+          transform: translateY(80%);
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+
+    .likedList {
+      position: absolute;
+      padding: 8px;
+      border-radius: 5px;
+      background: $secColor;
+      color: #fff;
+      transform: translateY(50%);
+      top: -50%;
+      opacity: 0;
+      visibility: hidden;
+      transition: all .3s ease-in-out;
+    }
   }
 }

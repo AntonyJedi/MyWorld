@@ -23,13 +23,13 @@ const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categor
   }
   return (
     <>
-    {isAuth && <div className={style.links_container}>{articleAuthRoutes.map(route => <Link className="action_button" to={route.path}><span>{route.title}</span></Link>)}</div>}
       {progress ? <Loader /> : allArticles.length > 0 ? <motion.div
         initial={{ translateX: "-25%", opacity: 0 }}
         animate={{ translateX: 0, opacity: 1 }}
         exit={{ translateX: "50%", opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
+        {isAuth && <div className={style.links_container}>{articleAuthRoutes.map(route => <Link className="action_button" to={route.path}><span>{route.title}</span></Link>)}</div>}
         {categoryName ? <h2>{categoryName.toUpperCase()}</h2> : <h2>All articles</h2>}
         <TransitionGroup component='ul' className={[style.articleContainer, 'list-group'].join(' ')}>
           {allArticles.map((article, index) => (
