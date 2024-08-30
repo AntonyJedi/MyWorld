@@ -13,7 +13,7 @@ import {
   pathToGame,
   pathToCategoryCreation
 } from './routes_const';
-import ArticlesContainer from "../pages/Articles/Articles/ArticlesContainer";
+import ArticlesContainer from "../pages/Articles/ArticlesView/ArticlesViewContainer";
 import UpdateArticleContainer from "../pages/Articles/UpdateArticle/UpdateArticleContainer";
 import CreateArticleContainer from "../pages/Articles/CreateArticle/CreateArticleContainer";
 import LoginContainer from "../pages/Login/LoginContainer";

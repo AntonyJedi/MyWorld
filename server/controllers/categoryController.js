@@ -1,4 +1,5 @@
 const Category = require("../models/categoryModel");
+const capitalize = require("../assist/capitalize");
 
 const categoryList = async (req, res) => {
   try {
@@ -11,9 +12,10 @@ const categoryList = async (req, res) => {
 
 const newCategory = async (req, res) => {
   const category = req.body;
+  const updatedCat = capitalize(category.name);
   try {
     const newCategory = await Category.create({
-      title: category.name
+      title: updatedCat
     })
     return res.status(200).json(newCategory)
   } catch (e) {

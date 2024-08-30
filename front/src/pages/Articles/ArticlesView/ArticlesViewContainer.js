@@ -1,5 +1,5 @@
 import React from "react";
-import Articles from "./Articles";
+import Articles from "./ArticlesView";
 import {connect} from "react-redux"
 import {
   delOneArticleThunkCreator,
@@ -37,6 +37,7 @@ class ArticlesContainer extends React.Component {
         categoryName={this.props.param.category}
         isAuth={this.props.isAuth}
         likeArticle={this.likeOneArticle}
+        categories={this.props.allCategories}
       />
     )
   }
@@ -48,7 +49,8 @@ const mapStateToProps = state => {
     isFetching: state.ArticlesStore.isFetching,
     isAdmin: state.UserStore.isAdmin,
     currentUser: state.UserStore.user,
-    isAuth: state.UserStore.isAuth
+    isAuth: state.UserStore.isAuth,
+    allCategories: state.ArticlesStore.categoriesStore,
   }
 }
 

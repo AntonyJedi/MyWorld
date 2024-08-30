@@ -7,29 +7,36 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
   align-items: center;
+
   @include breakpoint(tablet) {
     grid-template-columns: 1fr 1fr;
   }
+
   @include breakpoint(mobile) {
     grid-template-columns: 1fr;
   }
+
   li {
     position: relative;
+    box-shadow: 0 0.1rem 0.5rem 0 rgb(21 21 30 / 12%);
+    border-radius: 10px;
+    transition: all .5s ease;
+
+    &:hover {
+      box-shadow: 0 0.1rem 0.5rem 0 $secColor;
+      transform: scale(1.03);
+    }
+
     .title {
       width: fit-content;
     }
+
     .link {
       display: block;
       position: relative;
-      padding: 25px 40px 20px 20px;
-      box-shadow: 0 0.1rem 0.5rem 0 rgb(21 21 30 / 12%);
-      border-radius: 5px;
-      transition: all .5s ease;
-      &:hover {
-        box-shadow: 0 0.1rem 0.5rem 0 $secColor;
-        transform: scale(1.03);
-      }
+      padding: 20px 20px 40px 20px;
     }
+
     .userName {
       position: absolute;
       left: 20px;
@@ -43,6 +50,7 @@
       line-height: 17px;
 
     }
+
     img {
       position: absolute;
       right: 0;
@@ -57,7 +65,7 @@
 
 .edit_links {
   position: absolute;
-  top: 10px;
+  top: -20px;
   right: 10px;
   display: flex;
   gap: 10px;
@@ -65,28 +73,33 @@
 
 .like_container {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
   display: flex;
   gap: 5px;
+  right: 10px;
+  bottom: 10px;
+
   .like {
     cursor: pointer;
     transition: all .5s ease;
+
     &.clicked {
       font-size: 15px;
       padding: 0 10px;
-    } 
+    }
   }
+
   .count {
     cursor: pointer;
+
     &:hover {
-      ~ .likedList {
+      ~.likedList {
         transform: translateY(60%);
         visibility: visible;
         opacity: 1;
       }
     }
   }
+
   .likedList {
     position: absolute;
     padding: 8px;
@@ -100,10 +113,26 @@
   }
 }
 
+.category {
+  position: absolute;
+  left: 20px;
+  bottom: -10px;
+  border-radius: 10px;
+  padding: 2px 20px;
+  border: 1px solid $secColor;
+  background: #fff;
+  transition: all .1s ease;
+  &:hover {
+    border: 2px solid $secColor;
+  }
+}
+
 .links_container {
   display: flex;
   position: absolute;
+  right: 0;
   margin-bottom: 0;
+
   @include breakpoint(tablet) {
     position: relative;
     flex-direction: column;
@@ -111,6 +140,7 @@
     gap: 10px;
     margin-bottom: 30px;
   }
+
   @include breakpoint(mobile) {
     right: unset;
   }
