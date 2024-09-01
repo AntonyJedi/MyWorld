@@ -54,7 +54,8 @@ const ArticleReducer = (state = initStore, action) => {
     case 'DELETE-ONE-CATEGORY':
       return {
         ...state,
-        categoriesStore: state.categoriesStore.filter(d => d.id !== action.id)
+        categoriesStore: state.categoriesStore.filter(d => d.id !== action.id),
+        articlesStore: state.articlesStore.filter(article => article.categoryId !== action.id)
       }
     default:
       return state

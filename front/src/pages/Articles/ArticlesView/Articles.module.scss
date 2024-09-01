@@ -5,7 +5,7 @@
 .articleContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 30px;
+  grid-gap: 35px 20px;
   align-items: center;
 
   @include breakpoint(tablet) {
@@ -131,6 +131,7 @@
   display: flex;
   position: absolute;
   right: 0;
+  top: 0;
   margin-bottom: 0;
 
   @include breakpoint(tablet) {

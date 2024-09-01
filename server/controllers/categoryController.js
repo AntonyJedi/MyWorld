@@ -1,4 +1,5 @@
 const Category = require("../models/categoryModel");
+const Art = require('../models/articleModel')
 const capitalize = require("../assist/capitalize");
 
 const categoryList = async (req, res) => {
@@ -25,6 +26,7 @@ const newCategory = async (req, res) => {
 
 const categoryOneDelete = async (req, res) => {
   const del = await Category.destroy({where: {id: req.params.id}})
+  await Art.destroy({where: {categoryId: req.params.id}})
   res.status(200).json(del);
 }
 

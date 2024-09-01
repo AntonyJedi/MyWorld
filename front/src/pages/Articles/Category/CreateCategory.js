@@ -4,15 +4,18 @@ import { motion } from "framer-motion";
 import { AlertContext } from "../../../components/Alert/AlertContext";
 import { IconButton, TrashIcon } from "evergreen-ui";
 import style from './CreateCatogory.module.scss';
+import DialogWindow from '../../../components/Dialog/Dialog';
 
 
 function CreateCategory({ createNewCategory, allCategories, deleteOne }) {
   const alert = useContext(AlertContext)
   const [newCategory, setNewCategory] = useState({ name: "" })
+  const [dialog, setDialog] = useState({ isShown: false, catId: 1, title: '' });
 
   const handleDelete = id => {
     deleteOne(id);
-    alert.show("Category was deleted", "danger");
+    alert.show('Category and all related article were deleted', 'danger');
+    setDialog({ ...dialog, isShown: false })
   };
 
   const createCategory = async (e) => {
@@ -23,7 +26,7 @@ function CreateCategory({ createNewCategory, allCategories, deleteOne }) {
     }
     await createNewCategory(newCategory)
     alert.show('New category has been successfully created', 'success')
-    setNewCategory({name: ''})
+    setNewCategory({ name: '' })
   }
   return (
     <motion.div
@@ -48,10 +51,20 @@ function CreateCategory({ createNewCategory, allCategories, deleteOne }) {
         </form>
         <section className={style.categories}>
           <ul>
-            {allCategories.map(category => <li>{category.title}<IconButton icon={TrashIcon} intent="danger" onClick={() => handleDelete(category.id)} /></li>)}
+            {allCategories.map(category =>
+              <li key={category.id}>
+                {category.title}
+                <IconButton icon={TrashIcon} intent="danger" onClick={() => setDialog({ isShown: true, catId: category.id, title: category.title })} />
+              </li>)}
           </ul>
         </section>
       </main>
+      <DialogWindow
+        isShown={dialog.isShown}
+        catId={dialog.catId}
+        title={dialog.title}
+        deleteAll={handleDelete}
+      />
     </motion.div>
   )
 }

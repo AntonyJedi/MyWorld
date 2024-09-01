@@ -1,0 +1,13 @@
+@import '../../../scss/variables.scss';
+
+.animate_container {
+	height: 40vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #333;
+}
+
+.box {
+	@include magicButton();
+}
