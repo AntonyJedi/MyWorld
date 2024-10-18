@@ -146,3 +146,10 @@
     right: unset;
   }
 }
+
+.add_button {
+  margin: 20px auto 0 0;
+  @include breakpoint(mobile) {
+    margin: 20px auto 0 auto;
+  }
+}

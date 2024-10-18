@@ -4,7 +4,9 @@ const path = require('path')
 const fs = require('fs')
 
 const musicList = async (req, res) => {
-  const songs = await Music.findAll()
+  const songs = await Music.findAll({
+    order: [['createdAt', 'DESC']]
+  })
   return res.status(200).json(songs)
 }
 
