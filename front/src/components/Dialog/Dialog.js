@@ -1,6 +1,5 @@
 import React from 'react'
 import './Dialog.scss'
-import { Dialog } from "evergreen-ui";
 
 function DialogWindow({ isShown, catId, title, deleteAll }) {
   return (

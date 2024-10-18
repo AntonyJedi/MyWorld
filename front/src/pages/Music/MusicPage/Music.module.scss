@@ -1,6 +1,30 @@
 @import "src/scss/variables";
 @import "src/scss/breakpoints";
 
+.music_top_container {
+  @include flexFull(space-between);
+  @include breakpoint(mobile) {
+    justify-content: center;
+    gap: 20px;
+  }
+}
+
+.music_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 35px 20px;
+  align-items: center;
+  margin-top: 20px;
+
+  @include breakpoint(tablet) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include breakpoint(mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
 .card {
   background: rgba($color: #000000, $alpha: .05);
   perspective: 1000px;
@@ -74,8 +98,13 @@
 
   .lyrics {
     padding: 10px;
-    text-align: right;
-    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .lyrics_button {
+      cursor: pointer;
+    }
   }
 
   img {

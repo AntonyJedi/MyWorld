@@ -18,7 +18,7 @@ const MusicReducer = (state = initStore, action) => {
     case 'SET-NEW-SONG':
       return {
         ...state,
-        songsStore: [...state.songsStore, action.newSong]
+        songsStore: [action.newSong, ...state.songsStore]
       }
     case 'DELETE-ONE-SONG':
       return {
