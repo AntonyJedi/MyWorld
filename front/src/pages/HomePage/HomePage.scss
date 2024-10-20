@@ -1,0 +1,13 @@
+@import "src/scss/variables";
+@import "src/scss/breakpoints";
+
+.interests {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+ul.menuList {
+  padding: 10px 20px;
+  list-style: inherit;
+}

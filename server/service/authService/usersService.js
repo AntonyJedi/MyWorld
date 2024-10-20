@@ -8,16 +8,16 @@ const jwtAssist = require('../../assist/jwtPayload')
 const config = require('config')
 
 const generateAccessToken = (id, role) => {
-  const payload = {id, role}
-  return jwt.sign(payload, config.get("secret"), {expiresIn: "24h"})
+  const payload = { id, role }
+  return jwt.sign(payload, config.get("secret"), { expiresIn: "24h" })
 }
 
 const registrationServices = async (name, email, password, about, job, mood, interests) => {
-  const candidate = await Users.findOne({where: {email}})
+  const candidate = await Users.findOne({ where: { email } })
   if (!candidate) {
     const hashPassword = await bcrypt.hash(password, 3)
     const activationLink = uuid.v4()
-    const newUser = await Users.create({nickName: name, email, password: hashPassword, about, currectMood: mood, job, interests, activationLink})
+    const newUser = await Users.create({ nickName: name, email, password: hashPassword, about, currectMood: mood, job, interests, activationLink })
     console.log(newUser)
     const mailRes = await mailService.sendActivationLink(email, `${config.get('API_URL')}/api/auth/activate/${activationLink}`)
     const jwtUser = jwtAssist(newUser)
@@ -31,13 +31,27 @@ const registrationServices = async (name, email, password, about, job, mood, int
   } else {
     return {
       status: 400,
-      toClient: {message: 'User already exists'}
+      toClient: { message: 'User already exists' }
     }
   }
 }
 
+const updateUserServices = async (name, email, password, about, job, currectMood, interests) => {
+  const updatedUser = await Users.update({
+    nickName: name,
+    about,
+    currectMood,
+    job,
+    interests
+  }, { where: { email } })
+  return {
+    status: 200,
+    updatedUser
+  }
+}
+
 const loginServices = async (email, password) => {
-  const user = await Users.findOne({where: {email}})
+  const user = await Users.findOne({ where: { email } })
   if (!user) {
     return {
       status: 400,
@@ -82,7 +96,7 @@ const refreshServices = async (refreshToken) => {
       toClient: 'User is unauthorized'
     }
   }
-  const user = await Users.findOne({where: {id: validToken.id}})
+  const user = await Users.findOne({ where: { id: validToken.id } })
   const jwtUser = jwtAssist(user)
   const tokens = await tokensServices.generateToken(jwtUser)
   await tokensServices.saveToken(jwtUser.id, tokens.accessToken, tokens.refreshToken)
@@ -95,11 +109,11 @@ const refreshServices = async (refreshToken) => {
 }
 
 const activationServices = async (activationLink) => {
-  const user = await Users.findOne({where: {activationLink}})
+  const user = await Users.findOne({ where: { activationLink } })
   if (!user) {
     console.log("No such user here!")
   }
-  await user.update({isActivated: true})
+  await user.update({ isActivated: true })
 }
 
 module.exports = {
@@ -107,5 +121,6 @@ module.exports = {
   loginServices,
   logoutServices,
   activationServices,
-  refreshServices
+  refreshServices,
+  updateUserServices
 }

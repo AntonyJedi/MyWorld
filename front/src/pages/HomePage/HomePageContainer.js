@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux"
 import HomePage from "./HomePage";
 import {getAllCategoriesThunkCreator} from "../../redux/ArticleReducer";
+import {updateUserThunkCreator} from "../../redux/UserReducer";
 
 class HomePageContainer extends React.Component {
   constructor(props) {
@@ -12,6 +13,10 @@ class HomePageContainer extends React.Component {
     this.props.getAllCategoriesThunkCreator()
   }
 
+  updateUser = user => {
+    this.props.updateUserThunkCreator(user)
+  }
+
   render() {
     return (
       <HomePage
@@ -19,6 +24,7 @@ class HomePageContainer extends React.Component {
         user={this.props.user}
         isAdmin={this.props.isAdmin}
         isAuth={this.props.isAuth}
+        changeUser={this.updateUser}
       />
     )
   }
@@ -33,4 +39,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getAllCategoriesThunkCreator})(HomePageContainer)
+export default connect(mapStateToProps, {getAllCategoriesThunkCreator, updateUserThunkCreator})(HomePageContainer)

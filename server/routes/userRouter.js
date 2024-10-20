@@ -1,4 +1,4 @@
-const {Registration, Login, Logout, Activate, Refresh, getUsers} = require("../controllers/userController");
+const {Registration, Login, Logout, Activate, Refresh, getUsers, updateUser} = require("../controllers/userController");
 const {Router} = require('express')
 const {check} = require('express-validator')
 const authMiddleware = require('./../middleware/authMiddleware')
@@ -12,6 +12,7 @@ user.post('/registration',[
 ], Registration)
 user.post('/login', Login)
 user.post('/logout', Logout)
+user.post('/user/update', updateUser)
 user.get('/users', getUsers)
 user.get('/activate/:link', Activate)
 user.get('/refresh', Refresh)

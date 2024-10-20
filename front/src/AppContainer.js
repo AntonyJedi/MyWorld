@@ -1,7 +1,7 @@
 import React from 'react';
 import App from "./App";
 import {connect} from "react-redux";
-import {checkAuth, getUsersThunkCreator, LogoutThunkCreator} from "./redux/UserReducer";
+import {checkAuth, LogoutThunkCreator} from "./redux/UserReducer";
 import {getAllCategoriesThunkCreator} from "./redux/ArticleReducer";
 
 class AppContainer extends React.Component {
@@ -13,7 +13,6 @@ class AppContainer extends React.Component {
     if (localStorage.getItem('token')) {
       this.props.checkAuth()
     }
-    this.props.getUsersThunkCreator()
     this.props.getAllCategoriesThunkCreator()
   }
 
@@ -44,4 +43,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {checkAuth, getUsersThunkCreator, LogoutThunkCreator, getAllCategoriesThunkCreator})(AppContainer);
+export default connect(mapStateToProps, {checkAuth, LogoutThunkCreator, getAllCategoriesThunkCreator})(AppContainer);

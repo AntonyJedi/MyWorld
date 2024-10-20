@@ -84,11 +84,24 @@ const getUsers = async (req, res) => {
   }
 }
 
+const updateUser = async (req, res) => {
+  console.log(req.body)
+  try {
+    const {name, email, password, about, job, currectMood, interests} = req.body
+    const resultOfUpdate = await usersServices.updateUserServices(name, email, password, about, job, currectMood, interests)
+    res.status(200).json(resultOfUpdate)
+  } catch (e) {
+    console.log(e.message)
+    res.status(400).json({message: 'Something went wrong with updating'})
+  }
+}
+
 module.exports = {
   Registration,
   Login,
   Logout,
   Activate,
   Refresh,
-  getUsers
+  getUsers,
+  updateUser
 }

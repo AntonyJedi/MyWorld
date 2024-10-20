@@ -105,5 +105,9 @@ export const authAPI = {
 export const usersAPI = {
   getUsers: () => {
     return AXIOS.get(baseApiURL + `auth/users`)
+  },
+  updateUser: (user) => {
+    const {name, email,password, about, job, currectMood, interests} = user
+    return AXIOS.post(baseApiURL + `auth/user/update`, {name, email, password, about, job, currectMood, interests})
   }
 }

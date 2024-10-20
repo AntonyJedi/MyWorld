@@ -1,4 +1,4 @@
-import {authAPI, baseApiURL, usersAPI} from "../API/api";
+import { authAPI, baseApiURL, usersAPI } from "../API/api";
 import axios from "axios";
 
 const initStore = {
@@ -17,6 +17,12 @@ const UserReducer = (state = initStore, action) => {
         ...state,
         user: action.user,
         isAdmin: action.user.role === 'admin'
+      }
+    case 'EDIT-USER':
+      debugger
+      return {
+        ...state,
+        user: action.updatedUser
       }
     case 'SET-AUTH':
       return {
@@ -44,11 +50,12 @@ const UserReducer = (state = initStore, action) => {
 }
 
 
-const setUserActionCreator = userInfo => ({type: 'SET-USER', user: userInfo})
-const setAuthActionCreator = setAuth => ({type: 'SET-AUTH', isAuth: setAuth})
-const setLoadingCreator = setLoading => ({type: 'SET-LOADING', isLoading: setLoading})
-const getAllUsers = allUsers => ({type: 'ALL-USERS', allUsers})
-const setError = resError => ({type: 'SET-ERROR', resError})
+const setUserActionCreator = userInfo => ({ type: 'SET-USER', user: userInfo })
+const setUpdatedUserActionCreator = updatedUser => ({ type: 'EDIT-USER', updatedUser })
+const setAuthActionCreator = setAuth => ({ type: 'SET-AUTH', isAuth: setAuth })
+const setLoadingCreator = setLoading => ({ type: 'SET-LOADING', isLoading: setLoading })
+const getAllUsers = allUsers => ({ type: 'ALL-USERS', allUsers })
+const setError = resError => ({ type: 'SET-ERROR', resError })
 
 export const RegistrationThunkCreator = (name, email, pass, about, job, mood, interests) => async (dispatch) => {
   try {
@@ -97,11 +104,24 @@ export const LogoutThunkCreator = () => async (dispatch) => {
 export const checkAuth = () => async (dispatch) => {
   try {
     dispatch(setLoadingCreator(true))
-    const response = await axios.get(`${baseApiURL}auth/refresh`, {withCredentials: true})
+    const response = await axios.get(`${baseApiURL}auth/refresh`, { withCredentials: true })
     dispatch(setUserActionCreator(response.data.user))
     dispatch(setAuthActionCreator(true))
     const allUsers = await usersAPI.getUsers()
     dispatch(getAllUsers(allUsers.data))
+  } catch (e) {
+    console.log(e)
+  } finally {
+    dispatch(setLoadingCreator(false))
+  }
+}
+
+export const updateUserThunkCreator = (updatedUser) => async (dispatch) => {
+  debugger
+  try {
+    dispatch(setLoadingCreator(true))
+    await usersAPI.updateUser(updatedUser)
+    dispatch(setUpdatedUserActionCreator(updatedUser))
   } catch (e) {
     console.log(e)
   } finally {
