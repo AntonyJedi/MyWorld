@@ -1,16 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Avatar, Button, Switch, TextInputField } from "evergreen-ui";
+import { Avatar, Button, Switch, TextInputField, Textarea, Label, IconButton, TrashIcon } from "evergreen-ui";
 import { motion } from "framer-motion";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import style from "./HomePage.module.scss";
 import './HomePage.scss';
 import Bubble from "../../components/Bubble/Bubble";
 import { AlertContext } from "../../components/Alert/AlertContext";
 import MenuList from "../../components/MenuList/MenuList";
 
-const HomePage = ({ categories, user, isAdmin, isAuth, changeUser }) => {
+const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, createPost, deletePost, allUsers }) => {
   const alert = useContext(AlertContext)
   const [updatedUser, setUpdatedUser] = useState(user);
   const [edited, setEdited] = useState(false);
+
+  const [post, setPostText] = useState({ userName: user.nickName, text: '' })
 
   const completeEditing = () => {
     let updatedInterests = updatedUser.interests;
@@ -25,7 +28,7 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser }) => {
     alert.show("User profile has been successfully updated", "success")
   }
 
-  const stopEditing = (edited) => {
+  const stopEditing = edited => {
     let updatedInterests = updatedUser.interests;
     if (!Array.isArray(updatedInterests) && edited) {
       updatedInterests = updatedInterests.replace(/,\s+/g, ',').split(',');
@@ -35,6 +38,21 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser }) => {
     setEdited(edited)
   }
 
+  const createNewPost = post => {
+    if (post.text.length < 1) {
+      alert.show("Please, type something to save the post")
+      return
+    }
+    createPost(post);
+    setPostText({ ...post, text: '' });
+    alert.show("New post has been created", "success")
+  }
+
+  const deleteOnePost = id => {
+    deletePost(id)
+    alert.show("Post has been deleted", "danger")
+  }
+
   return (
     <motion.div
       initial={{ translateX: "-25%", opacity: 0 }}
@@ -42,10 +60,10 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser }) => {
       exit={{ translateX: "50%", opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className={style.editButton}>
+      {isAuth && <div className={style.editButton}>
         <span>Edit profile</span>
         <Switch checked={edited} onChange={e => stopEditing(e.target.checked)} />
-      </div>
+      </div>}
       <h1 style={{ textAlign: "center", marginBottom: "20px" }}>{updatedUser.nickName ? updatedUser.nickName + '\'s Profile' : 'Homepage'} </h1>
       {isAuth ? <main className={style.main}>
         <aside className={style.aside}>
@@ -115,10 +133,36 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser }) => {
           />
           }
           {(edited && user !== updatedUser) && <Button intent="success" onClick={() => completeEditing()}>Save</Button>}
+          {[...allUsers.filter(userOne => userOne.nickName !== user.nickName)].map(one => <div>{one.nickName}</div>)}
+          {/* {allUsers.map(userOne => userOne.nickName !== user.nickName)} */}
         </aside>
         <section className={style.container}>
           <div className={style.blog}>
-            Posts...
+            <div className={style.blog_control}>
+              <Label htmlFor="postText" marginBottom={4} display="block">
+                New post
+              </Label>
+              <Textarea id="postText" value={post.text} onChange={e => setPostText({ ...post, text: e.target.value })} />
+              <Button intent="success" onClick={() => createNewPost(post)}>Create post</Button>
+            </div>
+            {/* <ul className="post-list-group"> */}
+            <TransitionGroup component='ul' className='post-list-group'>
+              {posts.map((post, index) => (
+                <CSSTransition key={index} classNames='post' timeout={1000}>
+                  <li key={index} className='post'>
+                    <div className='postText'>{post.text}</div>
+                    <div className="postInfoContainer">
+                      <div className='userName'>{post.userName}</div>
+                      <div className='postDate'>{new Date(post.createdAt).toLocaleDateString("en-GB")}</div>
+                    </div>
+                    <IconButton className='iconDelete' icon={TrashIcon} intent="danger" onClick={() => deleteOnePost(post.id)} />
+                  </li>
+
+                </CSSTransition>
+              ))}
+              {/* </ul> */}
+            </TransitionGroup>
+            {posts.length < 1 && <div className={style.empty}>Nothing</div>}
           </div>
         </section>
       </main> : <div>You are unauthorized</div>}

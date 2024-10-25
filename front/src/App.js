@@ -12,7 +12,6 @@ import HomePageContainer from "./pages/HomePage/HomePageContainer";
 import CreateCategoryContainer from "./pages/Articles/Category/CreateCategoryContainer";
 
 const App = ({ isUserAuth, isUserLoading, isUserAdmin, makeOut, user }) => {
-  console.log(user)
   const location = useLocation()
   return (
     <>

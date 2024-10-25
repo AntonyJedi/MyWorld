@@ -1,7 +1,8 @@
 const List = require('../models/listModel')
 
 const notesList = async (req, res) => {
-  const notes = await List.findAll()
+  console.log(req)
+  const notes = await List.findAll({where: {userName: req.params.userName}})
   return res.status(200).json(notes)
 }
 

@@ -13,7 +13,7 @@ class ToDoListContainer extends React.Component {
     super(props);
   }
   componentDidMount() {
-    this.props.getNotesThunkCreator()
+    this.props.getNotesThunkCreator(this.props.currentUser.nickName)
   }
 
   removeNote = async id => {
