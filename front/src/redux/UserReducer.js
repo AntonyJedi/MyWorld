@@ -1,13 +1,15 @@
-import { authAPI, baseApiURL, usersAPI } from "../API/api";
+import { authAPI, baseApiURL, usersAPI, postsAPI } from "../API/api";
 import axios from "axios";
 
 const initStore = {
   user: {},
+  posts: [],
   isAdmin: false,
   isAuth: false,
   isLoading: false,
   allUsers: [],
-  error: {}
+  allUsersInfo: [],
+  error: {},
 }
 
 const UserReducer = (state = initStore, action) => {
@@ -37,7 +39,23 @@ const UserReducer = (state = initStore, action) => {
     case 'ALL-USERS':
       return {
         ...state,
-        allUsers: action.allUsers.map(name => name.nickName)
+        allUsers: action.allUsers.map(name => name.nickName),
+        allUsersInfo: action.allUsers
+      }
+    case 'GET-ALL-USER-POSTS':
+      return {
+        ...state,
+        posts: action.allUserPosts
+      }
+    case 'CREATE-POST':
+      return {
+        ...state,
+        posts: [action.post, ...state.posts]
+      }
+    case 'DELETE-POST':
+      return {
+        ...state,
+        posts: state.posts.filter(item => item.id !== action.id)
       }
     case 'SET-ERROR':
       return {
@@ -55,6 +73,9 @@ const setUpdatedUserActionCreator = updatedUser => ({ type: 'EDIT-USER', updated
 const setAuthActionCreator = setAuth => ({ type: 'SET-AUTH', isAuth: setAuth })
 const setLoadingCreator = setLoading => ({ type: 'SET-LOADING', isLoading: setLoading })
 const getAllUsers = allUsers => ({ type: 'ALL-USERS', allUsers })
+const getAllPostsThunkCreator = allUserPosts => ({ type: 'GET-ALL-USER-POSTS', allUserPosts })
+const createPostActionCreator = post => ({ type: 'CREATE-POST', post })
+const deletePostActionCreator = id => ({ type: 'DELETE-POST', id })
 const setError = resError => ({ type: 'SET-ERROR', resError })
 
 export const RegistrationThunkCreator = (name, email, pass, about, job, mood, interests) => async (dispatch) => {
@@ -83,6 +104,8 @@ export const LoginThunkCreator = (email, pass) => async (dispatch) => {
     }
     const allUsers = await usersAPI.getUsers()
     dispatch(getAllUsers(allUsers.data))
+    const allUserPosts = await postsAPI.getAllPosts(response.data.user.id);
+    dispatch(getAllPostsThunkCreator(allUserPosts.data))
   } catch (e) {
     console.log(e)
   } finally {
@@ -109,6 +132,8 @@ export const checkAuth = () => async (dispatch) => {
     dispatch(setAuthActionCreator(true))
     const allUsers = await usersAPI.getUsers()
     dispatch(getAllUsers(allUsers.data))
+    const allUserPosts = await postsAPI.getAllPosts();
+    dispatch(getAllPostsThunkCreator(allUserPosts.data))
   } catch (e) {
     console.log(e)
   } finally {
@@ -138,6 +163,24 @@ export const getUsersThunkCreator = () => async (dispatch) => {
     console.log(e)
   } finally {
     dispatch(setLoadingCreator(false))
+  }
+}
+
+export const createPostThunkCreator = post => async (dispatch) => {
+  try {
+    const createdPost = await postsAPI.createPost(post)
+    dispatch(createPostActionCreator(createdPost.data))
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const deletePostThunkCreator = id => async (dispatch) => {
+  try {
+    await postsAPI.deletePost(id)
+    dispatch(deletePostActionCreator(id))
+  } catch (e) {
+    console.log(e)
   }
 }
 

@@ -39,9 +39,9 @@ const setNewNoteActionCreator = newNote => ({type: 'SET-NEW-NOTE', newNote})
 const deleteOneNoteActionCreator = id => ({type: 'DELETE-ONE-NOTE', id})
 const changedOneNoteActionCreator = id => ({type: 'CHANGE-ONE-NOTE', id})
 
-export const getNotesThunkCreator = () => async (dispatch) => {
+export const getNotesThunkCreator = userName => async (dispatch) => {
   try {
-    const response = await notesAPI.getAllNotes()
+    const response = await notesAPI.getAllNotes(userName)
     dispatch(getNotesActionCreator(response.data))
   } catch (e) {
     console.log(e)

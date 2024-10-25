@@ -70,8 +70,8 @@ export const musicAPI = {
 }
 
 export const notesAPI = {
-  getAllNotes: () => {
-    return AXIOS.get(baseApiURL + `notes`)
+  getAllNotes: userName => {
+    return AXIOS.get(baseApiURL + `notes/${userName}`)
   },
   createNewNote: note => {
     return AXIOS.post(baseApiURL + `notes`, note)
@@ -107,7 +107,22 @@ export const usersAPI = {
     return AXIOS.get(baseApiURL + `auth/users`)
   },
   updateUser: (user) => {
-    const {name, email,password, about, job, currectMood, interests} = user
+    const {name, email, password, about, job, currectMood, interests} = user
     return AXIOS.post(baseApiURL + `auth/user/update`, {name, email, password, about, job, currectMood, interests})
+  }
+}
+
+export const postsAPI = {
+  getAllPosts: () => {
+    return AXIOS.get(baseApiURL + `posts`)
+  },
+  createPost: post => {
+    return AXIOS.post(baseApiURL + 'posts', {post})
+  },
+  editPost: text => {
+    return AXIOS.put(baseApiURL + 'posts', {text})
+  },
+  deletePost: id => {
+    return AXIOS.delete(baseApiURL + `posts/${id}`)
   }
 }

@@ -4,7 +4,7 @@ const {Router} = require('express')
 
 const notes = Router()
 
-notes.get('/', notesList)
+notes.get('/:userName', notesList)
 notes.post('/', createNote)
 notes.put('/:id', noteOneUpdate)
 notes.delete('/:id', noteOneDelete)

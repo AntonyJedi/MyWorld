@@ -9,7 +9,7 @@ const MenuList = ({ interests, buttonText, className }) => {
         content={
           <Menu>
             <ul className='menuList'>
-              {interests.map(one => <li>{one}</li>)}
+              {interests.map((one, index) => <li key={index}>{one}</li>)}
             </ul>
           </Menu>
         }
