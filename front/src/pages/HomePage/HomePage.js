@@ -163,7 +163,6 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
               </>
             ) : 'You are only one user here :('}
           </section>
-          {/* {allUsers.map(userOne => userOne.nickName !== user.nickName)} */}
         </aside>
         <section className={style.container}>
           <div className={style.blog}>
@@ -174,7 +173,6 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
               <Textarea id="postText" value={post.text} onChange={e => setPostText({ ...post, text: e.target.value })} />
               <Button intent="success" onClick={() => createNewPost(post)}>Create post</Button>
             </div>
-            {/* <ul className="post-list-group"> */}
             <TransitionGroup component='ul' className='post-list-group'>
               {posts.map((post, index) => {
                 if (user?.friends?.includes(post.userName) || post.userName == user.nickName) {
@@ -192,7 +190,6 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
                   )
                 }
               })}
-              {/* </ul> */}
             </TransitionGroup>
             {posts.length < 1 && <div className={style.empty}>Nothing</div>}
           </div>
