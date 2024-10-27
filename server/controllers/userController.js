@@ -87,11 +87,10 @@ const getUsers = async (req, res) => {
 const updateUser = async (req, res) => {
   console.log(req.body)
   try {
-    const {name, email, password, about, job, currectMood, interests} = req.body
-    const resultOfUpdate = await usersServices.updateUserServices(name, email, password, about, job, currectMood, interests)
+    const {nickName, email, about, job, currectMood, interests, friends} = req.body
+    const resultOfUpdate = await usersServices.updateUserServices(nickName, email, about, job, currectMood, interests, friends)
     res.status(200).json(resultOfUpdate)
   } catch (e) {
-    console.log(e.message)
     res.status(400).json({message: 'Something went wrong with updating'})
   }
 }

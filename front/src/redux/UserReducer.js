@@ -21,7 +21,6 @@ const UserReducer = (state = initStore, action) => {
         isAdmin: action.user.role === 'admin'
       }
     case 'EDIT-USER':
-      debugger
       return {
         ...state,
         user: action.updatedUser
@@ -104,7 +103,7 @@ export const LoginThunkCreator = (email, pass) => async (dispatch) => {
     }
     const allUsers = await usersAPI.getUsers()
     dispatch(getAllUsers(allUsers.data))
-    const allUserPosts = await postsAPI.getAllPosts(response.data.user.id);
+    const allUserPosts = await postsAPI.getAllPosts();
     dispatch(getAllPostsThunkCreator(allUserPosts.data))
   } catch (e) {
     console.log(e)
@@ -142,7 +141,6 @@ export const checkAuth = () => async (dispatch) => {
 }
 
 export const updateUserThunkCreator = (updatedUser) => async (dispatch) => {
-  debugger
   try {
     dispatch(setLoadingCreator(true))
     await usersAPI.updateUser(updatedUser)

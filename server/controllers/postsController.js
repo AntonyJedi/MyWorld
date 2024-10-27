@@ -2,7 +2,6 @@ const Posts = require('../models/postsModel')
 
 const postsList = async (req, res) => {
   const posts = await Posts.findAll({order: [['id', 'DESC']]})
-  console.log(posts);
   return res.status(200).json(posts)
 }
 
@@ -16,7 +15,8 @@ const createPost = async (req, res) => {
 }
 
 const postOneUpdate = async (req, res) => {
-  console.log(req);
+  // console.log(req);
+  return
 }
 
 const postOneDelete = async (req, res) => {

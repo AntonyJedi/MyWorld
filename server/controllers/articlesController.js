@@ -66,7 +66,6 @@ const articlesOne = async (req, res) => {
 }
 
 const articlesOneUpdate = async (req, res) => {
-  console.log(req.body)
   const form = req.body
   if (req.files) {
     const delImage = await Art.findOne({where: {id: req.params.id}})

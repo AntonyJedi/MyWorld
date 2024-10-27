@@ -5,25 +5,49 @@
   display: grid;
   grid-template-columns: 1fr 1.3fr;
   gap: 20px;
+
   .heading {
     position: relative;
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
+
     &.edited {
       display: block;
     }
   }
+
   @include breakpoint (tablet) {
     grid-template-columns: 1fr;
     margin-top: 30px;
   }
 }
 
+.usersBlock {
+  margin-top: 20px;
+  .usersList {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    .userItem {
+      box-shadow: 0 0.1rem 0.5rem 0 rgba(21, 21, 30, 0.12);
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      .userItemJob {
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
 .category {
   .category_item {
     margin-top: 15px;
+
     a {
       @include magicButton();
       margin: 0 auto;
@@ -33,21 +57,25 @@
 
 .aside {
   position: relative;
+
   .edit {
     position: absolute;
     right: 0;
     bottom: 0;
   }
+
   .mood {
-    position: absolute; 
+    position: absolute;
     top: 0;
     transform: translate(55px, -20px);
     z-index: 5;
+
     &.edited {
       position: static;
       transform: unset;
     }
   }
+
   .interests {
     margin-top: 20px;
   }
@@ -60,6 +88,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+
   @include breakpoint (mobile) {
     position: static;
     justify-content: center;
