@@ -10,6 +10,7 @@ const Users = sequelize.define('Users', {
   about: {type: DataTypes.STRING, allowNull: true},
   currectMood: {type: DataTypes.STRING, allowNull: true},
   interests: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true},
+  friends: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true},
   job: {type: DataTypes.STRING, allowNull: true},
   isActivated: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
   activationLink: {type: DataTypes.STRING, allowNull: true}

@@ -38,7 +38,6 @@ const createSong = async (req, res, next) => {
         userName: form.userName,
         liked: []
       })
-      console.log(createdSong)
       return res.status(200).json(createdSong)
     }
   } catch (e) {

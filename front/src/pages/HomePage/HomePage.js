@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Avatar, Button, Switch, TextInputField, Textarea, Label, IconButton, TrashIcon } from "evergreen-ui";
+import { Avatar, Button, Switch, TextInputField, Textarea, Label, IconButton, TrashIcon, TickIcon } from "evergreen-ui";
 import { motion } from "framer-motion";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import style from "./HomePage.module.scss";
@@ -53,6 +53,12 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
     alert.show("Post has been deleted", "danger")
   }
 
+  const addFriend = friend => {
+    const addedNewFriend = { ...updatedUser, friends: [...updatedUser.friends, friend] }
+    changeUser(addedNewFriend)
+    alert.show(`You have added ${friend} to your friends list. Now you can see ${friend}'s posts`, "success")
+  }
+
   return (
     <motion.div
       initial={{ translateX: "-25%", opacity: 0 }}
@@ -64,7 +70,7 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
         <span>Edit profile</span>
         <Switch checked={edited} onChange={e => stopEditing(e.target.checked)} />
       </div>}
-      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>{updatedUser.nickName ? updatedUser.nickName + '\'s Profile' : 'Homepage'} </h1>
+      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>{(updatedUser.nickName && isAuth) ? updatedUser.nickName + '\'s Profile' : 'Homepage'} </h1>
       {isAuth ? <main className={style.main}>
         <aside className={style.aside}>
           <div className={[style.heading, edited ? style.edited : ''].join(' ')}>
@@ -133,7 +139,30 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
           />
           }
           {(edited && user !== updatedUser) && <Button intent="success" onClick={() => completeEditing()}>Save</Button>}
-          {[...allUsers.filter(userOne => userOne.nickName !== user.nickName)].map(one => <div>{one.nickName}</div>)}
+          <section className={style.usersBlock}>
+            {allUsers.length > 1 ? (
+              <>
+                <h3>All Users</h3>
+                <ul className={style.usersList}>
+                  {[...allUsers.filter(userOne => userOne.nickName !== user.nickName)].map(one => {
+                    return <li key={one.id} className={style.userItem}>
+                      <div className={style.userItemName}>{one.nickName}</div>
+                      <div className={style.userItemJob}>{one.job}</div>
+                      <Button
+                        icon={TickIcon}
+                        appearance="primary"
+                        intent="success"
+                        disabled={user?.friends?.includes(one.nickName)}
+                        onClick={() => addFriend(one.nickName)}
+                      >
+                        {user?.friends?.includes(one.nickName) ? "You're friends" : "Add friend"}
+                      </Button>
+                    </li>
+                  })}
+                </ul>
+              </>
+            ) : 'You are only one user here :('}
+          </section>
           {/* {allUsers.map(userOne => userOne.nickName !== user.nickName)} */}
         </aside>
         <section className={style.container}>
@@ -147,19 +176,22 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
             </div>
             {/* <ul className="post-list-group"> */}
             <TransitionGroup component='ul' className='post-list-group'>
-              {posts.map((post, index) => (
-                <CSSTransition key={index} classNames='post' timeout={1000}>
-                  <li key={index} className='post'>
-                    <div className='postText'>{post.text}</div>
-                    <div className="postInfoContainer">
-                      <div className='userName'>{post.userName}</div>
-                      <div className='postDate'>{new Date(post.createdAt).toLocaleDateString("en-GB")}</div>
-                    </div>
-                    <IconButton className='iconDelete' icon={TrashIcon} intent="danger" onClick={() => deleteOnePost(post.id)} />
-                  </li>
-
-                </CSSTransition>
-              ))}
+              {posts.map((post, index) => {
+                if (user?.friends?.includes(post.userName) || post.userName == user.nickName) {
+                  return (
+                    <CSSTransition key={index} classNames='post' timeout={1000}>
+                      <li key={index} className='post'>
+                        <div className='postText'>{post.text}</div>
+                        <div className="postInfoContainer">
+                          <div className='userName'>{post.userName == user.nickName ? 'My post' : post.userName}</div>
+                          <div className='postDate'>{new Date(post.createdAt).toLocaleDateString("en-GB")}</div>
+                        </div>
+                        <IconButton className='iconDelete' icon={TrashIcon} intent="danger" onClick={() => deleteOnePost(post.id)} />
+                      </li>
+                    </CSSTransition>
+                  )
+                }
+              })}
               {/* </ul> */}
             </TransitionGroup>
             {posts.length < 1 && <div className={style.empty}>Nothing</div>}

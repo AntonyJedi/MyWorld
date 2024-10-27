@@ -17,8 +17,7 @@ const registrationServices = async (name, email, password, about, job, mood, int
   if (!candidate) {
     const hashPassword = await bcrypt.hash(password, 3)
     const activationLink = uuid.v4()
-    const newUser = await Users.create({ nickName: name, email, password: hashPassword, about, currectMood: mood, job, interests, activationLink })
-    console.log(newUser)
+    const newUser = await Users.create({ nickName: name, email, password: hashPassword, about, currectMood: mood, job, interests, activationLink, friends: [] })
     const mailRes = await mailService.sendActivationLink(email, `${config.get('API_URL')}/api/auth/activate/${activationLink}`)
     const jwtUser = jwtAssist(newUser)
     const tokens = await tokensServices.generateToken(jwtUser)
@@ -36,13 +35,15 @@ const registrationServices = async (name, email, password, about, job, mood, int
   }
 }
 
-const updateUserServices = async (name, email, password, about, job, currectMood, interests) => {
+const updateUserServices = async (nickName, email, about, job, currectMood, interests, friends) => {
+  console.log(friends, 'somethingos', nickName, job)
   const updatedUser = await Users.update({
-    nickName: name,
+    nickName,
     about,
     currectMood,
     job,
-    interests
+    interests,
+    friends
   }, { where: { email } })
   return {
     status: 200,
