@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import MusicCard from "./MusicCard";
 import CreateMusicContainer from "../CreateMusic/CreateMusicContainer";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion";
-import NextArrow from "./SliderArrows/NextArrow";
-import PrevArrow from "./SliderArrows/PrevArrow";
 import "./SliderArrows/SlickArrows.scss";
 import Loader from "../../../components/Loader/Loader";
 import style from './Music.module.scss';
 import SelectOne from "../../../components/SelectOne/SelectOne";
 
-const Music = ({ songs, deleteOne, isAuth, isAdminAuth, users, currentUser, isMusicLoading, likeOne }) => {
+const Music = ({ songs, deleteOne, isAuth, isAdminAuth, currentUser, isMusicLoading, likeOne }) => {
   const [isAddNew, setIsAddNew] = useState(false);
   const [isDefault, setIsDefault] = useState(false);
   const [selectedOwner, setSelectedOwner] = useState([currentUser.nickName]);

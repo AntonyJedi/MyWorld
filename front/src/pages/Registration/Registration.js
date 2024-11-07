@@ -53,21 +53,21 @@ const Registration = ({doReg, isUserAuth, error}) => {
         >
           <h2>Registration form</h2>
           <TextInput
-            label="Your name"
+            label='Your name'
             value={name}
             name='text-input-name'
             placeholder='Please, enter your name'
             onChange={e => setName(e.target.value)}
           />
           <TextInput
-            label="Your email"
+            label='Your email'
             value={email}
             name='text-input-email'
             placeholder='Please, enter your email'
             onChange={e => setEmail(e.target.value)}
           />
           <TextInput
-            label="Your password"
+            label='Your password'
             type='password'
             value={password}
             name='text-input-password'
@@ -76,7 +76,7 @@ const Registration = ({doReg, isUserAuth, error}) => {
           />
           <hr />
           <Textarea
-            label="Some info"
+            label='Some info'
             type='text'
             value={about}
             name='text-input-about'
@@ -84,7 +84,7 @@ const Registration = ({doReg, isUserAuth, error}) => {
             onChange={e => setAbout(e.target.value)}
           />
           <TextInput
-            label="Current mood"
+            label='Current mood'
             type='text'
             value={mood}
             name='text-input-name'
@@ -99,7 +99,7 @@ const Registration = ({doReg, isUserAuth, error}) => {
             onChange={e => setJob(e.target.value)}
           />
           <TextInput
-            label="Your interests"
+            label='Your interests'
             type='text'
             value={interests}
             name='text-input-interests'

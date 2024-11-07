@@ -7,7 +7,7 @@ import style from './CreateCatogory.module.scss';
 import DialogWindow from '../../../components/Dialog/Dialog';
 
 
-function CreateCategory({ createNewCategory, allCategories, deleteOne }) {
+const CreateCategory = ({ createNewCategory, allCategories, deleteOne }) => {
   const alert = useContext(AlertContext)
   const [newCategory, setNewCategory] = useState({ name: "" })
   const [dialog, setDialog] = useState({ isShown: false, catId: 1, title: '' });
@@ -54,7 +54,7 @@ function CreateCategory({ createNewCategory, allCategories, deleteOne }) {
             {allCategories.map(category =>
               <li key={category.id}>
                 {category.title}
-                <IconButton icon={TrashIcon} intent="danger" onClick={() => setDialog({ isShown: true, catId: category.id, title: category.title })} />
+                <IconButton icon={TrashIcon} intent='danger' onClick={() => setDialog({ isShown: true, catId: category.id, title: category.title })} />
               </li>)}
           </ul>
         </section>

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from "framer-motion";
 import './EmptyArticlePage.scss';
 
-function EmptyArticlePage() {
+const EmptyArticlePage = () => {
 	const styles = {
 		shape: {
 			position: 'absolute',

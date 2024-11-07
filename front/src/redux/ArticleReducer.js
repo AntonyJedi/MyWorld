@@ -139,7 +139,7 @@ export const newCategoryThunkCreator = newCategory => async (dispatch) => {
 }
 
 export const delOneCategoryThunkCreator = id => async (dispatch) => {
-  await articlesAPI.deleteOneCaregory(id)
+  await articlesAPI.deleteOneCategory(id)
   dispatch(delOneCategoryCreator(id))
 }
 

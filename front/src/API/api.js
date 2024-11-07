@@ -43,7 +43,7 @@ export const articlesAPI = {
   likeOneArticle: (id, user, add) => {
     return AXIOS.put(baseApiURL + `articles/like/${id}`, {user, add})
   },
-  deleteOneCaregory: id => {
+  deleteOneCategory: id => {
     return AXIOS.delete(baseApiURL + `categories/${id}`)
   }
 }

@@ -35,7 +35,7 @@ const MusicCard = ({
     <li className={[style.card, turn && style.turn].join(' ')}>
       <div className={style.lyrics}>
         <div>{songOwner}</div>
-        <Badge className={style.lyrics_button} color="orange" onClick={() => setTurn(turn => !turn)}>{!turn ? 'Lyrics' : 'Back'}</Badge>
+        <Badge className={style.lyrics_button} color='orange' onClick={() => setTurn(turn => !turn)}>{!turn ? 'Lyrics' : 'Back'}</Badge>
       </div>
       <div className={style.cardInner}>
         <div className={style.front}>
@@ -53,13 +53,13 @@ const MusicCard = ({
       </div>
       {(user === songOwner || canDelete) &&
         <div className={style.edit_links}>
-          <IconButton icon={TrashIcon} intent="danger" onClick={() => handlerDelete(id)} />
+          <IconButton icon={TrashIcon} intent='danger' onClick={() => handlerDelete(id)} />
           <Link to={`/updateSong/${id}`}>
             <IconButton icon={EditIcon} />
           </Link>
           <section className={style.like_container}>
-            {usersLiked.length > 0 && <Pill className={style.count} color="red">{usersLiked.length}</Pill>}
-            {isAuth && <Badge color="teal" className={[style.like, usersLiked.includes(user) && style.clicked].join(' ')} onClick={() => likeSong(id)}>Like</Badge>}
+            {usersLiked.length > 0 && <Pill className={style.count} color='red'>{usersLiked.length}</Pill>}
+            {isAuth && <Badge color='teal' className={[style.like, usersLiked.includes(user) && style.clicked].join(' ')} onClick={() => likeSong(id)}>Like</Badge>}
             <ul className={style.likedList}>{usersLiked.map((like, i) => <li key={i}>{like}</li>)}</ul>
           </section>
         </div>

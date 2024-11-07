@@ -9,9 +9,8 @@ import SideBarMobile from "./components/SideBarMobile/SideBarMobile";
 import { AnimatePresence } from "framer-motion"
 import AlertComponent from "./components/Alert/AlertComponent";
 import HomePageContainer from "./pages/HomePage/HomePageContainer";
-import CreateCategoryContainer from "./pages/Articles/Category/CreateCategoryContainer";
 
-const App = ({ isUserAuth, isUserLoading, isUserAdmin, makeOut, user }) => {
+const App = ({ isUserAuth, isUserLoading, isUserAdmin, makeOut }) => {
   const location = useLocation()
   return (
     <>

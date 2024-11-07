@@ -1,7 +1,7 @@
 import React from 'react'
 import './Dialog.scss'
 
-function DialogWindow({ isShown, catId, title, deleteAll }) {
+const DialogWindow = ({ isShown, catId, title, deleteAll }) => {
   return (
     <div className={['dialog_container', isShown ? ' show' : ''].join('')}>
       <div>

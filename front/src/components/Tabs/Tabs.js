@@ -1,6 +1,7 @@
 import React from 'react'
+import { Button, Group } from "evergreen-ui";
 
-function Tabs({size, array}) {
+const Tabs = ({size, array}) => {
   return (
     <Group size={size}>
 		{array.map((item, index) => (

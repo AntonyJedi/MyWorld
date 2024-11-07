@@ -2,7 +2,7 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import styles from './Navbar.module.scss'
 import logo from '../../static/images/logo.png'
-import {allRoutes, authRoutes, userRoutes} from "../../routes/routes";
+import {allRoutes, authRoutes} from "../../routes/routes";
 
 const Navbar = ({isUserAuth, makeOut, user}) => {
   const allLinks = allRoutes.filter(link => link.title !== 'Article' && link.title !== 'Specific Articles');

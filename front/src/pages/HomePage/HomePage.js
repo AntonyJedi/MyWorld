@@ -1,5 +1,16 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Avatar, Button, Switch, TextInputField, Textarea, Label, IconButton, TrashIcon, TickIcon } from "evergreen-ui";
+import React, { useState, useContext } from "react";
+import {
+  Avatar,
+  Button,
+  Switch,
+  TextInputField,
+  Textarea,
+  Label,
+  IconButton,
+  TrashIcon,
+  TickIcon,
+  Pill,
+} from "evergreen-ui";
 import { motion } from "framer-motion";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import style from "./HomePage.module.scss";
@@ -8,7 +19,7 @@ import Bubble from "../../components/Bubble/Bubble";
 import { AlertContext } from "../../components/Alert/AlertContext";
 import MenuList from "../../components/MenuList/MenuList";
 
-const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, createPost, deletePost, allUsers }) => {
+const HomePage = ({ user, isAuth, changeUser, posts, createPost, deletePost, allUsers }) => {
   const alert = useContext(AlertContext)
   const [updatedUser, setUpdatedUser] = useState(user);
   const [edited, setEdited] = useState(false);
@@ -59,6 +70,12 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
     alert.show(`You have added ${friend} to your friends list. Now you can see ${friend}'s posts`, "success")
   }
 
+  const removeFriend = removedFriend => {
+    const removedFriendArray = {...updatedUser, friends: [...updatedUser.friends.filter(friend => friend !== removedFriend)]}
+    changeUser(removedFriendArray);
+    alert.show(`You have removed ${removedFriend} from your friends list. You won't see ${removedFriend}'s posts anymore`, "danger")
+  }
+
   return (
     <motion.div
       initial={{ translateX: "-25%", opacity: 0 }}
@@ -83,7 +100,7 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
               >
                 <Avatar name={updatedUser.nickName} size={50} />
               </motion.div> : <TextInputField
-                label="Name"
+                label='Name'
                 value={updatedUser.nickName}
                 onChange={(e) => setUpdatedUser({ ...updatedUser, nickName: e.target.value })}
               />
@@ -97,10 +114,10 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
                     exit={{ translateX: "-50%", opacity: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <Bubble text={updatedUser.currectMood} entity="mood" />
+                    <Bubble text={updatedUser.currectMood} entity='mood' />
                   </motion.div> :
                   <TextInputField
-                    label="Mood"
+                    label='Mood'
                     value={updatedUser.currectMood}
                     onChange={e => setUpdatedUser({ ...updatedUser, currectMood: e.target.value })}
                   />
@@ -109,7 +126,7 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
             <div className={style.job}>
               {
                 !edited ? updatedUser.job : <TextInputField
-                  label="Job"
+                  label='Job'
                   value={updatedUser.job}
                   onChange={e => setUpdatedUser({ ...updatedUser, job: e.target.value })}
                 />
@@ -126,19 +143,19 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
               >
                 {updatedUser.about}
               </motion.div> : <TextInputField
-                label="About"
+                label='About'
                 value={updatedUser.about}
                 onChange={e => setUpdatedUser({ ...updatedUser, about: e.target.value })}
               />
             }
           </div>
-          {!edited ? <MenuList className="interests" interests={updatedUser.interests} buttonText='Interests' /> : <TextInputField
-            label="Interests"
+          {!edited ? <MenuList className='interests' interests={updatedUser.interests} buttonText='Interests' /> : <TextInputField
+            label='Interests'
             value={updatedUser.interests}
             onChange={e => setUpdatedUser({ ...updatedUser, interests: e.target.value })}
           />
           }
-          {(edited && user !== updatedUser) && <Button intent="success" onClick={() => completeEditing()}>Save</Button>}
+          {(edited && user !== updatedUser) && <Button intent='success' onClick={() => completeEditing()}>Save</Button>}
           <section className={style.usersBlock}>
             {allUsers.length > 1 ? (
               <>
@@ -150,13 +167,16 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
                       <div className={style.userItemJob}>{one.job}</div>
                       <Button
                         icon={TickIcon}
-                        appearance="primary"
-                        intent="success"
+                        appearance='primary'
+                        intent='success'
                         disabled={user?.friends?.includes(one.nickName)}
                         onClick={() => addFriend(one.nickName)}
                       >
                         {user?.friends?.includes(one.nickName) ? "You're friends" : "Add friend"}
                       </Button>
+                      {user?.friends?.includes(one.nickName) && <div className={style.remove}>
+                        <Pill color={'red'} onClick={() => removeFriend(one.nickName)}>x</Pill>
+                      </div>}
                     </li>
                   })}
                 </ul>
@@ -167,24 +187,24 @@ const HomePage = ({ categories, user, isAdmin, isAuth, changeUser, posts, create
         <section className={style.container}>
           <div className={style.blog}>
             <div className={style.blog_control}>
-              <Label htmlFor="postText" marginBottom={4} display="block">
+              <Label htmlFor='postText' marginBottom={4} display='block'>
                 New post
               </Label>
-              <Textarea id="postText" value={post.text} onChange={e => setPostText({ ...post, text: e.target.value })} />
-              <Button intent="success" onClick={() => createNewPost(post)}>Create post</Button>
+              <Textarea id='postText' value={post.text} onChange={e => setPostText({ ...post, text: e.target.value })} />
+              <Button intent='success' onClick={() => createNewPost(post)}>Create post</Button>
             </div>
             <TransitionGroup component='ul' className='post-list-group'>
               {posts.map((post, index) => {
-                if (user?.friends?.includes(post.userName) || post.userName == user.nickName) {
+                if (user?.friends?.includes(post.userName) || post.userName === user.nickName) {
                   return (
                     <CSSTransition key={index} classNames='post' timeout={1000}>
                       <li key={index} className='post'>
                         <div className='postText'>{post.text}</div>
-                        <div className="postInfoContainer">
-                          <div className='userName'>{post.userName == user.nickName ? 'My post' : post.userName}</div>
+                        <div className='postInfoContainer'>
+                          <div className='userName'>{post.userName === user.nickName ? 'My post' : post.userName}</div>
                           <div className='postDate'>{new Date(post.createdAt).toLocaleDateString("en-GB")}</div>
                         </div>
-                        <IconButton className='iconDelete' icon={TrashIcon} intent="danger" onClick={() => deleteOnePost(post.id)} />
+                        <IconButton className='iconDelete' icon={TrashIcon} intent='danger' onClick={() => deleteOnePost(post.id)} />
                       </li>
                     </CSSTransition>
                   )

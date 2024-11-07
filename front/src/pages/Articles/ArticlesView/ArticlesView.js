@@ -6,8 +6,6 @@ import './ArticleAnimation.scss';
 import { motion } from "framer-motion";
 import { AlertContext } from "../../../components/Alert/AlertContext";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-
-
 import { articleAuthRoutes } from "../../../routes/routes";
 import ArticleViewCard from "./ArticleViewCard";
 import EmptyArticlePage from "../EmptyArticlePage/EmptyArticlePage";
@@ -15,11 +13,11 @@ import EmptyArticlePage from "../EmptyArticlePage/EmptyArticlePage";
 const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categoryName, isAuth, likeArticle, categories }) => {
   const { show } = useContext(AlertContext);
 
-  const top_links = () => {
+  const topLinks = () => {
     if (categories.length > 0) {
-      return articleAuthRoutes.map(route => <Link className="action_button" to={route.path}><span>{route.title}</span></Link>)
+      return articleAuthRoutes.map((route, index) => <Link key={index} className='action_button' to={route.path}><span>{route.title}</span></Link>)
     } else {
-      return <Link className="action_button" to={articleAuthRoutes[1].path}><span>{articleAuthRoutes[1].title}</span></Link>
+      return <Link className='action_button' to={articleAuthRoutes[1].path}><span>{articleAuthRoutes[1].title}</span></Link>
     }
   }
 
@@ -37,7 +35,7 @@ const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categor
         className={style.links_container}
         style={{ marginTop: '20px' }}
       >
-        {top_links()}
+        {topLinks()}
       </div>}
       {progress ? <Loader /> : allArticles.length > 0 ? <motion.div
         initial={{ translateX: "-25%", opacity: 0 }}
@@ -46,7 +44,7 @@ const Articles = ({ allArticles, deleteOne, progress, isUserAdmin, user, categor
         transition={{ duration: 0.5 }}
       >
         {categoryName ? <h2>{categoryName.toUpperCase()}</h2> : <h2>All articles</h2>}
-        {isAuth && <div className={style.links_container}>{articleAuthRoutes.map(route => <Link className="action_button" to={route.path}><span>{route.title}</span></Link>)}</div>}
+        {isAuth && <div className={style.links_container}>{articleAuthRoutes.map((route, index) => <Link key={index} className='action_button' to={route.path}><span>{route.title}</span></Link>)}</div>}
         <TransitionGroup component='ul' className={[style.articleContainer, 'list-group'].join(' ')}>
           {allArticles.map((article, index) => (
             <CSSTransition key={article.id} classNames='article' timeout={1000} onEnter={() => console.log('Enter:', article.id)} onExit={() => console.log('Exit:', article.id)}>

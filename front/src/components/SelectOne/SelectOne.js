@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Select, Checkbox } from "evergreen-ui";
 
-function SelectOne({ array, selectedItem, setSelectedItem, replace = array[0], isDefault, setIsDefault, isAuth }) {
+const SelectOne = ({ array, selectedItem, setSelectedItem, replace = array[0], isDefault, setIsDefault, isAuth }) => {
 	
 	const setDefault = value => {
 		value ? setSelectedItem(array) : setSelectedItem([array[0]]);
@@ -13,7 +13,7 @@ function SelectOne({ array, selectedItem, setSelectedItem, replace = array[0], i
 				{array.map((item, index) => <option key={index} value={item} selected={index === 0}>{index === 0 && isAuth ? replace : item}</option>)}
 			</Select>
 			<Checkbox
-				label="All songs"
+				label='All songs'
 				checked={isDefault}
 				onChange={e => setDefault(e.target.checked)}
 			/>

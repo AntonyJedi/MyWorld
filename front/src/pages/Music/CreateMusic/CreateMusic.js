@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { AlertContext } from "../../../components/Alert/AlertContext";
 import { motion } from "framer-motion";
 import { Textarea, TextInput } from "evergreen-ui";

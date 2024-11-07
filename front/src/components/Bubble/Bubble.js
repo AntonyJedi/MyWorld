@@ -1,9 +1,9 @@
 import React from 'react'
 import style from './Bubble.module.scss'
 
-function Bubble({text, entity}) {
+const Bubble = ({text, entity}) => {
   return (
-    <div className={style.cloud} style={entity == "mood" && {}}>
+    <div className={style.cloud} style={entity === "mood" && {}}>
       {text}
     </div>
   )

@@ -25,7 +25,7 @@ const UpdateMusic = ({ id, song, updateSong, user }) => {
     setUp(song);
   }, [song]);
 
-    const updateHandler = async (e) => {
+  const updateHandler = async (e) => {
     e.preventDefault();
     const formUpdate = new FormData();
     formUpdate.append("song", up.song);
@@ -43,7 +43,7 @@ const UpdateMusic = ({ id, song, updateSong, user }) => {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   return (
     <motion.form
@@ -92,7 +92,7 @@ const UpdateMusic = ({ id, song, updateSong, user }) => {
         value={up.image}
       />
       <div>
-        <a className='form_submit' onClick={updateHandler}><span>Update article</span></a>
+        <a className='form_submit' onClick={updateHandler}><span>Update song</span></a>
       </div>
     </motion.form>
   );
