@@ -3,7 +3,7 @@ const sequelize = require('../db')
 
 const Quotes = sequelize.define('Quotes', {
   id: {type: DataTypes.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true},
-  content: {type: DataTypes.INTEGER, allowNull: false}
+  content: {type: DataTypes.STRING, allowNull: false}
 })
 
 module.exports = Quotes

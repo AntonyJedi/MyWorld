@@ -15,7 +15,7 @@ AXIOS.interceptors.request.use((config) => {
 })
 
 export const articlesAPI = {
-  getAllArticles: category => {
+  getAllArticles: (category = null) => {
     if (category) {
       return AXIOS.get(baseApiURL + `articles/?category=${category}`)
     } else {
